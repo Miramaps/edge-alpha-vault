@@ -50,14 +50,14 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Custom palette colors
-        "deep-core": "hsl(var(--deep-core))",
-        "dark-cocoa": "hsl(var(--dark-cocoa))",
-        "mocha": "hsl(var(--mocha))",
-        "soft-coffee": "hsl(var(--soft-coffee))",
-        "warm-highlight": "hsl(var(--warm-highlight))",
+        // Custom crimson palette colors
+        "crimson-deep": "hsl(var(--crimson-deep))",
+        "maroon": "hsl(var(--maroon))",
+        "crimson": "hsl(var(--crimson))",
+        "crimson-bright": "hsl(var(--crimson-bright))",
+        "coral-glow": "hsl(var(--coral-glow))",
         glow: {
-          warm: "hsl(var(--warm-highlight))",
+          crimson: "hsl(var(--coral-glow))",
         },
       },
       borderRadius: {

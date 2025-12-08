@@ -9,8 +9,9 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-gradient-hero" />
       <div className="absolute inset-0 bg-gradient-radial" />
       
-      {/* Glow effect */}
-      <div className="absolute top-0 right-0 w-[800px] h-[600px] bg-warm-highlight/10 rounded-full blur-[150px] animate-glow-pulse" />
+      {/* Glow effects matching crimson reference */}
+      <div className="absolute top-0 right-0 w-[800px] h-[600px] bg-coral-glow/25 rounded-full blur-[150px] animate-glow-pulse" />
+      <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-coral-glow/15 rounded-full blur-[120px] animate-glow-pulse" />
 
       <div className="container relative mx-auto px-4 py-24 md:py-32 lg:py-40">
         <div className="max-w-3xl mx-auto text-center">
