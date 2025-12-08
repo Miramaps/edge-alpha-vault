@@ -64,7 +64,7 @@ export default function TraderDashboard() {
   return (
     <Layout>
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#1A2C39] to-[#0F1C24] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-hero pointer-events-none opacity-50" />
 
       <div className="container relative mx-auto px-4 py-12 md:py-16 max-w-5xl">
         {/* Owner mode toggle (for demo) */}
@@ -73,7 +73,7 @@ export default function TraderDashboard() {
             variant="ghost"
             size="sm"
             onClick={() => setIsOwnerMode(!isOwnerMode)}
-            className="text-[#6393B7] hover:text-white hover:bg-[#2B475B]/50"
+            className="text-muted-foreground hover:text-foreground"
           >
             <Eye className="w-4 h-4 mr-2" />
             {isOwnerMode ? "Viewer Mode" : "Owner Mode"}
@@ -84,24 +84,24 @@ export default function TraderDashboard() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="rounded-xl bg-[#1A2C39] border border-[#2B475B] p-6 md:p-8 mb-6"
+          className="rounded-xl bg-gradient-to-br from-zinc-900/90 to-black/80 border border-accent/20 p-6 md:p-8 mb-6"
         >
           <div className="flex flex-col lg:flex-row lg:items-start gap-6">
             {/* Trader Info */}
             <div className="flex items-start gap-4 flex-1">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#4F7E9E] to-[#6393B7] flex items-center justify-center text-white font-bold text-2xl flex-shrink-0">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-foreground font-bold text-2xl flex-shrink-0">
                 {channel.trader.name.charAt(0)}
               </div>
               <div>
-                <h1 className="text-2xl md:text-3xl font-bold text-white mb-1">
+                <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-1">
                   {channel.trader.name}
                 </h1>
-                <p className="text-[#6393B7] mb-3">@{channel.trader.handle}</p>
+                <p className="text-muted-foreground mb-3">@{channel.trader.handle}</p>
                 <div className="flex flex-wrap gap-2">
                   {channel.trader.tags.map((tag) => (
                     <span 
                       key={tag} 
-                      className="px-2.5 py-1 text-xs rounded-md bg-[#395E77]/30 text-[#6393B7] border border-[#395E77]/50"
+                      className="px-2.5 py-1 text-xs rounded-md bg-accent/15 text-accent border border-accent/25"
                     >
                       {tag}
                     </span>
@@ -113,15 +113,16 @@ export default function TraderDashboard() {
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-3">
               <Button
+                variant="hero"
+                size="lg"
                 onClick={() => setIsBuyModalOpen(true)}
                 disabled={channel.status === "closed"}
-                className="h-11 px-6 bg-[#4F7E9E] hover:bg-[#6393B7] text-white font-medium"
               >
                 Buy Access NFT
               </Button>
               <Button 
                 variant="outline" 
-                className="h-11 px-6 border-[#395E77] text-[#6393B7] hover:bg-[#2B475B]/50 hover:text-white"
+                size="lg"
                 asChild
               >
                 <a href={channel.discordUrl} target="_blank" rel="noopener noreferrer">
@@ -138,32 +139,32 @@ export default function TraderDashboard() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="rounded-xl bg-[#1A2C39] border border-[#2B475B] p-6 mb-6"
+            className="rounded-xl bg-gradient-to-br from-zinc-900/90 to-black/80 border border-accent/20 p-6 mb-6"
           >
             <div className="flex items-center gap-2 mb-6">
-              <Settings className="w-5 h-5 text-[#6393B7]" />
-              <h2 className="text-lg font-semibold text-white">Channel Settings</h2>
+              <Settings className="w-5 h-5 text-accent" />
+              <h2 className="text-lg font-semibold text-foreground">Channel Settings</h2>
             </div>
 
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-sm text-[#6393B7] mb-1.5 block">Channel Name</label>
+                <label className="text-sm text-muted-foreground mb-1.5 block">Channel Name</label>
                 <input
                   type="text"
                   defaultValue={channel.name}
-                  className="w-full px-3 py-2 bg-[#2B475B]/30 border border-[#395E77]/50 rounded-md text-white text-sm focus:outline-none focus:border-[#6393B7]"
+                  className="w-full px-3 py-2 bg-black/40 border border-accent/20 rounded-md text-foreground text-sm focus:outline-none focus:border-accent/50"
                 />
               </div>
               <div>
-                <label className="text-sm text-[#6393B7] mb-1.5 block">Discord Invite Link</label>
+                <label className="text-sm text-muted-foreground mb-1.5 block">Discord Invite Link</label>
                 <input
                   type="text"
                   defaultValue={channel.discordUrl}
-                  className="w-full px-3 py-2 bg-[#2B475B]/30 border border-[#395E77]/50 rounded-md text-white text-sm focus:outline-none focus:border-[#6393B7]"
+                  className="w-full px-3 py-2 bg-black/40 border border-accent/20 rounded-md text-foreground text-sm focus:outline-none focus:border-accent/50"
                 />
               </div>
             </div>
-            <Button className="mt-4 bg-[#4F7E9E] hover:bg-[#6393B7] text-white">
+            <Button variant="hero" className="mt-4">
               Save Changes
             </Button>
           </motion.div>

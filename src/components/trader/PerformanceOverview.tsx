@@ -12,7 +12,6 @@ const generateEquityCurve = () => {
     value = Math.max(80, Math.min(140, value + change));
     data.push({ day: i, value: Math.round(value * 10) / 10 });
   }
-  // Ensure upward trend
   data[data.length - 1].value = Math.max(data[data.length - 1].value, 118);
   return data;
 };
@@ -29,21 +28,21 @@ interface StatCardProps {
 
 function StatCard({ label, value, subtext, icon: Icon, positive }: StatCardProps) {
   return (
-    <div className="p-4 rounded-lg bg-[#2B475B]/30 border border-[#395E77]/30">
+    <div className="p-4 rounded-lg bg-zinc-900/60 border border-accent/20">
       <div className="flex items-center gap-2 mb-2">
-        <Icon className="w-4 h-4 text-[#6393B7]" />
-        <span className="text-xs text-[#6393B7] uppercase tracking-wide">{label}</span>
+        <Icon className="w-4 h-4 text-accent" />
+        <span className="text-xs text-muted-foreground uppercase tracking-wide">{label}</span>
       </div>
       <p className={cn(
         "text-2xl font-bold",
         positive === true && "text-emerald-400",
         positive === false && "text-red-400",
-        positive === undefined && "text-white"
+        positive === undefined && "text-foreground"
       )}>
         {value}
       </p>
       {subtext && (
-        <p className="text-xs text-[#6393B7] mt-1">{subtext}</p>
+        <p className="text-xs text-muted-foreground mt-1">{subtext}</p>
       )}
     </div>
   );
@@ -69,10 +68,10 @@ export function PerformanceOverview({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1 }}
-      className="rounded-xl bg-[#1A2C39] border border-[#2B475B] overflow-hidden"
+      className="rounded-xl bg-gradient-to-br from-zinc-900/90 to-black/80 border border-accent/20 overflow-hidden"
     >
-      <div className="p-5 border-b border-[#2B475B]">
-        <h2 className="text-lg font-semibold text-white">Performance Overview</h2>
+      <div className="p-5 border-b border-accent/10">
+        <h2 className="text-lg font-semibold text-foreground">Performance Overview</h2>
       </div>
 
       <div className="p-5">
@@ -111,7 +110,7 @@ export function PerformanceOverview({
 
         {/* Equity Curve Chart */}
         <div>
-          <h3 className="text-sm font-medium text-[#6393B7] mb-4">Equity Curve (Last 90 Days)</h3>
+          <h3 className="text-sm font-medium text-muted-foreground mb-4">Equity Curve (Last 90 Days)</h3>
           <div className="h-48 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={equityData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
@@ -119,22 +118,22 @@ export function PerformanceOverview({
                   dataKey="day" 
                   axisLine={false}
                   tickLine={false}
-                  tick={{ fill: '#6393B7', fontSize: 11 }}
+                  tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 11 }}
                   tickFormatter={(value) => `${value}d`}
                 />
                 <YAxis 
                   domain={[80, 140]}
                   axisLine={false}
                   tickLine={false}
-                  tick={{ fill: '#6393B7', fontSize: 11 }}
+                  tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 11 }}
                   width={35}
                 />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#1A2C39',
-                    border: '1px solid #395E77',
+                    backgroundColor: 'hsl(var(--card))',
+                    border: '1px solid hsl(var(--accent) / 0.3)',
                     borderRadius: '8px',
-                    color: '#fff',
+                    color: 'hsl(var(--foreground))',
                   }}
                   labelFormatter={(value) => `Day ${value}`}
                   formatter={(value: number) => [value.toFixed(1), 'Index']}
@@ -142,10 +141,10 @@ export function PerformanceOverview({
                 <Line
                   type="monotone"
                   dataKey="value"
-                  stroke="#4F7E9E"
+                  stroke="hsl(var(--accent))"
                   strokeWidth={2}
                   dot={false}
-                  activeDot={{ r: 4, fill: '#6393B7' }}
+                  activeDot={{ r: 4, fill: 'hsl(var(--accent))' }}
                 />
               </LineChart>
             </ResponsiveContainer>
