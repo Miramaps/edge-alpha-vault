@@ -6,66 +6,71 @@
 
 @layer base {
   :root {
-    /* Exact Brown Palette from reference */
-    --deep-core: 21 24% 11%;               /* #241B16 */
-    --dark-cocoa: 19 23% 18%;              /* #3A2B24 */
-    --mocha: 18 21% 25%;                   /* #4D3A32 */
-    --soft-coffee: 18 21% 34%;             /* #694F44 */
-    --warm-highlight: 0 3% 94%;            /* #EFEEEE */
-    --pure-white: 0 0% 100%;               /* #FFFFFF */
+    /* Crimson/Maroon Palette from reference */
+    --crimson-deep: 0 60% 8%;              /* Very dark maroon core */
+    --maroon: 0 50% 15%;                   /* Dark maroon */
+    --crimson: 0 70% 25%;                  /* Mid crimson */
+    --crimson-bright: 0 85% 45%;           /* Bright crimson */
+    --coral-glow: 5 90% 60%;               /* Coral/red glow */
+    --pure-white: 0 0% 100%;               /* White */
 
-    /* Semantic tokens - using raw HSL values */
-    --background: 21 24% 11%;
+    /* Semantic tokens */
+    --background: 0 60% 8%;
     --foreground: 0 0% 100%;
 
-    --card: 19 23% 18%;
+    --card: 0 50% 12%;
     --card-foreground: 0 0% 100%;
 
-    --popover: 19 23% 18%;
+    --popover: 0 50% 12%;
     --popover-foreground: 0 0% 100%;
 
-    --primary: 18 21% 34%;
+    --primary: 0 85% 45%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 18 21% 25%;
+    --secondary: 0 50% 18%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 18 21% 25%;
-    --muted-foreground: 18 15% 55%;
+    --muted: 0 40% 20%;
+    --muted-foreground: 0 20% 60%;
 
-    --accent: 0 3% 94%;
-    --accent-foreground: 21 24% 11%;
+    --accent: 5 90% 60%;
+    --accent-foreground: 0 60% 8%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 18 21% 25%;
-    --input: 19 23% 18%;
-    --ring: 18 21% 34%;
+    --border: 0 40% 20%;
+    --input: 0 50% 12%;
+    --ring: 0 85% 45%;
 
     --radius: 0.5rem;
 
-    /* Gradient matching reference image */
+    /* Gradient matching crimson reference image */
     --gradient-hero: radial-gradient(
-      circle at top right,
-      hsl(0 3% 94% / 0.15) 0%,
-      hsl(18 21% 34% / 0.4) 30%,
-      hsl(18 21% 25% / 0.6) 55%,
-      hsl(19 23% 18%) 75%,
-      hsl(21 24% 11%) 100%
+      ellipse at 80% 20%,
+      hsl(5 90% 55% / 0.7) 0%,
+      hsl(0 70% 35% / 0.5) 25%,
+      hsl(0 60% 18%) 50%,
+      hsl(0 60% 10%) 75%,
+      hsl(0 60% 8%) 100%
+    ),
+    radial-gradient(
+      ellipse at 15% 10%,
+      hsl(5 85% 50% / 0.4) 0%,
+      transparent 50%
     );
     --gradient-radial: radial-gradient(
       ellipse at 85% 15%, 
-      hsl(0 3% 94% / 0.12) 0%, 
-      hsl(18 21% 34% / 0.15) 30%, 
+      hsl(5 90% 55% / 0.3) 0%, 
+      hsl(0 70% 35% / 0.2) 30%, 
       transparent 60%
     );
-    --gradient-card: linear-gradient(135deg, hsl(19 23% 18%) 0%, hsl(21 24% 11%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(0 50% 15%) 0%, hsl(0 60% 10%) 100%);
     
     /* Shadows */
     --shadow-card: 0 4px 24px -4px hsl(0 0% 0% / 0.6);
-    --shadow-glow: 0 0 80px hsl(0 3% 94% / 0.08);
-    --shadow-hover: 0 8px 40px -8px hsl(18 21% 34% / 0.4);
+    --shadow-glow: 0 0 80px hsl(5 90% 55% / 0.15);
+    --shadow-hover: 0 8px 40px -8px hsl(0 85% 45% / 0.4);
   }
 }
 
@@ -113,7 +118,7 @@
   }
 
   .tag {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-soft-coffee/30 text-warm-highlight border border-soft-coffee/40;
+    @apply inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-primary/20 text-foreground border border-primary/30;
   }
 
   .tag-success {
