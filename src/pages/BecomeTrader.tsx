@@ -1,125 +1,215 @@
+import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Check, TrendingUp, Users, Zap, DollarSign, Shield, Award } from "lucide-react";
-
-const benefits = [
-  {
-    icon: DollarSign,
-    title: "Earn from Your Alpha",
-    description: "Monetize your trading expertise by selling access to your exclusive channel.",
-  },
-  {
-    icon: Users,
-    title: "Build Your Community",
-    description: "Create a loyal following of members who value your insights and analysis.",
-  },
-  {
-    icon: Shield,
-    title: "NFT-Gated Access",
-    description: "Exclusive Discord rooms protected by NFT membership for true scarcity.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Track Your Performance",
-    description: "Showcase your win rate, PnL, and trading stats to attract more members.",
-  },
-];
-
-const requirements = [
-  "Minimum 50% win rate over 30+ trades",
-  "Active trading history on supported markets",
-  "Commitment to regular alpha updates",
-  "Discord account for community management",
-];
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
 
 export default function BecomeTrader() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    channelName: "",
+    twitterHandle: "",
+    discordHandle: "",
+    telegramHandle: "",
+    nftSupply: "",
+    floorPrice: "",
+    tradingExperience: "",
+    markets: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulate submission
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    toast.success("Application submitted! We'll review and get back to you within 48 hours.");
+    setIsSubmitting(false);
+  };
+
   return (
     <Layout>
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-hero pointer-events-none opacity-50" />
 
       <div className="container relative mx-auto px-4 py-20 md:py-28">
-        {/* Hero Section */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-2xl mx-auto mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 border border-accent/30 text-accent text-sm mb-6">
-            <Award className="w-4 h-4" />
-            Join the Elite
-          </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-            Become a <span className="text-accent">Trader</span>
+          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Become a Trader
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Share your trading expertise, build a community of followers, and earn EDGE tokens 
-            by selling NFT access to your exclusive alpha channel.
+          <p className="text-muted-foreground">
+            Apply to launch your own alpha channel and start earning
           </p>
         </motion.div>
 
-        {/* Benefits Grid */}
+        {/* Application Form */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="grid md:grid-cols-2 gap-6 mb-16"
+          className="max-w-xl mx-auto"
         >
-          {benefits.map((benefit, index) => (
-            <motion.div
-              key={benefit.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
-              className="p-6 rounded-xl bg-gradient-to-br from-zinc-900/90 to-black/80 border border-accent/20 hover:border-accent/40 transition-all"
-            >
-              <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-                <benefit.icon className="w-6 h-6 text-accent" />
-              </div>
-              <h3 className="text-xl font-semibold text-foreground mb-2">
-                {benefit.title}
-              </h3>
-              <p className="text-muted-foreground">
-                {benefit.description}
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Requirements Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="max-w-2xl mx-auto"
-        >
-          <div className="p-8 rounded-xl bg-gradient-to-br from-zinc-900/90 to-black/80 border border-accent/20">
-            <div className="flex items-center gap-3 mb-6">
-              <Zap className="w-6 h-6 text-accent" />
-              <h2 className="text-2xl font-bold text-foreground">Requirements</h2>
-            </div>
+          <form onSubmit={handleSubmit} className="space-y-6 p-8 rounded-xl bg-gradient-to-br from-zinc-900/90 to-black/80 border border-accent/20">
             
-            <ul className="space-y-4 mb-8">
-              {requirements.map((req, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Check className="w-3 h-3 text-accent" />
-                  </div>
-                  <span className="text-foreground">{req}</span>
-                </li>
-              ))}
-            </ul>
+            {/* Channel Info */}
+            <div className="space-y-4">
+              <h2 className="text-lg font-semibold text-foreground border-b border-border/30 pb-2">
+                Channel Info
+              </h2>
+              
+              <div>
+                <Label htmlFor="channelName">Channel Name *</Label>
+                <Input
+                  id="channelName"
+                  name="channelName"
+                  placeholder="e.g. Alpha Signals"
+                  value={formData.channelName}
+                  onChange={handleChange}
+                  required
+                  className="mt-1.5 bg-black/40 border-border/30"
+                />
+              </div>
 
-            <Button variant="hero" size="lg" className="w-full">
-              Apply Now
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="nftSupply">NFT Supply *</Label>
+                  <Input
+                    id="nftSupply"
+                    name="nftSupply"
+                    type="number"
+                    placeholder="e.g. 100"
+                    value={formData.nftSupply}
+                    onChange={handleChange}
+                    required
+                    className="mt-1.5 bg-black/40 border-border/30"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="floorPrice">Floor Price (SOL) *</Label>
+                  <Input
+                    id="floorPrice"
+                    name="floorPrice"
+                    type="number"
+                    step="0.01"
+                    placeholder="e.g. 0.5"
+                    value={formData.floorPrice}
+                    onChange={handleChange}
+                    required
+                    className="mt-1.5 bg-black/40 border-border/30"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Social Links */}
+            <div className="space-y-4">
+              <h2 className="text-lg font-semibold text-foreground border-b border-border/30 pb-2">
+                Social Links
+              </h2>
+              
+              <div>
+                <Label htmlFor="twitterHandle">X (Twitter) *</Label>
+                <Input
+                  id="twitterHandle"
+                  name="twitterHandle"
+                  placeholder="@yourhandle"
+                  value={formData.twitterHandle}
+                  onChange={handleChange}
+                  required
+                  className="mt-1.5 bg-black/40 border-border/30"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="discordHandle">Discord</Label>
+                  <Input
+                    id="discordHandle"
+                    name="discordHandle"
+                    placeholder="username#1234"
+                    value={formData.discordHandle}
+                    onChange={handleChange}
+                    className="mt-1.5 bg-black/40 border-border/30"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="telegramHandle">Telegram</Label>
+                  <Input
+                    id="telegramHandle"
+                    name="telegramHandle"
+                    placeholder="@username"
+                    value={formData.telegramHandle}
+                    onChange={handleChange}
+                    className="mt-1.5 bg-black/40 border-border/30"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Trading Background */}
+            <div className="space-y-4">
+              <h2 className="text-lg font-semibold text-foreground border-b border-border/30 pb-2">
+                Trading Background
+              </h2>
+              
+              <div>
+                <Label htmlFor="markets">Markets You Trade *</Label>
+                <Input
+                  id="markets"
+                  name="markets"
+                  placeholder="e.g. Crypto, Politics, Sports"
+                  value={formData.markets}
+                  onChange={handleChange}
+                  required
+                  className="mt-1.5 bg-black/40 border-border/30"
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="tradingExperience">Tell us about your trading experience</Label>
+                <Textarea
+                  id="tradingExperience"
+                  name="tradingExperience"
+                  placeholder="Your track record, win rate, notable calls..."
+                  value={formData.tradingExperience}
+                  onChange={handleChange}
+                  rows={4}
+                  className="mt-1.5 bg-black/40 border-border/30 resize-none"
+                />
+              </div>
+            </div>
+
+            <Button 
+              type="submit" 
+              variant="hero" 
+              size="lg" 
+              className="w-full"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Submitting..." : "Submit Application"}
             </Button>
             
-            <p className="text-center text-muted-foreground text-sm mt-4">
-              Applications are reviewed within 48 hours
+            <p className="text-center text-muted-foreground text-xs">
+              Applications reviewed within 48 hours
             </p>
-          </div>
+          </form>
         </motion.div>
       </div>
     </Layout>
