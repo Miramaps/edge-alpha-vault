@@ -50,18 +50,20 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        navy: {
-          dark: "hsl(var(--navy-dark))",
-          slate: "hsl(var(--navy-slate))",
+        core: {
+          red: "hsl(var(--core-red))",
         },
-        ocean: {
-          deep: "hsl(var(--ocean-deep))",
+        crimson: {
+          dark: "hsl(var(--dark-crimson))",
         },
-        steel: {
-          blue: "hsl(var(--steel-blue))",
+        wine: {
+          red: "hsl(var(--wine-red))",
+        },
+        scarlet: {
+          bright: "hsl(var(--bright-scarlet))",
         },
         glow: {
-          blue: "hsl(var(--blue-glow))",
+          red: "hsl(var(--hot-red))",
         },
       },
       borderRadius: {
