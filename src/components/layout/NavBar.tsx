@@ -54,7 +54,7 @@ export function NavBar() {
             {/* Left side - Logo and nav */}
             <div className="flex items-center gap-8">
               <Link to="/" className="flex items-center gap-2.5 group">
-                <img src={edgeLogo} alt="Edge" className="w-14 h-14 transition-transform duration-200 group-hover:scale-105" />
+                <img src={edgeLogo} alt="Edge" className="w-20 h-20 transition-transform duration-200 group-hover:scale-105" />
                 <span className="text-foreground font-semibold text-lg tracking-tight">Edge</span>
               </Link>
 
