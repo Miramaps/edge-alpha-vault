@@ -50,20 +50,18 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        core: {
-          red: "hsl(var(--core-red))",
+        maroon: {
+          dark: "hsl(var(--maroon-dark))",
+          mid: "hsl(var(--maroon-mid))",
         },
         crimson: {
-          dark: "hsl(var(--dark-crimson))",
+          deep: "hsl(var(--crimson-deep))",
+          DEFAULT: "hsl(var(--crimson))",
         },
-        wine: {
-          red: "hsl(var(--wine-red))",
-        },
-        scarlet: {
-          bright: "hsl(var(--bright-scarlet))",
-        },
+        "coral-red": "hsl(var(--coral-red))",
+        salmon: "hsl(var(--salmon))",
         glow: {
-          red: "hsl(var(--hot-red))",
+          red: "hsl(var(--coral-red))",
         },
       },
       borderRadius: {
@@ -94,7 +92,7 @@ export default {
         },
         "glow-pulse": {
           "0%, 100%": { opacity: "0.4" },
-          "50%": { opacity: "0.7" },
+          "50%": { opacity: "0.8" },
         },
         "shimmer": {
           "0%": { backgroundPosition: "-200% 0" },
