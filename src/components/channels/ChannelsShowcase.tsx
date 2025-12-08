@@ -96,7 +96,7 @@ export function ChannelsShowcase() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="rounded-xl p-4 mb-6 bg-gradient-to-r from-zinc-900/70 to-black/60 border border-accent/25"
+          className="pro-card p-4 mb-8"
         >
           <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center">
             {/* Search */}
@@ -162,7 +162,7 @@ export function ChannelsShowcase() {
 
         {/* Channels Grid/List */}
         {viewMode === "grid" ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {filteredAndSortedChannels.map((channel, index) => (
               <ChannelCard key={channel.id} channel={channel} index={index} />
             ))}
