@@ -6,14 +6,14 @@
 
 @layer base {
   :root {
-    /* Warm Red Palette - HSL */
-    --black-deep: 350 30% 6%;             /* Deep dark with red tint */
-    --maroon-dark: 350 50% 12%;           /* Dark maroon */
-    --maroon-mid: 350 55% 18%;            /* Mid maroon */
-    --crimson-deep: 355 65% 28%;          /* Deep crimson */
-    --crimson: 355 70% 40%;               /* Crimson */
-    --coral-red: 5 75% 55%;               /* Coral red */
-    --salmon: 10 80% 65%;                 /* Salmon/coral highlight */
+    /* Pure Red Palette - HSL */
+    --black-deep: 0 0% 4%;                /* Pure black */
+    --maroon-dark: 355 60% 10%;           /* Dark maroon */
+    --maroon-mid: 355 55% 15%;            /* Mid maroon */
+    --crimson-deep: 355 70% 25%;          /* Deep crimson */
+    --crimson: 355 75% 35%;               /* Crimson */
+    --blood-red: 355 80% 45%;             /* Blood red */
+    --bright-red: 355 85% 55%;            /* Bright red */
     --pure-white: 0 0% 100%;              /* #FFFFFF */
 
     /* Semantic tokens */
@@ -26,16 +26,16 @@
     --popover: var(--maroon-dark);
     --popover-foreground: var(--pure-white);
 
-    --primary: var(--coral-red);
+    --primary: var(--blood-red);
     --primary-foreground: var(--pure-white);
 
     --secondary: var(--maroon-mid);
     --secondary-foreground: var(--pure-white);
 
     --muted: var(--crimson-deep);
-    --muted-foreground: 350 30% 60%;
+    --muted-foreground: 355 30% 55%;
 
-    --accent: var(--salmon);
+    --accent: var(--bright-red);
     --accent-foreground: var(--pure-white);
 
     --destructive: 0 62.8% 30.6%;
@@ -43,31 +43,31 @@
 
     --border: var(--crimson-deep);
     --input: var(--maroon-mid);
-    --ring: var(--coral-red);
+    --ring: var(--bright-red);
 
     --radius: 0.5rem;
 
-    /* Gradients - warm red like the reference */
+    /* Gradients - pure red */
     --gradient-hero: radial-gradient(
       ellipse at 70% 30%,
-      hsl(10 80% 65% / 0.4) 0%,
-      hsl(5 75% 55% / 0.3) 25%,
-      hsl(355 65% 28% / 0.4) 50%,
-      hsl(350 50% 12%) 80%,
-      hsl(350 30% 6%) 100%
+      hsl(355 85% 55% / 0.35) 0%,
+      hsl(355 80% 45% / 0.25) 25%,
+      hsl(355 70% 25% / 0.3) 50%,
+      hsl(355 60% 10%) 80%,
+      hsl(0 0% 4%) 100%
     );
     --gradient-radial: radial-gradient(
       ellipse at 80% 20%, 
-      hsl(10 80% 65% / 0.3) 0%, 
-      hsl(5 75% 55% / 0.15) 30%, 
+      hsl(355 85% 55% / 0.3) 0%, 
+      hsl(355 80% 45% / 0.15) 30%, 
       transparent 60%
     );
-    --gradient-card: linear-gradient(135deg, hsl(350 55% 18% / 0.8) 0%, hsl(350 50% 12%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(355 55% 15% / 0.8) 0%, hsl(355 60% 10%) 100%);
     
     /* Shadows with red tint */
-    --shadow-card: 0 4px 24px -4px hsl(350 50% 5% / 0.8);
-    --shadow-glow: 0 0 60px hsl(5 75% 55% / 0.3);
-    --shadow-hover: 0 8px 40px -8px hsl(10 80% 65% / 0.4);
+    --shadow-card: 0 4px 24px -4px hsl(0 0% 0% / 0.8);
+    --shadow-glow: 0 0 60px hsl(355 85% 55% / 0.3);
+    --shadow-hover: 0 8px 40px -8px hsl(355 85% 55% / 0.4);
   }
 }
 
@@ -103,7 +103,7 @@
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-salmon to-coral-red;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent to-primary;
   }
 
   .stat-value {
