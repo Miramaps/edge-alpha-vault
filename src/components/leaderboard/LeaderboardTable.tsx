@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Star } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -78,7 +77,7 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
         <Table>
           <TableHeader>
             <TableRow className="border-border/20 hover:bg-transparent">
-              <TableHead className="w-10 text-muted-foreground/60 text-xs font-normal uppercase tracking-wider"></TableHead>
+              <TableHead className="w-12 text-muted-foreground/60 text-xs font-normal uppercase tracking-wider">#</TableHead>
               <TableHead className="text-muted-foreground/60 text-xs font-normal uppercase tracking-wider">Trader</TableHead>
               <TableHead className="text-muted-foreground/60 text-xs font-normal uppercase tracking-wider text-right">Floor Price</TableHead>
               <TableHead className="hidden sm:table-cell text-muted-foreground/60 text-xs font-normal uppercase tracking-wider text-right">1d Change</TableHead>
@@ -96,7 +95,7 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
                 className="border-border/10 hover:bg-white/[0.02] transition-colors group"
               >
                 <TableCell className="py-4">
-                  <Star className="w-4 h-4 text-muted-foreground/30 hover:text-yellow-500 cursor-pointer transition-colors" />
+                  <span className="text-sm font-medium text-muted-foreground">{index + 1}</span>
                 </TableCell>
                 <TableCell className="py-4">
                   <Link to={`/t/${trader.handle}`} className="flex items-center gap-3 group-hover:opacity-80 transition-opacity">
