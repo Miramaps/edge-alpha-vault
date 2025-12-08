@@ -6,68 +6,69 @@
 
 @layer base {
   :root {
-    /* Pure Red Palette - HSL */
-    --black-deep: 0 0% 4%;                /* Pure black */
-    --maroon-dark: 355 60% 10%;           /* Dark maroon */
-    --maroon-mid: 355 55% 15%;            /* Mid maroon */
-    --crimson-deep: 355 70% 25%;          /* Deep crimson */
-    --crimson: 355 75% 35%;               /* Crimson */
-    --blood-red: 355 80% 45%;             /* Blood red */
-    --bright-red: 355 85% 55%;            /* Bright red */
-    --pure-white: 0 0% 100%;              /* #FFFFFF */
+    /* Warm Brown/Sepia Palette - HSL */
+    --brown-deep: 20 15% 6%;               /* Deep dark brown-black */
+    --brown-dark: 25 20% 12%;              /* Dark brown */
+    --brown-mid: 28 25% 18%;               /* Mid brown */
+    --bronze-deep: 30 35% 25%;             /* Deep bronze */
+    --bronze: 32 40% 35%;                  /* Bronze */
+    --tan: 35 45% 45%;                     /* Tan/caramel */
+    --sand: 38 50% 55%;                    /* Sand/light tan */
+    --cream: 40 30% 75%;                   /* Cream */
+    --pure-white: 0 0% 100%;               /* #FFFFFF */
 
     /* Semantic tokens */
-    --background: var(--black-deep);
+    --background: var(--brown-deep);
     --foreground: var(--pure-white);
 
-    --card: 355 55% 14%;
+    --card: 25 20% 10%;
     --card-foreground: var(--pure-white);
 
-    --popover: var(--maroon-dark);
+    --popover: var(--brown-dark);
     --popover-foreground: var(--pure-white);
 
-    --primary: var(--blood-red);
-    --primary-foreground: var(--pure-white);
+    --primary: var(--tan);
+    --primary-foreground: var(--brown-deep);
 
-    --secondary: var(--maroon-mid);
+    --secondary: var(--brown-mid);
     --secondary-foreground: var(--pure-white);
 
-    --muted: var(--crimson-deep);
-    --muted-foreground: 355 30% 55%;
+    --muted: var(--bronze-deep);
+    --muted-foreground: 35 25% 55%;
 
-    --accent: var(--bright-red);
-    --accent-foreground: var(--pure-white);
+    --accent: var(--sand);
+    --accent-foreground: var(--brown-deep);
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: var(--pure-white);
 
-    --border: var(--crimson-deep);
-    --input: var(--maroon-mid);
-    --ring: var(--bright-red);
+    --border: var(--bronze-deep);
+    --input: var(--brown-mid);
+    --ring: var(--sand);
 
     --radius: 0.5rem;
 
-    /* Gradients - pure red */
+    /* Gradients - warm brown */
     --gradient-hero: radial-gradient(
       ellipse at 70% 30%,
-      hsl(355 85% 55% / 0.35) 0%,
-      hsl(355 80% 45% / 0.25) 25%,
-      hsl(355 70% 25% / 0.3) 50%,
-      hsl(355 60% 10%) 80%,
-      hsl(0 0% 4%) 100%
+      hsl(35 45% 45% / 0.25) 0%,
+      hsl(32 40% 35% / 0.2) 25%,
+      hsl(28 25% 18% / 0.3) 50%,
+      hsl(25 20% 12%) 80%,
+      hsl(20 15% 6%) 100%
     );
     --gradient-radial: radial-gradient(
       ellipse at 80% 20%, 
-      hsl(355 85% 55% / 0.3) 0%, 
-      hsl(355 80% 45% / 0.15) 30%, 
+      hsl(38 50% 55% / 0.25) 0%, 
+      hsl(35 45% 45% / 0.12) 30%, 
       transparent 60%
     );
-    --gradient-card: linear-gradient(135deg, hsl(355 55% 15% / 0.8) 0%, hsl(355 60% 10%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(28 25% 18% / 0.8) 0%, hsl(25 20% 12%) 100%);
     
-    /* Shadows with red tint */
+    /* Shadows with brown tint */
     --shadow-card: 0 4px 24px -4px hsl(0 0% 0% / 0.8);
-    --shadow-glow: 0 0 60px hsl(355 85% 55% / 0.3);
-    --shadow-hover: 0 8px 40px -8px hsl(355 85% 55% / 0.4);
+    --shadow-glow: 0 0 60px hsl(35 45% 45% / 0.2);
+    --shadow-hover: 0 8px 40px -8px hsl(38 50% 55% / 0.3);
   }
 }
 
