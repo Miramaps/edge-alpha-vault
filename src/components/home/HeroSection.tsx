@@ -10,7 +10,7 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-gradient-radial" />
       
       {/* Glow effect */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-glow-blue/20 rounded-full blur-[120px] animate-glow-pulse" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-glow-red/20 rounded-full blur-[120px] animate-glow-pulse" />
 
       <div className="container relative mx-auto px-4 py-24 md:py-32 lg:py-40">
         <div className="max-w-3xl mx-auto text-center">

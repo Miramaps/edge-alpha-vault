@@ -70,7 +70,7 @@ export default function TraderDashboard() {
     <Layout>
       {/* Hero gradient */}
       <div className="absolute inset-0 bg-gradient-hero pointer-events-none" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-glow-blue/10 rounded-full blur-[120px]" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-glow-red/10 rounded-full blur-[120px]" />
 
       <div className="container relative mx-auto px-4 py-12 md:py-16">
         {/* Owner mode toggle (for demo) */}
