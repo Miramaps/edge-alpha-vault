@@ -20,7 +20,7 @@
     --background: var(--black-deep);
     --foreground: var(--pure-white);
 
-    --card: var(--maroon-dark);
+    --card: 355 55% 14%;
     --card-foreground: var(--pure-white);
 
     --popover: var(--maroon-dark);

@@ -96,7 +96,7 @@ export function ChannelsShowcase() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="glass-card p-4 mb-6"
+          className="rounded-xl p-4 mb-6 bg-gradient-to-r from-muted/60 to-card/80 border border-accent/20"
         >
           <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center">
             {/* Search */}
