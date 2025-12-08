@@ -2,7 +2,6 @@ import { Layout } from "@/components/layout/Layout";
 import { HeroSection } from "@/components/home/HeroSection";
 import { SocialLinksRow } from "@/components/home/SocialLinksRow";
 import { ChannelsShowcase } from "@/components/channels/ChannelsShowcase";
-import { LeaderboardTable } from "@/components/leaderboard/LeaderboardTable";
 import { WidgetPanel } from "@/components/widgets/WidgetPanel";
 
 const Index = () => {
@@ -26,11 +25,6 @@ const Index = () => {
             </div>
           </div>
         </div>
-
-        {/* Leaderboard Section */}
-        <section className="py-16 md:py-24 border-t border-border/30">
-          <LeaderboardTable limit={10} />
-        </section>
       </div>
     </Layout>
   );
