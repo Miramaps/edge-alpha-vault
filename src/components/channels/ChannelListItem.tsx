@@ -47,7 +47,7 @@ export function ChannelListItem({ channel }: ChannelListItemProps) {
       {/* Floor */}
       <div className="hidden md:block min-w-[80px]">
         <p className="stat-label">Floor</p>
-        <p className="stat-value text-sm">{channel.floorPrice} EDGE</p>
+        <p className="stat-value text-sm">{channel.floorPrice} SOL</p>
       </div>
 
       {/* Volume */}

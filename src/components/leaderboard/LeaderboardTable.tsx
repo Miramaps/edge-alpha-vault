@@ -111,7 +111,7 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
                 </TableCell>
                 <TableCell className="text-right py-4">
                   <span className="text-sm font-medium text-foreground">{trader.floorPrice}</span>
-                  <span className="text-xs text-muted-foreground/60 ml-1">EDGE</span>
+                  <span className="text-xs text-muted-foreground/60 ml-1">SOL</span>
                 </TableCell>
                 <TableCell className={cn(
                   "hidden sm:table-cell text-right py-4 font-medium text-sm",
@@ -124,7 +124,7 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
                 </TableCell>
                 <TableCell className="hidden lg:table-cell text-right py-4">
                   <span className="text-sm text-foreground">{(trader.volume24h / 1000).toFixed(1)}k</span>
-                  <span className="text-xs text-muted-foreground/60 ml-1">EDGE</span>
+                  <span className="text-xs text-muted-foreground/60 ml-1">SOL</span>
                 </TableCell>
                 <TableCell className="hidden md:table-cell text-right py-4 text-sm text-foreground">
                   {trader.members.toLocaleString()}
