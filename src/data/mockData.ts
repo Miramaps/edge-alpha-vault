@@ -135,14 +135,42 @@ export const members: Member[] = [
   { id: 'm4', channelId: 'ch-1', wallet: '0x3456...yzab', username: 'whale_watcher', joinedAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 30).toISOString() },
 ];
 
+// Generate random trend data for sparklines
+const generateTrendData = (isPositive: boolean): number[] => {
+  const points = 7;
+  const data: number[] = [];
+  let value = 50 + Math.random() * 20;
+  
+  for (let i = 0; i < points; i++) {
+    const change = (Math.random() - (isPositive ? 0.3 : 0.7)) * 15;
+    value = Math.max(10, Math.min(100, value + change));
+    data.push(value);
+  }
+  
+  // Ensure end matches trend direction
+  if (isPositive && data[data.length - 1] < data[0]) {
+    data[data.length - 1] = data[0] + Math.random() * 20;
+  } else if (!isPositive && data[data.length - 1] > data[0]) {
+    data[data.length - 1] = data[0] - Math.random() * 20;
+  }
+  
+  return data;
+};
+
 export const leaderboardData = traders
-  .map((trader, index) => ({
-    ...trader,
-    rank: index + 1,
-    members: channels.find(c => c.trader.id === trader.id)?.minted || 0,
-    floorPrice: channels.find(c => c.trader.id === trader.id)?.floorPrice || 0,
-    volume24h: channels.find(c => c.trader.id === trader.id)?.volume24h || 0,
-  }))
+  .map((trader, index) => {
+    const channel = channels.find(c => c.trader.id === trader.id);
+    const priceChange = channel?.priceChange24h || 0;
+    return {
+      ...trader,
+      rank: index + 1,
+      members: channel?.minted || 0,
+      floorPrice: channel?.floorPrice || 0,
+      volume24h: channel?.volume24h || 0,
+      priceChange24h: priceChange,
+      trendData: generateTrendData(priceChange >= 0),
+    };
+  })
   .sort((a, b) => b.stats.lifetimePnl - a.stats.lifetimePnl)
   .map((trader, index) => ({ ...trader, rank: index + 1 }));
 
