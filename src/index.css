@@ -6,69 +6,66 @@
 
 @layer base {
   :root {
-    /* Warm Brown/Sepia Palette - True brown, not yellow */
-    --brown-black: 15 20% 5%;              /* Almost black with brown */
-    --brown-deep: 15 25% 10%;              /* Deep brown */
-    --brown-dark: 18 22% 15%;              /* Dark brown */
-    --brown-mid: 20 20% 22%;               /* Mid brown */
-    --taupe: 20 15% 35%;                   /* Taupe/muted brown */
-    --warm-gray: 20 10% 50%;               /* Warm gray-brown */
-    --light-taupe: 25 12% 65%;             /* Light taupe */
-    --cream: 30 15% 85%;                   /* Cream */
+    /* Exact Brown Palette from reference */
+    --deep-core: 21 24% 11%;               /* #241B16 */
+    --dark-cocoa: 19 23% 18%;              /* #3A2B24 */
+    --mocha: 18 21% 25%;                   /* #4D3A32 */
+    --soft-coffee: 18 21% 34%;             /* #694F44 */
+    --warm-highlight: 0 3% 94%;            /* #EFEEEE */
     --pure-white: 0 0% 100%;               /* #FFFFFF */
 
     /* Semantic tokens */
-    --background: var(--brown-black);
+    --background: var(--deep-core);
     --foreground: var(--pure-white);
 
-    --card: 15 22% 9%;
+    --card: var(--dark-cocoa);
     --card-foreground: var(--pure-white);
 
-    --popover: var(--brown-deep);
+    --popover: var(--dark-cocoa);
     --popover-foreground: var(--pure-white);
 
-    --primary: var(--taupe);
+    --primary: var(--soft-coffee);
     --primary-foreground: var(--pure-white);
 
-    --secondary: var(--brown-dark);
+    --secondary: var(--mocha);
     --secondary-foreground: var(--pure-white);
 
-    --muted: var(--brown-mid);
-    --muted-foreground: 20 12% 55%;
+    --muted: var(--mocha);
+    --muted-foreground: 18 15% 55%;
 
-    --accent: var(--light-taupe);
-    --accent-foreground: var(--brown-black);
+    --accent: var(--warm-highlight);
+    --accent-foreground: var(--deep-core);
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: var(--pure-white);
 
-    --border: var(--brown-mid);
-    --input: var(--brown-dark);
-    --ring: var(--light-taupe);
+    --border: var(--mocha);
+    --input: var(--dark-cocoa);
+    --ring: var(--soft-coffee);
 
     --radius: 0.5rem;
 
-    /* Gradients - true warm brown */
+    /* Gradient matching reference image */
     --gradient-hero: radial-gradient(
-      ellipse at 70% 30%,
-      hsl(20 30% 25% / 0.4) 0%,
-      hsl(18 25% 18% / 0.3) 30%,
-      hsl(15 22% 12% / 0.4) 55%,
-      hsl(15 20% 8%) 80%,
-      hsl(15 20% 5%) 100%
+      circle at top right,
+      hsl(0 3% 94% / 0.15) 0%,
+      hsl(18 21% 34% / 0.4) 30%,
+      hsl(18 21% 25% / 0.6) 55%,
+      hsl(19 23% 18%) 75%,
+      hsl(21 24% 11%) 100%
     );
     --gradient-radial: radial-gradient(
-      ellipse at 80% 80%, 
-      hsl(25 35% 30% / 0.25) 0%, 
-      hsl(20 25% 20% / 0.15) 35%, 
-      transparent 65%
+      ellipse at 85% 15%, 
+      hsl(0 3% 94% / 0.12) 0%, 
+      hsl(18 21% 34% / 0.15) 30%, 
+      transparent 60%
     );
-    --gradient-card: linear-gradient(135deg, hsl(18 22% 15% / 0.8) 0%, hsl(15 22% 10%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(19 23% 18%) 0%, hsl(21 24% 11%) 100%);
     
-    /* Shadows with brown tint */
-    --shadow-card: 0 4px 24px -4px hsl(0 0% 0% / 0.8);
-    --shadow-glow: 0 0 60px hsl(20 30% 25% / 0.15);
-    --shadow-hover: 0 8px 40px -8px hsl(25 25% 30% / 0.25);
+    /* Shadows */
+    --shadow-card: 0 4px 24px -4px hsl(0 0% 0% / 0.6);
+    --shadow-glow: 0 0 80px hsl(0 3% 94% / 0.08);
+    --shadow-hover: 0 8px 40px -8px hsl(18 21% 34% / 0.4);
   }
 }
 
@@ -98,7 +95,7 @@
   }
 
   .glass-card-hover:hover {
-    @apply border-accent/50;
+    @apply border-accent/30;
     box-shadow: var(--shadow-hover);
     transform: translateY(-2px);
   }
@@ -116,7 +113,7 @@
   }
 
   .tag {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-primary/20 text-accent border border-primary/30;
+    @apply inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-soft-coffee/30 text-warm-highlight border border-soft-coffee/40;
   }
 
   .tag-success {

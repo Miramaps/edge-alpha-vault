@@ -50,18 +50,14 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        brown: {
-          black: "hsl(var(--brown-black))",
-          deep: "hsl(var(--brown-deep))",
-          dark: "hsl(var(--brown-dark))",
-          mid: "hsl(var(--brown-mid))",
-        },
-        taupe: "hsl(var(--taupe))",
-        "warm-gray": "hsl(var(--warm-gray))",
-        "light-taupe": "hsl(var(--light-taupe))",
-        cream: "hsl(var(--cream))",
+        // Custom palette colors
+        "deep-core": "hsl(var(--deep-core))",
+        "dark-cocoa": "hsl(var(--dark-cocoa))",
+        "mocha": "hsl(var(--mocha))",
+        "soft-coffee": "hsl(var(--soft-coffee))",
+        "warm-highlight": "hsl(var(--warm-highlight))",
         glow: {
-          warm: "hsl(var(--light-taupe))",
+          warm: "hsl(var(--warm-highlight))",
         },
       },
       borderRadius: {
@@ -92,7 +88,7 @@ export default {
         },
         "glow-pulse": {
           "0%, 100%": { opacity: "0.4" },
-          "50%": { opacity: "0.8" },
+          "50%": { opacity: "0.7" },
         },
         "shimmer": {
           "0%": { backgroundPosition: "-200% 0" },
@@ -105,7 +101,7 @@ export default {
         "fade-in": "fade-in 0.5s ease-out forwards",
         "fade-in-up": "fade-in-up 0.6s ease-out forwards",
         "slide-in": "slide-in 0.4s ease-out forwards",
-        "glow-pulse": "glow-pulse 3s ease-in-out infinite",
+        "glow-pulse": "glow-pulse 4s ease-in-out infinite",
         "shimmer": "shimmer 2s linear infinite",
       },
       backgroundImage: {
