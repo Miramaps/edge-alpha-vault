@@ -1,9 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import type { Channel } from "@/data/mockData";
-import { cn } from "@/lib/utils";
 
 interface ChannelCardProps {
   channel: Channel;
@@ -11,61 +8,63 @@ interface ChannelCardProps {
 }
 
 export function ChannelCard({ channel, index }: ChannelCardProps) {
-  const supplyPercentage = (channel.minted / channel.maxSupply) * 100;
-
-  const getStatusTag = () => {
-    switch (channel.status) {
-      case "open":
-        return <span className="tag tag-success">Open</span>;
-      case "almost-full":
-        return <span className="tag tag-warning">Almost Full</span>;
-      case "closed":
-        return <span className="tag tag-closed">Closed</span>;
-    }
-  };
+  const capacityPercentage = (channel.minted / channel.maxSupply) * 100;
+  const isOpen = channel.status === "open" || channel.status === "almost-full";
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="relative overflow-hidden rounded-xl p-5 flex flex-col bg-gradient-to-br from-zinc-900/90 to-black/80 border border-accent/30 hover:border-accent/60 transition-all duration-300 hover:shadow-hover hover:-translate-y-1"
+      className="pro-card-hover p-5 md:p-6 flex flex-col"
     >
-      {/* Header */}
+      {/* Top Bar - Identity + Status */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-foreground font-bold text-sm">
+          {/* Avatar */}
+          <div 
+            className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium"
+            style={{ 
+              background: 'hsl(16 20% 24%)', 
+              color: 'hsl(30 4% 93%)' 
+            }}
+          >
             {channel.trader.name.charAt(0)}
           </div>
+          {/* Name & Handle */}
           <div>
-            <h3 className="font-semibold text-foreground">{channel.trader.name}</h3>
-            <p className="text-xs text-muted-foreground">@{channel.trader.handle}</p>
+            <h3 className="text-base font-medium text-white leading-tight">
+              {channel.trader.name}
+            </h3>
+            <p className="text-[13px] text-soft-muted">
+              @{channel.trader.handle}
+            </p>
           </div>
         </div>
-        {getStatusTag()}
+        {/* Status Pill */}
+        <span className={isOpen ? "status-open" : "status-closed"}>
+          {isOpen ? "Open" : "Closed"}
+        </span>
       </div>
 
       {/* Tags */}
-      <div className="flex flex-wrap gap-1.5 mb-4">
-        {channel.trader.tags.map((tag) => (
-          <span
-            key={tag}
-            className="px-2 py-0.5 text-xs rounded bg-accent/15 text-accent border border-accent/25"
-          >
+      <div className="flex flex-wrap gap-1.5 mb-5">
+        {channel.trader.tags.slice(0, 4).map((tag) => (
+          <span key={tag} className="tag">
             {tag}
           </span>
         ))}
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-2 gap-3 mb-4">
+      {/* Middle - Metrics Grid */}
+      <div className="grid grid-cols-2 gap-x-6 gap-y-4 mb-5">
         <div>
           <p className="stat-label">Floor</p>
-          <p className="stat-value">{channel.floorPrice} SOL</p>
+          <p className="stat-value">{channel.floorPrice} EDGE</p>
         </div>
         <div>
-          <p className="stat-label">Vol 24h</p>
-          <p className="stat-value">{(channel.volume24h / 1000).toFixed(1)}k SOL</p>
+          <p className="stat-label">Vol 24H</p>
+          <p className="stat-value">{(channel.volume24h / 1000).toFixed(1)}k EDGE</p>
         </div>
         <div>
           <p className="stat-label">Members</p>
@@ -75,29 +74,36 @@ export function ChannelCard({ channel, index }: ChannelCardProps) {
         </div>
         <div>
           <p className="stat-label">Win Rate</p>
-          <p className={cn(
-            "stat-value",
-            channel.trader.stats.winRate >= 60 && "text-emerald-400"
-          )}>
+          <p className="stat-value text-win">
             {channel.trader.stats.winRate}%
           </p>
         </div>
       </div>
 
-      {/* Supply Progress */}
-      <div className="mb-4">
-        <Progress value={supplyPercentage} className="h-1.5" />
+      {/* Capacity Progress Bar */}
+      <div className="mb-2">
+        <div className="progress-track">
+          <div 
+            className="progress-fill" 
+            style={{ width: `${capacityPercentage}%` }}
+          />
+        </div>
       </div>
-
-      {/* Discord hint */}
-      <p className="text-xs text-muted-foreground mb-4">
-        Discord alpha room access via NFT
+      <p className="text-[11px] text-soft-dim mb-5">
+        Capacity: {channel.minted} / {channel.maxSupply} seats used
       </p>
 
-      {/* Action */}
-      <Button variant="hero" className="w-full mt-auto" asChild>
-        <Link to={`/t/${channel.trader.handle}`}>View Channel</Link>
-      </Button>
+      {/* Bottom - Helper Text + CTA */}
+      <p className="text-[12px] text-soft-muted mb-4">
+        Discord alpha room access via channel NFT.
+      </p>
+
+      <Link 
+        to={`/t/${channel.trader.handle}`}
+        className="btn-accent w-full text-center text-sm mt-auto"
+      >
+        View Channel
+      </Link>
     </motion.div>
   );
 }

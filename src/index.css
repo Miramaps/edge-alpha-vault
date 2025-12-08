@@ -6,71 +6,71 @@
 
 @layer base {
   :root {
-    /* Crimson/Maroon Palette from reference */
-    --crimson-deep: 0 60% 8%;              /* Very dark maroon core */
-    --maroon: 0 50% 15%;                   /* Dark maroon */
-    --crimson: 0 70% 25%;                  /* Mid crimson */
-    --crimson-bright: 0 85% 45%;           /* Bright crimson */
-    --coral-glow: 5 90% 60%;               /* Coral/red glow */
-    --pure-white: 0 0% 100%;               /* White */
+    /* Professional Trading Palette */
+    --base-dark: 18 24% 11%;               /* #241B16 - page background */
+    --card-bg: 17 23% 18%;                 /* #3A2B24 - card background */
+    --card-elevated: 16 20% 24%;           /* #4D3A32 - subtle elevation */
+    --border-muted: 16 20% 33%;            /* #694F44 - borders/separators */
+    --text-soft: 30 4% 93%;                /* #EFEEEE - soft highlight text */
+    --pure-white: 0 0% 100%;               /* #FFFFFF - pure white */
+    
+    /* Accent colors */
+    --accent-red: 355 71% 51%;             /* #D52D3E - primary accent */
+    --accent-red-hover: 7 85% 62%;         /* #F0604F - hover accent */
+    --win-green: 142 71% 45%;              /* #22C55E - win rate */
 
     /* Semantic tokens */
-    --background: 0 60% 8%;
+    --background: 18 24% 11%;
     --foreground: 0 0% 100%;
 
-    --card: 0 50% 12%;
+    --card: 17 23% 18%;
     --card-foreground: 0 0% 100%;
 
-    --popover: 0 50% 12%;
+    --popover: 17 23% 18%;
     --popover-foreground: 0 0% 100%;
 
-    --primary: 0 85% 45%;
+    --primary: 355 71% 51%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 50% 18%;
+    --secondary: 16 20% 24%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 40% 20%;
-    --muted-foreground: 0 20% 60%;
+    --muted: 16 20% 24%;
+    --muted-foreground: 30 4% 93%;
 
-    --accent: 5 90% 60%;
-    --accent-foreground: 0 60% 8%;
+    --accent: 355 71% 51%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 40% 20%;
-    --input: 0 50% 12%;
-    --ring: 0 85% 45%;
+    --border: 16 20% 33%;
+    --input: 17 23% 18%;
+    --ring: 355 71% 51%;
 
     --radius: 0.5rem;
 
-    /* Gradient matching crimson reference image */
+    /* Page gradient - subtle, stays on background only */
     --gradient-hero: radial-gradient(
       ellipse at 80% 20%,
-      hsl(5 90% 55% / 0.7) 0%,
-      hsl(0 70% 35% / 0.5) 25%,
-      hsl(0 60% 18%) 50%,
-      hsl(0 60% 10%) 75%,
-      hsl(0 60% 8%) 100%
+      hsl(355 71% 51% / 0.15) 0%,
+      hsl(17 23% 18% / 0.3) 35%,
+      hsl(18 24% 11%) 70%
     ),
     radial-gradient(
       ellipse at 15% 10%,
-      hsl(5 85% 50% / 0.4) 0%,
+      hsl(7 85% 62% / 0.1) 0%,
       transparent 50%
     );
     --gradient-radial: radial-gradient(
       ellipse at 85% 15%, 
-      hsl(5 90% 55% / 0.3) 0%, 
-      hsl(0 70% 35% / 0.2) 30%, 
-      transparent 60%
+      hsl(355 71% 51% / 0.12) 0%, 
+      transparent 50%
     );
-    --gradient-card: linear-gradient(135deg, hsl(0 50% 15%) 0%, hsl(0 60% 10%) 100%);
     
-    /* Shadows */
-    --shadow-card: 0 4px 24px -4px hsl(0 0% 0% / 0.6);
-    --shadow-glow: 0 0 80px hsl(5 90% 55% / 0.15);
-    --shadow-hover: 0 8px 40px -8px hsl(0 85% 45% / 0.4);
+    /* Shadows - subtle */
+    --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.35);
+    --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.45);
   }
 }
 
@@ -90,55 +90,121 @@
 }
 
 @layer components {
-  .glass-card {
-    @apply bg-card backdrop-blur-sm border border-border/40 rounded-lg;
-    box-shadow: var(--shadow-card);
+  /* Pro card style - flat, minimal */
+  .pro-card {
+    background: hsl(17 23% 18%);
+    border: 1px solid hsl(16 20% 24%);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   }
 
-  .glass-card-hover {
-    @apply glass-card transition-all duration-300;
+  .pro-card-hover {
+    @apply pro-card transition-all duration-200;
   }
 
-  .glass-card-hover:hover {
-    @apply border-accent/30;
-    box-shadow: var(--shadow-hover);
+  .pro-card-hover:hover {
+    border-color: hsl(16 20% 33%);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
     transform: translateY(-2px);
   }
 
-  .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent to-primary;
+  /* Status pills */
+  .status-open {
+    @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium;
+    border: 1px solid hsl(142 71% 45%);
+    color: hsl(142 71% 45%);
+    background: transparent;
+  }
+
+  .status-closed {
+    @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium;
+    border: 1px solid hsl(16 20% 33%);
+    color: hsl(16 20% 33%);
+    background: transparent;
+  }
+
+  /* Tags */
+  .tag {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium;
+    background: hsl(16 20% 24%);
+    color: hsl(30 4% 93%);
+  }
+
+  /* Stats */
+  .stat-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: hsl(30 4% 93% / 0.56);
+    margin-bottom: 2px;
   }
 
   .stat-value {
-    @apply text-foreground font-semibold tabular-nums;
+    font-size: 15px;
+    font-weight: 500;
+    color: hsl(0 0% 100%);
   }
 
-  .stat-label {
-    @apply text-muted-foreground text-xs uppercase tracking-wider;
+  /* Accent button */
+  .btn-accent {
+    @apply inline-flex items-center justify-center font-medium transition-all duration-200;
+    background: hsl(355 71% 51%);
+    color: white;
+    border-radius: 999px;
+    padding: 12px 24px;
   }
 
-  .tag {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-primary/20 text-foreground border border-primary/30;
+  .btn-accent:hover {
+    background: hsl(7 85% 62%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(213, 45, 62, 0.3);
   }
 
-  .tag-success {
-    @apply bg-emerald-500/15 text-emerald-400 border-emerald-500/25;
+  /* Progress bar */
+  .progress-track {
+    width: 100%;
+    height: 4px;
+    background: hsl(16 20% 24%);
+    border-radius: 2px;
+    overflow: hidden;
   }
 
-  .tag-warning {
-    @apply bg-amber-500/15 text-amber-400 border-amber-500/25;
+  .progress-fill {
+    height: 100%;
+    background: hsl(355 71% 51%);
+    border-radius: 2px;
   }
 
-  .tag-closed {
-    @apply bg-muted/50 text-muted-foreground border-muted/50;
-  }
-
+  /* Nav styles */
   .nav-link {
-    @apply text-muted-foreground hover:text-foreground transition-colors duration-200 text-sm font-medium;
+    @apply text-sm font-medium transition-colors duration-200;
+    color: hsl(30 4% 93% / 0.7);
+  }
+
+  .nav-link:hover {
+    color: hsl(0 0% 100%);
   }
 
   .nav-link-active {
-    @apply text-foreground;
+    color: hsl(0 0% 100%);
+  }
+
+  /* Win rate color */
+  .text-win {
+    color: hsl(142 71% 45%);
+  }
+
+  /* Muted text variants */
+  .text-soft {
+    color: hsl(30 4% 93%);
+  }
+
+  .text-soft-muted {
+    color: hsl(30 4% 93% / 0.72);
+  }
+
+  .text-soft-dim {
+    color: hsl(30 4% 93% / 0.56);
   }
 }
 

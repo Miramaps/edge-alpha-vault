@@ -50,15 +50,15 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Custom crimson palette colors
-        "crimson-deep": "hsl(var(--crimson-deep))",
-        "maroon": "hsl(var(--maroon))",
-        "crimson": "hsl(var(--crimson))",
-        "crimson-bright": "hsl(var(--crimson-bright))",
-        "coral-glow": "hsl(var(--coral-glow))",
-        glow: {
-          crimson: "hsl(var(--coral-glow))",
-        },
+        // Trading palette
+        "base-dark": "hsl(var(--base-dark))",
+        "card-bg": "hsl(var(--card-bg))",
+        "card-elevated": "hsl(var(--card-elevated))",
+        "border-muted": "hsl(var(--border-muted))",
+        "text-soft": "hsl(var(--text-soft))",
+        "accent-red": "hsl(var(--accent-red))",
+        "accent-red-hover": "hsl(var(--accent-red-hover))",
+        "win-green": "hsl(var(--win-green))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -82,17 +82,9 @@ export default {
           "0%": { opacity: "0", transform: "translateY(20px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
-        "slide-in": {
-          "0%": { opacity: "0", transform: "translateX(-10px)" },
-          "100%": { opacity: "1", transform: "translateX(0)" },
-        },
         "glow-pulse": {
           "0%, 100%": { opacity: "0.4" },
-          "50%": { opacity: "0.7" },
-        },
-        "shimmer": {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
+          "50%": { opacity: "0.6" },
         },
       },
       animation: {
@@ -100,19 +92,11 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.5s ease-out forwards",
         "fade-in-up": "fade-in-up 0.6s ease-out forwards",
-        "slide-in": "slide-in 0.4s ease-out forwards",
         "glow-pulse": "glow-pulse 4s ease-in-out infinite",
-        "shimmer": "shimmer 2s linear infinite",
       },
       backgroundImage: {
         'gradient-hero': 'var(--gradient-hero)',
         'gradient-radial': 'var(--gradient-radial)',
-        'gradient-card': 'var(--gradient-card)',
-      },
-      boxShadow: {
-        'card': 'var(--shadow-card)',
-        'glow': 'var(--shadow-glow)',
-        'hover': 'var(--shadow-hover)',
       },
     },
   },
