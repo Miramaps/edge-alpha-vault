@@ -14,34 +14,34 @@
     --warm-highlight: 0 3% 94%;            /* #EFEEEE */
     --pure-white: 0 0% 100%;               /* #FFFFFF */
 
-    /* Semantic tokens */
-    --background: var(--deep-core);
-    --foreground: var(--pure-white);
+    /* Semantic tokens - using raw HSL values */
+    --background: 21 24% 11%;
+    --foreground: 0 0% 100%;
 
-    --card: var(--dark-cocoa);
-    --card-foreground: var(--pure-white);
+    --card: 19 23% 18%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: var(--dark-cocoa);
-    --popover-foreground: var(--pure-white);
+    --popover: 19 23% 18%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: var(--soft-coffee);
-    --primary-foreground: var(--pure-white);
+    --primary: 18 21% 34%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: var(--mocha);
-    --secondary-foreground: var(--pure-white);
+    --secondary: 18 21% 25%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: var(--mocha);
+    --muted: 18 21% 25%;
     --muted-foreground: 18 15% 55%;
 
-    --accent: var(--warm-highlight);
-    --accent-foreground: var(--deep-core);
+    --accent: 0 3% 94%;
+    --accent-foreground: 21 24% 11%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: var(--pure-white);
+    --destructive-foreground: 0 0% 100%;
 
-    --border: var(--mocha);
-    --input: var(--dark-cocoa);
-    --ring: var(--soft-coffee);
+    --border: 18 21% 25%;
+    --input: 19 23% 18%;
+    --ring: 18 21% 34%;
 
     --radius: 0.5rem;
 
