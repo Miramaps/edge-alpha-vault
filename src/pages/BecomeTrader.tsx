@@ -89,7 +89,7 @@ export default function BecomeTrader() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="nftSupply">NFT Supply *</Label>
+                  <Label htmlFor="nftSupply">Max Members *</Label>
                   <Input
                     id="nftSupply"
                     name="nftSupply"
@@ -100,6 +100,7 @@ export default function BecomeTrader() {
                     required
                     className="mt-1.5 bg-black/40 border-border/30"
                   />
+                  <p className="text-xs text-muted-foreground mt-1">Number of NFTs to mint</p>
                 </div>
                 <div>
                   <Label htmlFor="floorPrice">Floor Price (SOL) *</Label>
