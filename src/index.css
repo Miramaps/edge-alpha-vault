@@ -6,69 +6,69 @@
 
 @layer base {
   :root {
-    /* Warm Brown/Sepia Palette - HSL */
-    --brown-deep: 20 15% 6%;               /* Deep dark brown-black */
-    --brown-dark: 25 20% 12%;              /* Dark brown */
-    --brown-mid: 28 25% 18%;               /* Mid brown */
-    --bronze-deep: 30 35% 25%;             /* Deep bronze */
-    --bronze: 32 40% 35%;                  /* Bronze */
-    --tan: 35 45% 45%;                     /* Tan/caramel */
-    --sand: 38 50% 55%;                    /* Sand/light tan */
-    --cream: 40 30% 75%;                   /* Cream */
+    /* Warm Brown/Sepia Palette - True brown, not yellow */
+    --brown-black: 15 20% 5%;              /* Almost black with brown */
+    --brown-deep: 15 25% 10%;              /* Deep brown */
+    --brown-dark: 18 22% 15%;              /* Dark brown */
+    --brown-mid: 20 20% 22%;               /* Mid brown */
+    --taupe: 20 15% 35%;                   /* Taupe/muted brown */
+    --warm-gray: 20 10% 50%;               /* Warm gray-brown */
+    --light-taupe: 25 12% 65%;             /* Light taupe */
+    --cream: 30 15% 85%;                   /* Cream */
     --pure-white: 0 0% 100%;               /* #FFFFFF */
 
     /* Semantic tokens */
-    --background: var(--brown-deep);
+    --background: var(--brown-black);
     --foreground: var(--pure-white);
 
-    --card: 25 20% 10%;
+    --card: 15 22% 9%;
     --card-foreground: var(--pure-white);
 
-    --popover: var(--brown-dark);
+    --popover: var(--brown-deep);
     --popover-foreground: var(--pure-white);
 
-    --primary: var(--tan);
-    --primary-foreground: var(--brown-deep);
+    --primary: var(--taupe);
+    --primary-foreground: var(--pure-white);
 
-    --secondary: var(--brown-mid);
+    --secondary: var(--brown-dark);
     --secondary-foreground: var(--pure-white);
 
-    --muted: var(--bronze-deep);
-    --muted-foreground: 35 25% 55%;
+    --muted: var(--brown-mid);
+    --muted-foreground: 20 12% 55%;
 
-    --accent: var(--sand);
-    --accent-foreground: var(--brown-deep);
+    --accent: var(--light-taupe);
+    --accent-foreground: var(--brown-black);
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: var(--pure-white);
 
-    --border: var(--bronze-deep);
-    --input: var(--brown-mid);
-    --ring: var(--sand);
+    --border: var(--brown-mid);
+    --input: var(--brown-dark);
+    --ring: var(--light-taupe);
 
     --radius: 0.5rem;
 
-    /* Gradients - warm brown */
+    /* Gradients - true warm brown */
     --gradient-hero: radial-gradient(
       ellipse at 70% 30%,
-      hsl(35 45% 45% / 0.25) 0%,
-      hsl(32 40% 35% / 0.2) 25%,
-      hsl(28 25% 18% / 0.3) 50%,
-      hsl(25 20% 12%) 80%,
-      hsl(20 15% 6%) 100%
+      hsl(20 30% 25% / 0.4) 0%,
+      hsl(18 25% 18% / 0.3) 30%,
+      hsl(15 22% 12% / 0.4) 55%,
+      hsl(15 20% 8%) 80%,
+      hsl(15 20% 5%) 100%
     );
     --gradient-radial: radial-gradient(
-      ellipse at 80% 20%, 
-      hsl(38 50% 55% / 0.25) 0%, 
-      hsl(35 45% 45% / 0.12) 30%, 
-      transparent 60%
+      ellipse at 80% 80%, 
+      hsl(25 35% 30% / 0.25) 0%, 
+      hsl(20 25% 20% / 0.15) 35%, 
+      transparent 65%
     );
-    --gradient-card: linear-gradient(135deg, hsl(28 25% 18% / 0.8) 0%, hsl(25 20% 12%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(18 22% 15% / 0.8) 0%, hsl(15 22% 10%) 100%);
     
     /* Shadows with brown tint */
     --shadow-card: 0 4px 24px -4px hsl(0 0% 0% / 0.8);
-    --shadow-glow: 0 0 60px hsl(35 45% 45% / 0.2);
-    --shadow-hover: 0 8px 40px -8px hsl(38 50% 55% / 0.3);
+    --shadow-glow: 0 0 60px hsl(20 30% 25% / 0.15);
+    --shadow-hover: 0 8px 40px -8px hsl(25 25% 30% / 0.25);
   }
 }
 
