@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { EdgeLogo } from "@/components/icons/EdgeLogo";
 import { TwitterIcon, DiscordIcon, DocsIcon } from "@/components/icons/SocialIcons";
+import edgeLogo from "@/assets/edge-logo.png";
 
 const socialLinks = [
   { href: "https://twitter.com", icon: TwitterIcon, label: "Twitter / X" },
@@ -49,7 +49,7 @@ export function Footer() {
           {/* Logo and copyright */}
           <div className="flex flex-col items-center gap-3">
             <div className="flex items-center gap-2.5">
-              <EdgeLogo size={24} className="text-muted-foreground" />
+              <img src={edgeLogo} alt="Edge" className="w-6 h-6 opacity-70" />
               <span className="text-muted-foreground text-sm">Edge</span>
             </div>
             <p className="text-muted-foreground text-xs">

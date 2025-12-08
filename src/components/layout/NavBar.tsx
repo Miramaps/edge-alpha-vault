@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { EdgeLogo } from "@/components/icons/EdgeLogo";
 import { TwitterIcon, DiscordIcon, GitHubIcon } from "@/components/icons/SocialIcons";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import edgeLogo from "@/assets/edge-logo.png";
 
 const navLinks = [
   { href: "/", label: "Channels" },
@@ -54,7 +54,7 @@ export function NavBar() {
             {/* Left side - Logo and nav */}
             <div className="flex items-center gap-8">
               <Link to="/" className="flex items-center gap-2.5 group">
-                <EdgeLogo size={28} className="transition-transform duration-200 group-hover:scale-105" />
+                <img src={edgeLogo} alt="Edge" className="w-7 h-7 transition-transform duration-200 group-hover:scale-105" />
                 <span className="text-foreground font-semibold text-lg tracking-tight">Edge</span>
               </Link>
 
