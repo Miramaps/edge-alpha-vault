@@ -1,0 +1,78 @@
+import { Link, useLocation } from "react-router-dom";
+import { EdgeLogo } from "@/components/icons/EdgeLogo";
+import { TwitterIcon, DiscordIcon, GitHubIcon } from "@/components/icons/SocialIcons";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+const navLinks = [
+  { href: "/", label: "Channels" },
+  { href: "/leaderboard", label: "Leaderboard" },
+  { href: "/docs", label: "Docs" },
+];
+
+const socialLinks = [
+  { href: "https://twitter.com", icon: TwitterIcon, label: "Twitter" },
+  { href: "https://discord.com", icon: DiscordIcon, label: "Discord" },
+  { href: "https://github.com", icon: GitHubIcon, label: "GitHub" },
+];
+
+export function NavBar() {
+  const location = useLocation();
+
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-card/90 backdrop-blur-md border-b border-border">
+      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+        {/* Left side - Logo and nav */}
+        <div className="flex items-center gap-8">
+          <Link to="/" className="flex items-center gap-2.5 group">
+            <EdgeLogo size={28} className="transition-transform duration-200 group-hover:scale-105" />
+            <span className="text-foreground font-semibold text-lg tracking-tight">Edge</span>
+          </Link>
+
+          <div className="hidden md:flex items-center gap-6">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                to={link.href}
+                className={cn(
+                  "nav-link",
+                  location.pathname === link.href && "nav-link-active"
+                )}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Right side - Token, Connect, Socials */}
+        <div className="flex items-center gap-4">
+          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-md bg-secondary/50 border border-border/50">
+            <span className="text-muted-foreground text-xs">Token:</span>
+            <span className="text-foreground text-sm font-medium">EDGE</span>
+            <span className="text-accent text-xs">$0.84</span>
+          </div>
+
+          <div className="hidden lg:flex items-center gap-1">
+            {socialLinks.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+                aria-label={social.label}
+              >
+                <social.icon size={18} />
+              </a>
+            ))}
+          </div>
+
+          <Button variant="hero" size="sm">
+            Connect Wallet
+          </Button>
+        </div>
+      </div>
+    </nav>
+  );
+}
