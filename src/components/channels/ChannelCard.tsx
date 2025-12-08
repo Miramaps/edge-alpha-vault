@@ -29,7 +29,7 @@ export function ChannelCard({ channel, index }: ChannelCardProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="glass-card-hover p-5 flex flex-col"
+      className="relative overflow-hidden rounded-xl p-5 flex flex-col bg-gradient-to-br from-muted/80 to-card border border-accent/25 hover:border-accent/50 transition-all duration-300 hover:shadow-hover hover:-translate-y-1"
     >
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
@@ -50,7 +50,7 @@ export function ChannelCard({ channel, index }: ChannelCardProps) {
         {channel.trader.tags.map((tag) => (
           <span
             key={tag}
-            className="px-2 py-0.5 text-xs rounded bg-secondary/50 text-muted-foreground border border-border/50"
+            className="px-2 py-0.5 text-xs rounded bg-accent/15 text-accent border border-accent/25"
           >
             {tag}
           </span>
@@ -95,7 +95,7 @@ export function ChannelCard({ channel, index }: ChannelCardProps) {
       </p>
 
       {/* Action */}
-      <Button variant="outline" className="w-full mt-auto" asChild>
+      <Button variant="hero" className="w-full mt-auto" asChild>
         <Link to={`/t/${channel.trader.handle}`}>View Channel</Link>
       </Button>
     </motion.div>

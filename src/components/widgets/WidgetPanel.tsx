@@ -17,7 +17,7 @@ function WidgetItem({ channel, showChange }: WidgetItemProps) {
   return (
     <Link
       to={`/t/${channel.trader.handle}`}
-      className="flex items-center justify-between py-2.5 px-3 hover:bg-secondary/30 rounded-md transition-colors"
+      className="flex items-center justify-between py-2.5 px-3 hover:bg-accent/10 rounded-md transition-colors"
     >
       <div className="flex items-center gap-2.5 min-w-0">
         <div className="w-7 h-7 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-foreground font-bold text-xs flex-shrink-0">
@@ -68,10 +68,10 @@ export function WidgetPanel() {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="glass-card overflow-hidden"
+      className="rounded-xl overflow-hidden bg-gradient-to-br from-muted/70 to-card border border-accent/25"
     >
       {/* Tabs */}
-      <div className="flex border-b border-border/50">
+      <div className="flex border-b border-accent/20">
         {tabs.map((tab) => (
           <button
             key={tab.value}
