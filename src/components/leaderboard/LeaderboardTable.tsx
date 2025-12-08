@@ -42,13 +42,19 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
           className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6"
         >
           <div>
-            <h2 className="text-2xl font-bold text-foreground">Top Traders</h2>
-            <p className="text-muted-foreground text-sm mt-1">
+            <h2 className="text-2xl font-bold text-white">Top Traders</h2>
+            <p className="text-soft-dim text-sm mt-1">
               Ranked by performance
             </p>
           </div>
 
-          <div className="flex items-center gap-1 p-1 rounded-lg border border-border/30 bg-black/40 w-fit">
+          <div 
+            className="flex items-center gap-1 p-1 rounded-lg w-fit"
+            style={{ 
+              background: 'hsl(17 23% 18%)',
+              border: '1px solid hsl(16 20% 24%)'
+            }}
+          >
             {timeframes.map((tf) => (
               <button
                 key={tf.value}
@@ -56,9 +62,13 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
                 className={cn(
                   "px-3 py-1.5 text-xs font-medium rounded-md transition-all",
                   timeframe === tf.value
-                    ? "bg-accent/20 text-accent"
-                    : "text-muted-foreground hover:text-foreground"
+                    ? "text-white"
+                    : "text-soft-dim hover:text-soft"
                 )}
+                style={timeframe === tf.value ? { 
+                  background: 'hsl(355 71% 51% / 0.2)',
+                  color: 'hsl(355 71% 51%)'
+                } : {}}
               >
                 {tf.label}
               </button>
@@ -72,63 +82,75 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.1 }}
-        className="rounded-xl overflow-hidden bg-black/60 border border-border/20"
+        className="pro-card overflow-hidden"
       >
         <Table>
           <TableHeader>
-            <TableRow className="border-border/20 hover:bg-transparent">
-              <TableHead className="w-12 text-muted-foreground/60 text-xs font-normal uppercase tracking-wider">#</TableHead>
-              <TableHead className="text-muted-foreground/60 text-xs font-normal uppercase tracking-wider">Trader</TableHead>
-              <TableHead className="text-muted-foreground/60 text-xs font-normal uppercase tracking-wider text-right">Floor Price</TableHead>
-              <TableHead className="hidden sm:table-cell text-muted-foreground/60 text-xs font-normal uppercase tracking-wider text-right">1d Change</TableHead>
-              <TableHead className="hidden md:table-cell text-muted-foreground/60 text-xs font-normal uppercase tracking-wider text-right">Win Rate</TableHead>
-              <TableHead className="hidden lg:table-cell text-muted-foreground/60 text-xs font-normal uppercase tracking-wider text-right">1d Vol</TableHead>
-              <TableHead className="hidden md:table-cell text-muted-foreground/60 text-xs font-normal uppercase tracking-wider text-right">Members</TableHead>
-              <TableHead className="hidden lg:table-cell text-muted-foreground/60 text-xs font-normal uppercase tracking-wider text-right">Markets</TableHead>
-              <TableHead className="text-muted-foreground/60 text-xs font-normal uppercase tracking-wider text-right">Last 7d</TableHead>
+            <TableRow 
+              className="hover:bg-transparent"
+              style={{ borderColor: 'hsl(16 20% 24%)' }}
+            >
+              <TableHead className="w-12 text-[11px] font-normal uppercase tracking-wider" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>#</TableHead>
+              <TableHead className="text-[11px] font-normal uppercase tracking-wider" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>Trader</TableHead>
+              <TableHead className="text-[11px] font-normal uppercase tracking-wider text-right" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>Floor Price</TableHead>
+              <TableHead className="hidden sm:table-cell text-[11px] font-normal uppercase tracking-wider text-right" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>1d Change</TableHead>
+              <TableHead className="hidden md:table-cell text-[11px] font-normal uppercase tracking-wider text-right" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>Win Rate</TableHead>
+              <TableHead className="hidden lg:table-cell text-[11px] font-normal uppercase tracking-wider text-right" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>1d Vol</TableHead>
+              <TableHead className="hidden md:table-cell text-[11px] font-normal uppercase tracking-wider text-right" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>Members</TableHead>
+              <TableHead className="hidden lg:table-cell text-[11px] font-normal uppercase tracking-wider text-right" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>Markets</TableHead>
+              <TableHead className="text-[11px] font-normal uppercase tracking-wider text-right" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>Last 7d</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {data.map((trader, index) => (
               <TableRow 
                 key={trader.id} 
-                className="border-border/10 hover:bg-white/[0.02] transition-colors group"
+                className="transition-colors group hover:bg-white/[0.02]"
+                style={{ borderColor: 'hsl(16 20% 24% / 0.5)' }}
               >
                 <TableCell className="py-4">
-                  <span className="text-sm font-medium text-muted-foreground">{index + 1}</span>
+                  <span className="text-sm font-medium text-soft-dim">{index + 1}</span>
                 </TableCell>
                 <TableCell className="py-4">
                   <Link to={`/t/${trader.handle}`} className="flex items-center gap-3 group-hover:opacity-80 transition-opacity">
-                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-foreground font-bold text-sm flex-shrink-0">
+                    <div 
+                      className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0"
+                      style={{ 
+                        background: 'hsl(16 20% 24%)', 
+                        color: 'hsl(30 4% 93%)' 
+                      }}
+                    >
                       {trader.name.charAt(0)}
                     </div>
                     <div className="min-w-0">
-                      <p className="font-medium text-foreground text-sm truncate">{trader.name}</p>
-                      <p className="text-xs text-muted-foreground/60 truncate">@{trader.handle}</p>
+                      <p className="font-medium text-white text-sm truncate">{trader.name}</p>
+                      <p className="text-xs text-soft-dim truncate">@{trader.handle}</p>
                     </div>
                   </Link>
                 </TableCell>
                 <TableCell className="text-right py-4">
-                  <span className="text-sm font-medium text-foreground">{trader.floorPrice}</span>
-                  <span className="text-xs text-muted-foreground/60 ml-1">SOL</span>
+                  <span className="text-sm font-medium text-white">{trader.floorPrice}</span>
+                  <span className="text-xs text-soft-dim ml-1">EDGE</span>
                 </TableCell>
                 <TableCell className={cn(
                   "hidden sm:table-cell text-right py-4 font-medium text-sm",
-                  trader.priceChange24h > 0 ? "text-emerald-500" : trader.priceChange24h < 0 ? "text-red-500" : "text-muted-foreground"
-                )}>
+                  trader.priceChange24h > 0 ? "text-win" : trader.priceChange24h < 0 ? "text-accent-red" : "text-soft-dim"
+                )}
+                style={trader.priceChange24h > 0 ? { color: 'hsl(142 71% 45%)' } : trader.priceChange24h < 0 ? { color: 'hsl(355 71% 51%)' } : {}}
+                >
                   {trader.priceChange24h > 0 ? "+" : ""}{trader.priceChange24h}%
                 </TableCell>
                 <TableCell className="hidden md:table-cell text-right py-4">
-                  <span className="text-sm text-foreground">{trader.stats.winRate}%</span>
+                  <span className="text-sm" style={{ color: 'hsl(142 71% 45%)' }}>{trader.stats.winRate}%</span>
                 </TableCell>
                 <TableCell className="hidden lg:table-cell text-right py-4">
-                  <span className="text-sm text-foreground">{(trader.volume24h / 1000).toFixed(1)}k</span>
-                  <span className="text-xs text-muted-foreground/60 ml-1">SOL</span>
+                  <span className="text-sm text-white">{(trader.volume24h / 1000).toFixed(1)}k</span>
+                  <span className="text-xs text-soft-dim ml-1">EDGE</span>
                 </TableCell>
-                <TableCell className="hidden md:table-cell text-right py-4 text-sm text-foreground">
+                <TableCell className="hidden md:table-cell text-right py-4 text-sm text-white">
                   {trader.members.toLocaleString()}
                 </TableCell>
-                <TableCell className="hidden lg:table-cell text-right py-4 text-sm text-foreground">
+                <TableCell className="hidden lg:table-cell text-right py-4 text-sm text-white">
                   {trader.stats.marketsTraded.toLocaleString()}
                 </TableCell>
                 <TableCell className="text-right py-4">
