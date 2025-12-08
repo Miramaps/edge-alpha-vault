@@ -51,19 +51,17 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         brown: {
+          black: "hsl(var(--brown-black))",
           deep: "hsl(var(--brown-deep))",
           dark: "hsl(var(--brown-dark))",
           mid: "hsl(var(--brown-mid))",
         },
-        bronze: {
-          deep: "hsl(var(--bronze-deep))",
-          DEFAULT: "hsl(var(--bronze))",
-        },
-        tan: "hsl(var(--tan))",
-        sand: "hsl(var(--sand))",
+        taupe: "hsl(var(--taupe))",
+        "warm-gray": "hsl(var(--warm-gray))",
+        "light-taupe": "hsl(var(--light-taupe))",
         cream: "hsl(var(--cream))",
         glow: {
-          warm: "hsl(var(--sand))",
+          warm: "hsl(var(--light-taupe))",
         },
       },
       borderRadius: {
