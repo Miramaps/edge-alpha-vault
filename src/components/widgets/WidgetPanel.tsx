@@ -68,7 +68,7 @@ export function WidgetPanel() {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="rounded-xl overflow-hidden bg-gradient-to-br from-muted/70 to-card border border-accent/25"
+      className="rounded-xl overflow-hidden bg-gradient-to-br from-zinc-900/80 to-black/70 border border-accent/30"
     >
       {/* Tabs */}
       <div className="flex border-b border-accent/20">
