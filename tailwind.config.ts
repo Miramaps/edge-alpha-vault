@@ -58,10 +58,10 @@ export default {
           deep: "hsl(var(--crimson-deep))",
           DEFAULT: "hsl(var(--crimson))",
         },
-        "coral-red": "hsl(var(--coral-red))",
-        salmon: "hsl(var(--salmon))",
+        "blood-red": "hsl(var(--blood-red))",
+        "bright-red": "hsl(var(--bright-red))",
         glow: {
-          red: "hsl(var(--coral-red))",
+          red: "hsl(var(--bright-red))",
         },
       },
       borderRadius: {
