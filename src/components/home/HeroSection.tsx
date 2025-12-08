@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden -mt-16 pt-16">
+    <section className="relative min-h-screen flex flex-col overflow-hidden -mt-16 pt-16">
       {/* Subtle gradient background */}
       <div className="absolute inset-0 bg-gradient-hero" />
       <div className="absolute inset-0 bg-gradient-radial" />
@@ -18,7 +18,8 @@ export function HeroSection() {
         style={{ background: 'hsl(7 85% 62% / 0.08)' }}
       />
 
-      <div className="relative px-6 md:px-12 lg:px-16 py-24 md:py-32 lg:py-40">
+      {/* Main content - centered vertically */}
+      <div className="relative flex-1 flex items-center px-6 md:px-12 lg:px-16 py-24">
         <div className="max-w-3xl mx-auto text-center">
 
           <motion.h1
@@ -70,7 +71,7 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Trust badges strip */}
+      {/* Trust badges strip - pinned to bottom of viewport */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
