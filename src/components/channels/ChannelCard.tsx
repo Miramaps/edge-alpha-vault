@@ -29,7 +29,7 @@ export function ChannelCard({ channel, index }: ChannelCardProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="relative overflow-hidden rounded-xl p-5 flex flex-col bg-gradient-to-br from-muted/80 to-card border border-accent/25 hover:border-accent/50 transition-all duration-300 hover:shadow-hover hover:-translate-y-1"
+      className="relative overflow-hidden rounded-xl p-5 flex flex-col bg-gradient-to-br from-zinc-900/90 to-black/80 border border-accent/30 hover:border-accent/60 transition-all duration-300 hover:shadow-hover hover:-translate-y-1"
     >
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
