@@ -36,36 +36,36 @@ export function ChannelAnalyticsAccess({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3 }}
-      className="rounded-xl bg-[#1A2C39] border border-[#2B475B] overflow-hidden"
+      className="rounded-xl bg-gradient-to-br from-zinc-900/90 to-black/80 border border-accent/20 overflow-hidden"
     >
-      <div className="p-5 border-b border-[#2B475B]">
-        <h2 className="text-lg font-semibold text-white">Channel Analytics and Access</h2>
+      <div className="p-5 border-b border-accent/10">
+        <h2 className="text-lg font-semibold text-foreground">Channel Analytics and Access</h2>
       </div>
 
       <div className="p-5">
         <div className="grid md:grid-cols-2 gap-6">
           {/* Left - Channel Analytics */}
-          <div className="space-y-4">
-            <h3 className="text-xs font-medium text-[#6393B7] uppercase tracking-wide mb-4">
+          <div className="space-y-3">
+            <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-4">
               Channel Analytics
             </h3>
 
             {/* Members */}
-            <div className="flex items-center justify-between p-3 rounded-lg bg-[#2B475B]/20 border border-[#395E77]/20">
+            <div className="flex items-center justify-between p-3 rounded-lg bg-zinc-900/40 border border-accent/10">
               <div className="flex items-center gap-3">
-                <Users className="w-4 h-4 text-[#6393B7]" />
-                <span className="text-sm text-[#6393B7]">Members</span>
+                <Users className="w-4 h-4 text-accent" />
+                <span className="text-sm text-muted-foreground">Members</span>
               </div>
-              <span className="text-sm font-medium text-white">
+              <span className="text-sm font-medium text-foreground">
                 {members} / {maxMembers} seats filled
               </span>
             </div>
 
             {/* Member Growth */}
-            <div className="flex items-center justify-between p-3 rounded-lg bg-[#2B475B]/20 border border-[#395E77]/20">
+            <div className="flex items-center justify-between p-3 rounded-lg bg-zinc-900/40 border border-accent/10">
               <div className="flex items-center gap-3">
-                <TrendingUp className="w-4 h-4 text-[#6393B7]" />
-                <span className="text-sm text-[#6393B7]">Member Growth (30d)</span>
+                <TrendingUp className="w-4 h-4 text-accent" />
+                <span className="text-sm text-muted-foreground">Member Growth (30d)</span>
               </div>
               <span className="text-sm font-medium text-emerald-400">
                 +{memberGrowth}%
@@ -73,84 +73,85 @@ export function ChannelAnalyticsAccess({
             </div>
 
             {/* Retention */}
-            <div className="flex items-center justify-between p-3 rounded-lg bg-[#2B475B]/20 border border-[#395E77]/20">
+            <div className="flex items-center justify-between p-3 rounded-lg bg-zinc-900/40 border border-accent/10">
               <div className="flex items-center gap-3">
-                <Clock className="w-4 h-4 text-[#6393B7]" />
-                <span className="text-sm text-[#6393B7]">Retention</span>
+                <Clock className="w-4 h-4 text-accent" />
+                <span className="text-sm text-muted-foreground">Retention</span>
               </div>
-              <span className="text-sm font-medium text-white">
+              <span className="text-sm font-medium text-foreground">
                 {retentionPercent}% stay &gt; 30 days
               </span>
             </div>
 
             {/* Engagement */}
-            <div className="flex items-center justify-between p-3 rounded-lg bg-[#2B475B]/20 border border-[#395E77]/20">
+            <div className="flex items-center justify-between p-3 rounded-lg bg-zinc-900/40 border border-accent/10">
               <div className="flex items-center gap-3">
-                <MessageSquare className="w-4 h-4 text-[#6393B7]" />
-                <span className="text-sm text-[#6393B7]">Engagement</span>
+                <MessageSquare className="w-4 h-4 text-accent" />
+                <span className="text-sm text-muted-foreground">Engagement</span>
               </div>
-              <span className="text-sm font-medium text-white">
+              <span className="text-sm font-medium text-foreground">
                 {postsPerDay} posts/day in Discord
               </span>
             </div>
 
             {/* Signal Frequency */}
-            <div className="flex items-center justify-between p-3 rounded-lg bg-[#2B475B]/20 border border-[#395E77]/20">
+            <div className="flex items-center justify-between p-3 rounded-lg bg-zinc-900/40 border border-accent/10">
               <div className="flex items-center gap-3">
-                <Zap className="w-4 h-4 text-[#6393B7]" />
-                <span className="text-sm text-[#6393B7]">Signal Frequency</span>
+                <Zap className="w-4 h-4 text-accent" />
+                <span className="text-sm text-muted-foreground">Signal Frequency</span>
               </div>
-              <span className="text-sm font-medium text-white">
+              <span className="text-sm font-medium text-foreground">
                 {signalsPerWeek} ideas/week
               </span>
             </div>
           </div>
 
           {/* Right - Access Card */}
-          <div className="p-5 rounded-xl bg-[#2B475B]/40 border border-[#395E77]/40">
-            <h3 className="text-base font-semibold text-white mb-3">
+          <div className="p-5 rounded-xl bg-muted/50 border border-accent/20">
+            <h3 className="text-base font-semibold text-foreground mb-3">
               Access via Channel NFT
             </h3>
-            <p className="text-sm text-[#6393B7] mb-5 leading-relaxed">
+            <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
               Hold 1 Channel NFT to stay in this Discord alpha. Selling the NFT removes access.
             </p>
 
             {/* NFT Stats */}
             <div className="space-y-3 mb-5">
               <div className="flex justify-between text-sm">
-                <span className="text-[#6393B7]">Max Supply</span>
-                <span className="text-white font-medium">{maxMembers}</span>
+                <span className="text-muted-foreground">Max Supply</span>
+                <span className="text-foreground font-medium">{maxMembers}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-[#6393B7]">Current Floor</span>
-                <span className="text-white font-medium">{floorPrice} SOL</span>
+                <span className="text-muted-foreground">Current Floor</span>
+                <span className="text-foreground font-medium">{floorPrice} SOL</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-[#6393B7]">24h Volume</span>
-                <span className="text-white font-medium">{(volume24h / 1000).toFixed(1)}k SOL</span>
+                <span className="text-muted-foreground">24h Volume</span>
+                <span className="text-foreground font-medium">{(volume24h / 1000).toFixed(1)}k SOL</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-[#6393B7]">Seats Available</span>
-                <span className="text-white font-medium">{seatsAvailable} remaining</span>
+                <span className="text-muted-foreground">Seats Available</span>
+                <span className="text-foreground font-medium">{seatsAvailable} remaining</span>
               </div>
             </div>
 
             {/* Progress Bar */}
             <div className="mb-5">
-              <Progress value={fillPercent} className="h-1.5 bg-[#395E77]/30" />
+              <Progress value={fillPercent} className="h-1.5" />
             </div>
 
             {/* Buy Button */}
             <Button
+              variant="hero"
               onClick={onBuyClick}
               disabled={disabled}
-              className="w-full h-11 bg-[#4F7E9E] hover:bg-[#6393B7] text-white font-medium"
+              className="w-full h-11"
             >
               Buy Access NFT
             </Button>
 
             {/* Marketplace Link */}
-            <button className="w-full mt-3 flex items-center justify-center gap-2 text-sm text-[#6393B7] hover:text-white transition-colors">
+            <button className="w-full mt-3 flex items-center justify-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
               <ExternalLink className="w-3.5 h-3.5" />
               View on Marketplace
             </button>
