@@ -1,6 +1,5 @@
 import { Layout } from "@/components/layout/Layout";
 import { HeroSection } from "@/components/home/HeroSection";
-import { SocialLinksRow } from "@/components/home/SocialLinksRow";
 import { ChannelsShowcase } from "@/components/channels/ChannelsShowcase";
 import { WidgetPanel } from "@/components/widgets/WidgetPanel";
 
@@ -8,7 +7,6 @@ const Index = () => {
   return (
     <Layout>
       <HeroSection />
-      <SocialLinksRow />
       
       {/* Main content with widgets */}
       <div className="container mx-auto px-4">
