@@ -94,7 +94,7 @@ export default function TraderDashboard() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] p-6 md:p-8 mb-6"
+          className="rounded-2xl bg-black/40 backdrop-blur-sm border border-white/[0.08] p-6 md:p-8 mb-6"
         >
           <div className="flex flex-col lg:flex-row lg:items-start gap-6">
             {/* Trader Info */}
@@ -149,7 +149,7 @@ export default function TraderDashboard() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] p-6 mb-6"
+            className="rounded-2xl bg-black/40 backdrop-blur-sm border border-white/[0.08] p-6 mb-6"
           >
             <div className="flex items-center gap-2 mb-6">
               <Settings className="w-5 h-5 text-accent" />
