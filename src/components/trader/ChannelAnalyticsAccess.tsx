@@ -36,9 +36,9 @@ export function ChannelAnalyticsAccess({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3 }}
-      className="rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] overflow-hidden"
+      className="rounded-2xl bg-black/40 backdrop-blur-sm border border-white/[0.08] overflow-hidden"
     >
-      <div className="p-5 border-b border-white/[0.05]">
+      <div className="p-5 border-b border-white/[0.06]">
         <h2 className="text-lg font-semibold text-foreground">Channel Analytics and Access</h2>
       </div>
 
@@ -51,7 +51,7 @@ export function ChannelAnalyticsAccess({
             </h3>
 
             {/* Members */}
-            <div className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] border border-white/[0.05]">
+            <div className="flex items-center justify-between p-3 rounded-xl bg-black/30 border border-white/[0.06]">
               <div className="flex items-center gap-3">
                 <Users className="w-4 h-4 text-accent" />
                 <span className="text-sm text-muted-foreground">Members</span>
@@ -62,7 +62,7 @@ export function ChannelAnalyticsAccess({
             </div>
 
             {/* Member Growth */}
-            <div className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] border border-white/[0.05]">
+            <div className="flex items-center justify-between p-3 rounded-xl bg-black/30 border border-white/[0.06]">
               <div className="flex items-center gap-3">
                 <TrendingUp className="w-4 h-4 text-accent" />
                 <span className="text-sm text-muted-foreground">Member Growth (30d)</span>
@@ -73,7 +73,7 @@ export function ChannelAnalyticsAccess({
             </div>
 
             {/* Retention */}
-            <div className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] border border-white/[0.05]">
+            <div className="flex items-center justify-between p-3 rounded-xl bg-black/30 border border-white/[0.06]">
               <div className="flex items-center gap-3">
                 <Clock className="w-4 h-4 text-accent" />
                 <span className="text-sm text-muted-foreground">Retention</span>
@@ -84,7 +84,7 @@ export function ChannelAnalyticsAccess({
             </div>
 
             {/* Engagement */}
-            <div className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] border border-white/[0.05]">
+            <div className="flex items-center justify-between p-3 rounded-xl bg-black/30 border border-white/[0.06]">
               <div className="flex items-center gap-3">
                 <MessageSquare className="w-4 h-4 text-accent" />
                 <span className="text-sm text-muted-foreground">Engagement</span>
@@ -95,7 +95,7 @@ export function ChannelAnalyticsAccess({
             </div>
 
             {/* Signal Frequency */}
-            <div className="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] border border-white/[0.05]">
+            <div className="flex items-center justify-between p-3 rounded-xl bg-black/30 border border-white/[0.06]">
               <div className="flex items-center gap-3">
                 <Zap className="w-4 h-4 text-accent" />
                 <span className="text-sm text-muted-foreground">Signal Frequency</span>
@@ -107,7 +107,7 @@ export function ChannelAnalyticsAccess({
           </div>
 
           {/* Right - Access Card */}
-          <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.05]">
+          <div className="p-5 rounded-xl bg-black/30 border border-white/[0.06]">
             <h3 className="text-base font-semibold text-foreground mb-3">
               Access via Channel NFT
             </h3>
