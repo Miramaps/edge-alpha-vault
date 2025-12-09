@@ -17,6 +17,7 @@ import {
 import { leaderboardData, channels } from "@/data/mockData";
 import { cn } from "@/lib/utils";
 import { MiniTrendChart } from "./MiniTrendChart";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 type TimeFrame = "1d" | "7d" | "30d" | "all";
 
@@ -28,6 +29,7 @@ interface LeaderboardTableProps {
 export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableProps) {
   const [timeframe, setTimeframe] = useState<TimeFrame>("1d");
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
 
   const timeframes: { value: TimeFrame; label: string }[] = [
     { value: "all", label: "All" },
@@ -116,79 +118,88 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
               const priceLabel = channel ? `${channel.floorPrice} EDGE` : `${trader.floorPrice} EDGE`;
               const volLabel = channel ? `${(channel.volume24h / 1000).toFixed(1)}k EDGE` : `${(trader.volume24h / 1000).toFixed(1)}k EDGE`;
 
+              const rowContent = (
+                <TableRow 
+                  onClick={() => navigate(`/t/${trader.handle}`)}
+                  className={cn(
+                    "transition-all cursor-pointer group border-white/[0.04] hover:border-white/[0.08] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.05)]",
+                    index === 0 &&
+                      "bg-accent/15 hover:bg-accent/25 ring-1 ring-accent/35 border-l-4 border-l-accent/70 shadow-[0_8px_30px_rgba(213,45,62,0.18)]",
+                    index === 1 &&
+                      "bg-white/10 hover:bg-white/16 ring-1 ring-white/18 border-l-4 border-l-white/60 shadow-[0_6px_22px_rgba(255,255,255,0.12)]",
+                    index === 2 &&
+                      "bg-white/6 hover:bg-white/12 ring-1 ring-white/12 border-l-4 border-l-white/45 shadow-[0_6px_18px_rgba(255,255,255,0.1)]",
+                    index > 2 && "hover:bg-white/[0.04]"
+                  )}
+                >
+                    <TableCell className="py-4">
+                      <span
+                        className={cn(
+                          "inline-flex items-center justify-center w-8 h-8 text-sm font-semibold rounded-full border",
+                          index === 0 && "bg-accent text-white border-accent shadow-[0_6px_18px_rgba(213,45,62,0.3)]",
+                          index === 1 && "bg-white/15 text-white border-white/30 shadow-[0_4px_14px_rgba(255,255,255,0.18)]",
+                          index === 2 && "bg-white/10 text-white border-white/25 shadow-[0_3px_12px_rgba(255,255,255,0.14)]",
+                          index > 2 && "text-soft-dim border-white/10 bg-transparent"
+                        )}
+                      >
+                        {index + 1}
+                      </span>
+                    </TableCell>
+                    <TableCell className="py-4">
+                      <div className="flex items-center gap-3">
+                        <div 
+                          className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0 bg-black/30 text-muted-foreground"
+                        >
+                          {trader.name.charAt(0)}
+                        </div>
+                        <div className="min-w-0">
+                          <p className="font-medium text-white text-sm truncate">{trader.name}</p>
+                          <p className="text-xs text-soft-dim truncate">@{trader.handle}</p>
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell className="text-right py-4">
+                      <span className="text-sm font-medium text-white">{trader.floorPrice}</span>
+                      <span className="text-xs text-soft-dim ml-1">EDGE</span>
+                    </TableCell>
+                    <TableCell className={cn(
+                      "hidden sm:table-cell text-right py-4 font-medium text-sm",
+                      trader.priceChange24h > 0 ? "text-win" : trader.priceChange24h < 0 ? "text-accent-red" : "text-soft-dim"
+                    )}
+                    style={trader.priceChange24h > 0 ? { color: 'hsl(142 71% 45%)' } : trader.priceChange24h < 0 ? { color: 'hsl(355 71% 51%)' } : {}}
+                    >
+                      {trader.priceChange24h > 0 ? "+" : ""}{trader.priceChange24h}%
+                    </TableCell>
+                    <TableCell className="hidden md:table-cell text-right py-4">
+                      <span className="text-sm" style={{ color: 'hsl(142 71% 45%)' }}>{trader.stats.winRate}%</span>
+                    </TableCell>
+                    <TableCell className="hidden lg:table-cell text-right py-4">
+                      <span className="text-sm text-white">{(trader.volume24h / 1000).toFixed(1)}k</span>
+                      <span className="text-xs text-soft-dim ml-1">EDGE</span>
+                    </TableCell>
+                    <TableCell className="hidden md:table-cell text-right py-4 text-sm text-white">
+                      {trader.members.toLocaleString()}
+                    </TableCell>
+                    <TableCell className="hidden lg:table-cell text-right py-4 text-sm text-white">
+                      {trader.stats.marketsTraded.toLocaleString()}
+                    </TableCell>
+                    <TableCell className="text-right py-4">
+                      <div className="flex justify-end">
+                        <MiniTrendChart data={trader.trendData} />
+                      </div>
+                    </TableCell>
+                </TableRow>
+              );
+
+              // On mobile, skip HoverCard entirely for better performance
+              if (isMobile) {
+                return <tbody key={trader.id}>{rowContent}</tbody>;
+              }
+
               return (
               <HoverCard key={trader.id} openDelay={120} closeDelay={120}>
                 <HoverCardTrigger asChild>
-                  <TableRow 
-                    onClick={() => navigate(`/t/${trader.handle}`)}
-                    className={cn(
-                      "transition-all cursor-pointer group border-white/[0.04] hover:border-white/[0.08] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.05)]",
-                      index === 0 &&
-                        "bg-accent/15 hover:bg-accent/25 ring-1 ring-accent/35 border-l-4 border-l-accent/70 shadow-[0_8px_30px_rgba(213,45,62,0.18)]",
-                      index === 1 &&
-                        "bg-white/10 hover:bg-white/16 ring-1 ring-white/18 border-l-4 border-l-white/60 shadow-[0_6px_22px_rgba(255,255,255,0.12)]",
-                      index === 2 &&
-                        "bg-white/6 hover:bg-white/12 ring-1 ring-white/12 border-l-4 border-l-white/45 shadow-[0_6px_18px_rgba(255,255,255,0.1)]",
-                      index > 2 && "hover:bg-white/[0.04]"
-                    )}
-                  >
-                      <TableCell className="py-4">
-                        <span
-                          className={cn(
-                            "inline-flex items-center justify-center w-8 h-8 text-sm font-semibold rounded-full border",
-                            index === 0 && "bg-accent text-white border-accent shadow-[0_6px_18px_rgba(213,45,62,0.3)]",
-                            index === 1 && "bg-white/15 text-white border-white/30 shadow-[0_4px_14px_rgba(255,255,255,0.18)]",
-                            index === 2 && "bg-white/10 text-white border-white/25 shadow-[0_3px_12px_rgba(255,255,255,0.14)]",
-                            index > 2 && "text-soft-dim border-white/10 bg-transparent"
-                          )}
-                        >
-                          {index + 1}
-                        </span>
-                      </TableCell>
-                      <TableCell className="py-4">
-                        <div className="flex items-center gap-3">
-                          <div 
-                            className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0 bg-black/30 text-muted-foreground"
-                          >
-                            {trader.name.charAt(0)}
-                          </div>
-                          <div className="min-w-0">
-                            <p className="font-medium text-white text-sm truncate">{trader.name}</p>
-                            <p className="text-xs text-soft-dim truncate">@{trader.handle}</p>
-                          </div>
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-right py-4">
-                        <span className="text-sm font-medium text-white">{trader.floorPrice}</span>
-                        <span className="text-xs text-soft-dim ml-1">EDGE</span>
-                      </TableCell>
-                      <TableCell className={cn(
-                        "hidden sm:table-cell text-right py-4 font-medium text-sm",
-                        trader.priceChange24h > 0 ? "text-win" : trader.priceChange24h < 0 ? "text-accent-red" : "text-soft-dim"
-                      )}
-                      style={trader.priceChange24h > 0 ? { color: 'hsl(142 71% 45%)' } : trader.priceChange24h < 0 ? { color: 'hsl(355 71% 51%)' } : {}}
-                      >
-                        {trader.priceChange24h > 0 ? "+" : ""}{trader.priceChange24h}%
-                      </TableCell>
-                      <TableCell className="hidden md:table-cell text-right py-4">
-                        <span className="text-sm" style={{ color: 'hsl(142 71% 45%)' }}>{trader.stats.winRate}%</span>
-                      </TableCell>
-                      <TableCell className="hidden lg:table-cell text-right py-4">
-                        <span className="text-sm text-white">{(trader.volume24h / 1000).toFixed(1)}k</span>
-                        <span className="text-xs text-soft-dim ml-1">EDGE</span>
-                      </TableCell>
-                      <TableCell className="hidden md:table-cell text-right py-4 text-sm text-white">
-                        {trader.members.toLocaleString()}
-                      </TableCell>
-                      <TableCell className="hidden lg:table-cell text-right py-4 text-sm text-white">
-                        {trader.stats.marketsTraded.toLocaleString()}
-                      </TableCell>
-                      <TableCell className="text-right py-4">
-                        <div className="flex justify-end">
-                          <MiniTrendChart data={trader.trendData} />
-                        </div>
-                      </TableCell>
-                  </TableRow>
+                  {rowContent}
                 </HoverCardTrigger>
                 <HoverCardContent 
                   side="top"
