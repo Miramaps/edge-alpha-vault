@@ -17,18 +17,14 @@ export function ChannelCard({ channel, index }: ChannelCardProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="pro-card-hover p-5 md:p-6 flex flex-col"
+      className="rounded-2xl bg-black/40 backdrop-blur-sm border border-white/[0.08] p-5 md:p-6 flex flex-col hover:border-white/[0.12] transition-all duration-200"
     >
       {/* Top Bar - Identity + Status */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
           {/* Avatar */}
           <div 
-            className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium"
-            style={{ 
-              background: 'hsl(16 20% 24%)', 
-              color: 'hsl(30 4% 93%)' 
-            }}
+            className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium bg-black/30 text-muted-foreground"
           >
             {channel.trader.name.charAt(0)}
           </div>

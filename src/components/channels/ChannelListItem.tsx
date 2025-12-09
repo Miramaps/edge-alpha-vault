@@ -23,10 +23,10 @@ export function ChannelListItem({ channel }: ChannelListItemProps) {
   };
 
   return (
-    <div className="glass-card p-4 flex items-center gap-4 hover:border-accent/30 transition-colors">
+    <div className="rounded-xl bg-black/40 backdrop-blur-sm border border-white/[0.08] p-4 flex items-center gap-4 hover:border-white/[0.12] transition-colors">
       {/* Avatar and Name */}
       <div className="flex items-center gap-3 min-w-[180px]">
-        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-foreground font-bold text-sm flex-shrink-0">
+        <div className="w-9 h-9 rounded-full bg-black/30 flex items-center justify-center text-muted-foreground font-bold text-sm flex-shrink-0">
           {channel.trader.name.charAt(0)}
         </div>
         <div className="min-w-0">

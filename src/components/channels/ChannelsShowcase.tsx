@@ -96,7 +96,7 @@ export function ChannelsShowcase() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="pro-card p-4 mb-8"
+          className="rounded-2xl bg-black/40 backdrop-blur-sm border border-white/[0.08] p-4 mb-8"
         >
           <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center">
             {/* Search */}
@@ -106,14 +106,14 @@ export function ChannelsShowcase() {
                 placeholder="Search by trader, handle, or channel..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-9 bg-secondary/50 border-border/50"
+                className="pl-9 bg-black/30 border-white/[0.06]"
               />
             </div>
 
             <div className="flex flex-wrap gap-3 items-center">
               {/* Filter */}
               <Select value={filter} onValueChange={(v) => setFilter(v as FilterType)}>
-                <SelectTrigger className="w-[130px] bg-secondary/50 border-border/50">
+                <SelectTrigger className="w-[130px] bg-black/30 border-white/[0.06]">
                   <SelectValue placeholder="Filter" />
                 </SelectTrigger>
                 <SelectContent>
@@ -126,7 +126,7 @@ export function ChannelsShowcase() {
 
               {/* Sort */}
               <Select value={sort} onValueChange={(v) => setSort(v as SortType)}>
-                <SelectTrigger className="w-[150px] bg-secondary/50 border-border/50">
+                <SelectTrigger className="w-[150px] bg-black/30 border-white/[0.06]">
                   <SelectValue placeholder="Sort by" />
                 </SelectTrigger>
                 <SelectContent>
@@ -138,7 +138,7 @@ export function ChannelsShowcase() {
               </Select>
 
               {/* View Toggle */}
-              <div className="flex items-center gap-1 p-1 bg-secondary/50 rounded-md border border-border/50">
+              <div className="flex items-center gap-1 p-1 bg-black/30 rounded-md border border-white/[0.06]">
                 <Button
                   variant={viewMode === "grid" ? "default" : "ghost"}
                   size="icon-sm"
