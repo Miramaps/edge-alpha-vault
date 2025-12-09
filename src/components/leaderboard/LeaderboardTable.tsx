@@ -78,9 +78,9 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.1 }}
-        className="rounded-2xl bg-black/40 backdrop-blur-sm border border-white/[0.08] overflow-hidden"
+        className="rounded-xl bg-black/40 backdrop-blur-sm border border-white/[0.08] overflow-x-auto"
       >
-        <Table>
+        <Table className="min-w-[600px]">
           <TableHeader>
             <TableRow 
               className="hover:bg-transparent border-white/[0.06]"

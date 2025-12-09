@@ -105,8 +105,8 @@ export default function BecomeTrader() {
         />
       </div>
 
-      <div className="container relative mx-auto px-4 py-8 md:py-12 min-h-[calc(100vh-4rem)] flex items-center">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full max-w-6xl mx-auto">
+      <div className="container relative mx-auto px-4 py-6 md:py-12 min-h-[calc(100vh-4rem)] flex items-center">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center w-full max-w-6xl mx-auto pt-12 md:pt-0">
           
           {/* Left Side - Info */}
           <motion.div
@@ -114,11 +114,11 @@ export default function BecomeTrader() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3 leading-tight">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-2 md:mb-3 leading-tight">
               Become a <span className="text-accent">Trader</span>
             </h1>
             
-            <p className="text-muted-foreground text-base mb-8 max-w-md">
+            <p className="text-muted-foreground text-sm md:text-base mb-6 md:mb-8 max-w-md">
               Share your alpha, build a community, and earn SOL through NFT-gated access to your exclusive channel.
             </p>
 
