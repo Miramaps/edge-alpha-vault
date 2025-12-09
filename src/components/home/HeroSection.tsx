@@ -20,7 +20,7 @@ export function HeroSection() {
               className="block mt-2"
               style={{ color: 'hsl(355 71% 51%)' }}
             >
-              Trade on the traders.
+              Get private access to the traders beating the markets.
             </span>
           </motion.h1>
 
@@ -30,9 +30,9 @@ export function HeroSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-base md:text-lg lg:text-xl text-soft-muted mb-8 md:mb-10 max-w-2xl mx-auto px-2"
           >
-            Top prediction market traders run token-gated Discord alpha channels.
-            Access is an NFT with limited supply. More members push the floor price higher.
-            NFTs are tradable; selling revokes access.
+            Edge hosts private alpha rooms run by the best prediction market traders.
+            Your access is a scarce NFT — its price moves with demand.
+            Trade your membership anytime; selling removes your access.
           </motion.p>
 
           <motion.div
