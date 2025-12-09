@@ -20,7 +20,7 @@ export default function TraderDashboard() {
   }, [handle]);
 
   if (!channel) {
-    return (
+  return (
       <Layout>
         <div className="container mx-auto px-4 py-24 text-center">
           <h1 className="text-2xl font-bold text-foreground mb-4">Channel not found</h1>
@@ -88,7 +88,7 @@ export default function TraderDashboard() {
         />
       </div>
 
-      <div className="container relative mx-auto px-4 py-8 md:py-10 max-w-4xl">
+      <div className="relative w-full px-6 md:px-10 lg:px-16 py-8 md:py-10">
         {/* Owner mode toggle (for demo) */}
         <div className="flex justify-end mb-3">
           <Button
