@@ -63,18 +63,20 @@ export default function TraderDashboard() {
 
   return (
     <Layout>
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-hero pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-radial pointer-events-none" />
-      
-      {/* Grainy noise texture overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.12] pointer-events-none mix-blend-overlay"
-        style={{ 
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.7' numOctaves='1' seed='15' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E")`,
-          backgroundSize: '200px 200px'
-        }}
-      />
+      {/* Background - fixed to cover entire viewport */}
+      <div className="fixed inset-0 -z-10 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-hero" />
+        <div className="absolute inset-0 bg-gradient-radial" />
+        
+        {/* Grainy noise texture overlay */}
+        <div 
+          className="absolute inset-0 opacity-[0.12] mix-blend-overlay"
+          style={{ 
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.7' numOctaves='1' seed='15' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E")`,
+            backgroundSize: '200px 200px'
+          }}
+        />
+      </div>
 
       <div className="container relative mx-auto px-4 py-12 md:py-16 max-w-5xl">
         {/* Owner mode toggle (for demo) */}
