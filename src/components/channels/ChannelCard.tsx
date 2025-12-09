@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import type { Channel } from "@/data/mockData";
 import { TwitterIcon } from "@/components/icons/SocialIcons";
+import { formatVolumeUSD } from "@/utils/currency";
 
 interface ChannelCardProps {
   channel: Channel;
@@ -68,7 +69,7 @@ export function ChannelCard({ channel, index }: ChannelCardProps) {
         </div>
         <div>
           <p className="stat-label">Vol 24H</p>
-          <p className="stat-value">{(channel.volume24h / 1000).toFixed(1)}k EDGE</p>
+          <p className="stat-value">{formatVolumeUSD(channel.volume24h)}</p>
         </div>
         <div>
           <p className="stat-label">Members</p>

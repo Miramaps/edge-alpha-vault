@@ -2,6 +2,7 @@
 import { Users, TrendingUp, Clock, MessageSquare, Zap, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { formatVolumeUSD } from "@/utils/currency";
 
 interface ChannelAnalyticsAccessProps {
   members: number;
@@ -111,7 +112,7 @@ export function ChannelAnalyticsAccess({
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">24h Vol</span>
-                <span className="text-foreground font-medium">{(volume24h / 1000).toFixed(1)}k</span>
+                <span className="text-foreground font-medium">{formatVolumeUSD(volume24h)}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Available</span>

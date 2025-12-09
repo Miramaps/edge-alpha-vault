@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import type { Channel } from "@/data/mockData";
 import { cn } from "@/lib/utils";
+import { formatVolumeUSD } from "@/utils/currency";
 
 interface ChannelListItemProps {
   channel: Channel;
@@ -53,7 +54,7 @@ export function ChannelListItem({ channel }: ChannelListItemProps) {
       {/* Volume */}
       <div className="hidden lg:block min-w-[80px]">
         <p className="stat-label">Vol 24h</p>
-        <p className="stat-value text-sm">{(channel.volume24h / 1000).toFixed(1)}k</p>
+        <p className="stat-value text-sm">{formatVolumeUSD(channel.volume24h)}</p>
       </div>
 
       {/* Win Rate */}

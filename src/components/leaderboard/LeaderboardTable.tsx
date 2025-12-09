@@ -18,6 +18,7 @@ import { leaderboardData, channels } from "@/data/mockData";
 import { cn } from "@/lib/utils";
 import { MiniTrendChart } from "./MiniTrendChart";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { formatVolumeUSD } from "@/utils/currency";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { isWalletVerified } from "@/utils/verification";
 import { Badge } from "@/components/ui/badge";
@@ -178,7 +179,7 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
               const status = channel?.status;
               const supplyLabel = channel ? `${channel.minted}/${channel.maxSupply}` : "—";
               const priceLabel = channel ? `${channel.floorPrice} EDGE` : `${trader.floorPrice} EDGE`;
-              const volLabel = channel ? `${(channel.volume24h / 1000).toFixed(1)}k EDGE` : `${(trader.volume24h / 1000).toFixed(1)}k EDGE`;
+              const volLabel = channel ? formatVolumeUSD(channel.volume24h) : formatVolumeUSD(trader.volume24h);
 
                 const rowContent = (
                   <TableRow 
@@ -252,8 +253,7 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
                       <span className="text-sm" style={{ color: 'hsl(142 71% 45%)' }}>{trader.stats.winRate}%</span>
                     </TableCell>
                     <TableCell className="hidden lg:table-cell text-right py-4">
-                      <span className="text-sm text-white">{(trader.volume24h / 1000).toFixed(1)}k</span>
-                      <span className="text-xs text-soft-dim ml-1">EDGE</span>
+                      <span className="text-sm text-white">{formatVolumeUSD(trader.volume24h)}</span>
                     </TableCell>
                     <TableCell className="text-right py-4 text-sm text-white">
                       {trader.members.toLocaleString()}
