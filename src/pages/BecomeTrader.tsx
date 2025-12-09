@@ -3,7 +3,6 @@ import { Layout } from "@/components/layout/Layout";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Users, Coins, MessageCircle, Send, X, Image } from "lucide-react";
@@ -119,64 +118,9 @@ export default function BecomeTrader() {
               Become a <span className="text-accent">Trader</span>
             </h1>
             
-            <p className="text-muted-foreground text-base mb-6 max-w-md">
+            <p className="text-muted-foreground text-base mb-8 max-w-md">
               Share your alpha, build a community, and earn SOL through NFT-gated access to your exclusive channel.
             </p>
-
-            {/* NFT Profile Upload */}
-            <div className="mb-6">
-              <p className="text-sm text-muted-foreground mb-3">NFT Profile Picture</p>
-              <div 
-                className={`relative flex flex-col items-center justify-center p-6 rounded-xl border-2 border-dashed transition-all duration-200 cursor-pointer ${
-                  isDragging 
-                    ? 'border-accent bg-accent/10' 
-                    : profileImage 
-                      ? 'border-white/[0.08] bg-black/30' 
-                      : 'border-white/[0.08] bg-black/30 hover:border-white/[0.15]'
-                }`}
-                onDragOver={handleDragOver}
-                onDragLeave={handleDragLeave}
-                onDrop={handleDrop}
-                onClick={() => !profileImage && document.getElementById('profile-upload')?.click()}
-              >
-                {profileImage ? (
-                  <div className="relative">
-                    <img 
-                      src={profileImage} 
-                      alt="Profile preview" 
-                      className="w-24 h-24 rounded-full object-cover border-2 border-white/[0.1]"
-                    />
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        removeImage();
-                      }}
-                      className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-accent flex items-center justify-center hover:bg-accent/80 transition-colors"
-                    >
-                      <X className="w-3 h-3 text-white" />
-                    </button>
-                  </div>
-                ) : (
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-white/[0.05] flex items-center justify-center">
-                      <Image className="w-6 h-6 text-muted-foreground" />
-                    </div>
-                    <div>
-                      <p className="text-foreground text-sm font-medium">Drag & drop image</p>
-                      <p className="text-muted-foreground text-xs">or click to browse</p>
-                    </div>
-                  </div>
-                )}
-                <input
-                  id="profile-upload"
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileSelect}
-                  className="hidden"
-                />
-              </div>
-            </div>
 
             {/* Benefits */}
             <div className="space-y-3">
@@ -222,6 +166,66 @@ export default function BecomeTrader() {
               onSubmit={handleSubmit} 
               className="p-5 md:p-6 rounded-2xl bg-black/40 backdrop-blur-sm border border-white/[0.08]"
             >
+              {/* NFT Profile Picture */}
+              <div className="mb-5">
+                <Label className="text-foreground text-sm mb-2 block">NFT Profile Picture</Label>
+                <div 
+                  className={`relative flex items-center gap-4 p-4 rounded-xl border-2 border-dashed transition-all duration-200 cursor-pointer ${
+                    isDragging 
+                      ? 'border-accent bg-accent/10' 
+                      : 'border-white/[0.08] bg-black/30 hover:border-white/[0.15]'
+                  }`}
+                  onDragOver={handleDragOver}
+                  onDragLeave={handleDragLeave}
+                  onDrop={handleDrop}
+                  onClick={() => !profileImage && document.getElementById('profile-upload')?.click()}
+                >
+                  {profileImage ? (
+                    <>
+                      <img 
+                        src={profileImage} 
+                        alt="Profile preview" 
+                        className="w-14 h-14 rounded-full object-cover border border-white/[0.1]"
+                      />
+                      <div className="flex-1">
+                        <p className="text-foreground text-sm font-medium">Image uploaded</p>
+                        <p className="text-muted-foreground text-xs">Click to change</p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          removeImage();
+                        }}
+                        className="w-7 h-7 rounded-full bg-accent/20 flex items-center justify-center hover:bg-accent/30 transition-colors"
+                      >
+                        <X className="w-3.5 h-3.5 text-accent" />
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <div className="w-14 h-14 rounded-full bg-white/[0.05] flex items-center justify-center">
+                        <Image className="w-6 h-6 text-muted-foreground" />
+                      </div>
+                      <div>
+                        <p className="text-foreground text-sm font-medium">Drag & drop image</p>
+                        <p className="text-muted-foreground text-xs">or click to browse</p>
+                      </div>
+                    </>
+                  )}
+                  <input
+                    id="profile-upload"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileSelect}
+                    className="hidden"
+                  />
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div className="h-px bg-white/[0.06] mb-5" />
+
               {/* Channel Details */}
               <div className="space-y-4 mb-5">
                 <div>
