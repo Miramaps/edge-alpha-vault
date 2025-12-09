@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import {
   Table,
@@ -378,8 +379,7 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
               })}
             </TableBody>
           </Table>
-        </div>
-      )}
+        </motion.div>
     </div>
   );
 }
