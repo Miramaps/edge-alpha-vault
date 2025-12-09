@@ -1,6 +1,5 @@
 import { useState, useMemo } from "react";
-import { motion } from "framer-motion";
-import { Search, Grid3X3, List, ChevronDown } from "lucide-react";
+import { Search, Grid3X3, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -122,27 +121,18 @@ export function ChannelsShowcase() {
     <section id="channels" className="py-4">
       <div>
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-4"
-        >
+        <div className="mb-4">
           <h2 className="text-lg md:text-xl font-bold text-foreground mb-1">
             Live Alpha Channels
           </h2>
           <p className="text-muted-foreground text-sm">
             Buy access NFTs to join elite prediction traders' Discord rooms.
           </p>
-        </motion.div>
+        </div>
 
         {/* Toolbar */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="rounded-xl bg-black/40 backdrop-blur-sm border border-white/[0.08] p-3 mb-4"
+        <div
+          className="rounded-xl bg-black/40 border border-white/[0.08] p-3 mb-4"
         >
           <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center">
             {/* Search */}
@@ -218,7 +208,7 @@ export function ChannelsShowcase() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Channels Grid/List */}
         {viewMode === "grid" ? (
