@@ -195,7 +195,7 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
                   align="start"
                   sideOffset={12}
                   alignOffset={4}
-                  className="w-72 sm:w-[360px] rounded-xl bg-black/85 backdrop-blur-md border border-white/[0.08] p-3.5 shadow-lg"
+                  className="w-72 sm:w-[360px] rounded-xl bg-black/75 backdrop-blur-md border border-white/[0.08] p-3.5 shadow-lg"
                 >
                   <div className="space-y-3.5">
                     {/* Header */}
