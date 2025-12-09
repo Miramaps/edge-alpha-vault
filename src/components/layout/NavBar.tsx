@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import edgeLogo from "@/assets/edge-logo.png";
 
 const navLinks = [
-  { href: "/", label: "Channels" },
+  { href: "/channels", label: "Channels" },
   { href: "/leaderboard", label: "Leaderboard" },
   { href: "/docs", label: "Docs" },
 ];
