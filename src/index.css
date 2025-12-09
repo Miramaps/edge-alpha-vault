@@ -4,6 +4,49 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Wallet Adapter Modal Overrides - Remove Scrollbar */
+.wallet-adapter-modal-wrapper {
+  overflow: hidden !important;
+}
+
+.wallet-adapter-modal {
+  overflow: hidden !important;
+  max-height: 90vh !important;
+}
+
+.wallet-adapter-modal-container {
+  overflow: hidden !important;
+  max-height: 90vh !important;
+}
+
+.wallet-adapter-modal-list,
+.wallet-adapter-modal-list-no-mobile {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  max-height: calc(90vh - 200px) !important;
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE and Edge */
+}
+
+.wallet-adapter-modal-list::-webkit-scrollbar,
+.wallet-adapter-modal-list-no-mobile::-webkit-scrollbar {
+  display: none !important; /* Chrome, Safari, Opera */
+}
+
+/* Prevent body scroll when modal is open */
+body.wallet-adapter-modal-open {
+  overflow: hidden !important;
+}
+
+/* Additional wallet adapter overrides */
+.wallet-adapter-modal-overlay {
+  overflow: hidden !important;
+}
+
+.wallet-adapter-button {
+  overflow: visible !important;
+}
+
 @layer base {
   :root {
     /* Professional Trading Palette */

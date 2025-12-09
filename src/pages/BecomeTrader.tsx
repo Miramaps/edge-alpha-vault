@@ -80,10 +80,14 @@ export default function BecomeTrader() {
 
   return (
     <Layout>
-      {/* Simplified background for performance */}
+      {/* Background image */}
       <div className="fixed inset-0 -z-10 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-hero" />
-        <div className="absolute inset-0 bg-gradient-radial" />
+        <img 
+          src="/bg.jpg" 
+          alt="" 
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/40" />
       </div>
 
       <div className="container relative mx-auto px-4 py-6 md:py-12 min-h-[calc(100vh-4rem)] flex items-center">
@@ -92,7 +96,7 @@ export default function BecomeTrader() {
           {/* Left Side - Info */}
           <div>
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-2 md:mb-3 leading-tight">
-              Become a <span className="text-accent">Trader</span>
+              Join <span className="text-accent">Edge</span>
             </h1>
             
             <p className="text-muted-foreground text-sm md:text-base mb-6 md:mb-8 max-w-md">
@@ -106,8 +110,8 @@ export default function BecomeTrader() {
                   <Coins className="w-4 h-4 text-accent" />
                 </div>
                 <div>
-                  <p className="text-foreground text-sm font-medium">Set Your Price</p>
-                  <p className="text-muted-foreground text-xs">You decide the subscription price</p>
+                  <p className="text-foreground text-sm font-medium">Your Price</p>
+                  <p className="text-muted-foreground text-xs">Dynamic pricing based on deflationary token</p>
                 </div>
               </div>
               
@@ -285,17 +289,17 @@ export default function BecomeTrader() {
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
-                  "Creating..."
+                  "Submitting..."
                 ) : (
                   <>
-                    Start Channel
+                    Submit Application
                     <Send className="w-4 h-4 ml-2" />
                   </>
                 )}
               </Button>
               
               <p className="text-center text-muted-foreground/60 text-xs mt-3">
-                Your channel will be live instantly
+                We'll review your application and get back to you soon
               </p>
             </form>
           </div>

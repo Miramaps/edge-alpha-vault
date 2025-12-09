@@ -4,6 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { TwitterIcon, DiscordIcon, GitHubIcon } from "@/components/icons/SocialIcons";
 import { Button } from "@/components/ui/button";
+import { WalletDropdown } from "@/components/wallet/WalletDropdown";
+import { WalletAddressModal } from "@/components/wallet/WalletAddressModal";
+import { useWalletAddress } from "@/contexts/WalletAddressContext";
 import { cn } from "@/lib/utils";
 import edgeLogo from "@/assets/edge-logo.png";
 
@@ -24,6 +27,7 @@ export function NavBar() {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { address } = useWalletAddress();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -105,9 +109,21 @@ export function NavBar() {
                   ))}
                 </div>
 
-                <Button variant="hero" size="sm" className="text-xs md:text-sm px-3 md:px-4">
-                  Connect Wallet
-                </Button>
+                {address ? (
+                  <WalletDropdown publicKey={address} />
+                ) : (
+                  <WalletAddressModal
+                    trigger={
+                      <Button
+                        variant="hero"
+                        size="sm"
+                        className="text-xs md:text-sm px-3 md:px-4"
+                      >
+                        Connect Wallet
+                      </Button>
+                    }
+                  />
+                )}
 
                 {/* Mobile menu button */}
                 <button

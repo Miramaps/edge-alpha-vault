@@ -18,6 +18,10 @@ import { leaderboardData, channels } from "@/data/mockData";
 import { cn } from "@/lib/utils";
 import { MiniTrendChart } from "./MiniTrendChart";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { isWalletVerified } from "@/utils/verification";
+import { Badge } from "@/components/ui/badge";
+import { CheckCircle } from "lucide-react";
 
 type TimeFrame = "1d" | "7d" | "30d" | "all";
 
@@ -98,6 +102,7 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
   const [timeframe, setTimeframe] = useState<TimeFrame>("1d");
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const { publicKey } = useWallet();
 
   const timeframes: { value: TimeFrame; label: string }[] = [
     { value: "all", label: "All" },
@@ -204,8 +209,31 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
                         <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0 bg-black/30 text-muted-foreground">
                           {trader.name.charAt(0)}
                         </div>
-                        <div className="min-w-0">
-                          <p className="font-medium text-white text-sm truncate">{trader.name}</p>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2">
+                            <p className="font-medium text-white text-sm truncate">{trader.name}</p>
+                            {/* Mockup: Show verification badge for top trader (rank #1) */}
+                            {index === 0 && (
+                              <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30 px-1.5 py-0 h-4">
+                                <CheckCircle className="w-3 h-3 mr-0.5" />
+                                Verified
+                              </Badge>
+                            )}
+                            {/* Show verification badge if this is the current user and they're verified */}
+                            {publicKey && trader.id === publicKey.toString() && isWalletVerified(publicKey.toString()) && index !== 0 && (
+                              <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30 px-1.5 py-0 h-4">
+                                <CheckCircle className="w-3 h-3 mr-0.5" />
+                                Verified
+                              </Badge>
+                            )}
+                            {/* Show verification badge if trader is marked as verified in data */}
+                            {trader.verified && index !== 0 && (
+                              <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30 px-1.5 py-0 h-4">
+                                <CheckCircle className="w-3 h-3 mr-0.5" />
+                                Verified
+                              </Badge>
+                            )}
+                          </div>
                           <p className="text-xs text-soft-dim truncate">@{trader.handle}</p>
                         </div>
                       </div>
@@ -250,7 +278,7 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
                       side="top"
                       align="center"
                       sideOffset={8}
-                      className="w-[420px] max-w-[90vw] rounded-xl bg-black/90 backdrop-blur-md border border-white/[0.12] p-4 shadow-2xl"
+                      className="w-[420px] max-w-[90vw] rounded-xl bg-black/60 backdrop-blur-md border border-white/[0.12] p-4 shadow-2xl"
                     >
                       <div className="space-y-3">
                         {/* Header */}
@@ -265,9 +293,18 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
                             </div>
                           </div>
                           <div className="flex flex-col items-end gap-1">
-                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-accent/15 text-accent border border-accent/20">
-                              Rank #{index + 1}
-                            </span>
+                            <div className="flex items-center gap-1.5">
+                              <span className="text-[10px] px-2 py-0.5 rounded-full bg-accent/15 text-accent border border-accent/20">
+                                Rank #{index + 1}
+                              </span>
+                              {/* Mockup: Show verification badge for top trader */}
+                              {index === 0 && (
+                                <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30 px-1.5 py-0 h-4 text-[10px]">
+                                  <CheckCircle className="w-2.5 h-2.5 mr-0.5" />
+                                  Verified
+                                </Badge>
+                              )}
+                            </div>
                             {status && (
                               <span
                                 className={cn(

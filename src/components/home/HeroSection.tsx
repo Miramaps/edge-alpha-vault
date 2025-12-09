@@ -15,12 +15,12 @@ export function HeroSection() {
             transition={{ duration: 0.3 }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4 md:mb-6"
           >
-            Welcome to Edge
+            Get Private Access To The
             <span 
               className="block mt-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
               style={{ color: 'hsl(355 71% 51%)' }}
             >
-              Get private access to the traders beating the markets.
+              Traders Beating The Markets.
             </span>
           </motion.h1>
 
@@ -30,9 +30,10 @@ export function HeroSection() {
             transition={{ duration: 0.3 }}
             className="text-base md:text-lg lg:text-xl text-soft-muted mb-8 md:mb-10 max-w-2xl mx-auto px-2"
           >
-            Edge hosts private alpha rooms run by the best prediction market traders.
-            Subscribe with EDGE tokens to access exclusive channels.
-            Your subscription price moves with demand. Cancel anytime to revoke access.
+            Edge hosts private alpha rooms run by the best prediction market
+            traders. Subscribe with EDGE tokens to access exclusive channels.
+            Your subscription price moves with demand.
+            Cancel anytime to revoke access.
           </motion.p>
 
           <motion.div
@@ -52,7 +53,7 @@ export function HeroSection() {
                 color: 'hsl(30 4% 93%)'
               }}
             >
-              Become a Trader
+              Join Edge
             </Link>
           </motion.div>
         </div>

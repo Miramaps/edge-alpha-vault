@@ -5,10 +5,14 @@ import { ChannelsShowcase } from "@/components/channels/ChannelsShowcase";
 const Index = () => {
   return (
     <Layout>
-      {/* Simplified background for performance */}
+      {/* Background image */}
       <div className="fixed inset-0 -z-10 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-hero" />
-        <div className="absolute inset-0 bg-gradient-radial" />
+        <img 
+          src="/bg.jpg" 
+          alt="" 
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/40" />
       </div>
 
       <HeroSection />

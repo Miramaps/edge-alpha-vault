@@ -4,6 +4,7 @@ export interface Trader {
   handle: string;
   avatar?: string;
   tags: string[];
+  verified?: boolean; // Verification status
   stats: {
     lifetimePnl: number;
     winRate: number;
