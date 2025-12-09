@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+
 import { TrendingUp, Target, Percent, Calendar, Activity } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
@@ -64,10 +64,7 @@ export function PerformanceOverview({
   volatility,
 }: PerformanceOverviewProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.1 }}
+    <div
       className="rounded-xl bg-black/40 backdrop-blur-sm border border-white/[0.08] overflow-hidden"
     >
       <div className="px-4 py-3 border-b border-white/[0.06]">
@@ -152,6 +149,6 @@ export function PerformanceOverview({
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

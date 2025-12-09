@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+
 import { cn } from "@/lib/utils";
 
 interface StyleRiskProfileProps {
@@ -22,10 +22,7 @@ export function StyleRiskProfile({
   const riskLevels = ['Conservative', 'Balanced', 'Aggressive'];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.2 }}
+    <div
       className="rounded-xl bg-black/40 backdrop-blur-sm border border-white/[0.08] overflow-hidden"
     >
       <div className="px-4 py-3 border-b border-white/[0.06]">
@@ -124,6 +121,6 @@ export function StyleRiskProfile({
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

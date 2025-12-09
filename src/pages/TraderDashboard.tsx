@@ -1,6 +1,5 @@
 import { useState, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { ExternalLink, Eye, Settings } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -103,9 +102,7 @@ export default function TraderDashboard() {
         </div>
 
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+        <div
           className="rounded-xl bg-black/40 backdrop-blur-sm border border-white/[0.08] p-4 md:p-5 mb-4"
         >
           <div className="flex flex-col sm:flex-row sm:items-center gap-4">
@@ -156,13 +153,11 @@ export default function TraderDashboard() {
               </Button>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Owner Mode Settings */}
         {isOwnerMode && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+          <div
             className="rounded-xl bg-black/40 backdrop-blur-sm border border-white/[0.08] p-4 mb-4"
           >
             <div className="flex items-center gap-2 mb-4">
@@ -191,7 +186,7 @@ export default function TraderDashboard() {
             <Button variant="hero" size="sm" className="mt-3 h-8 text-sm">
               Save Changes
             </Button>
-          </motion.div>
+          </div>
         )}
 
         {/* Main Content Sections */}
