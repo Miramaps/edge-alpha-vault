@@ -254,18 +254,29 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
                     <HoverCardContent 
                       side="top"
                       align="center"
-                      sideOffset={0}
-                      className="w-[500px] max-w-[90vw] rounded-xl bg-black/80 border border-white/[0.08] p-3 shadow-2xl"
+                      sideOffset={8}
+                      className="w-[420px] max-w-[90vw] rounded-xl bg-black/90 backdrop-blur-md border border-white/[0.12] p-4 shadow-2xl"
                     >
                       <div className="space-y-3">
-                        <div className="flex items-start justify-between gap-2">
-                          <div className="min-w-0">
-                            <h3 className="font-semibold text-white text-sm truncate">{trader.name}</h3>
-                            <p className="text-[11px] text-soft-dim mt-0.5 truncate">@{trader.handle}</p>
+                        {/* Header */}
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-full bg-black/50 flex items-center justify-center text-sm font-medium text-white border border-white/10">
+                              {trader.name.charAt(0)}
+                            </div>
+                            <div className="min-w-0">
+                              <h3 className="font-semibold text-white text-sm truncate">{trader.name}</h3>
+                              <p className="text-[11px] text-soft-dim truncate">@{trader.handle}</p>
+                            </div>
+                          </div>
+                          <div className="flex flex-col items-end gap-1">
+                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-accent/15 text-accent border border-accent/20">
+                              Rank #{index + 1}
+                            </span>
                             {status && (
                               <span
                                 className={cn(
-                                  "mt-2 inline-flex items-center gap-1 px-2 py-0.5 text-[10px] rounded-full border",
+                                  "inline-flex items-center gap-1 px-2 py-0.5 text-[10px] rounded-full border",
                                   status === "open" && "border-emerald-500/40 text-emerald-400 bg-emerald-500/10",
                                   status === "almost-full" && "border-amber-400/50 text-amber-300 bg-amber-500/10",
                                   status === "closed" && "border-white/20 text-soft-dim bg-white/5"
@@ -276,29 +287,64 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
                               </span>
                             )}
                           </div>
-                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-accent/15 text-accent border border-accent/20">
-                            Rank #{index + 1}
-                          </span>
                         </div>
 
-                        <div className="grid grid-cols-4 gap-2 pt-2 border-t border-white/[0.05] text-xs">
+                        {/* Performance Stats */}
+                        <div className="grid grid-cols-4 gap-3 pt-3 border-t border-white/[0.08]">
                           <div>
-                            <p className="text-soft-dim mb-0.5">Floor</p>
-                            <p className="font-medium text-white">{priceLabel}</p>
+                            <p className="text-[10px] text-soft-dim uppercase tracking-wide mb-1">Edge Score</p>
+                            <p className="text-lg font-bold text-accent">{trader.stats.edgeScore}</p>
                           </div>
                           <div>
-                            <p className="text-soft-dim mb-0.5">24h Vol</p>
-                            <p className="font-medium text-white">{volLabel}</p>
+                            <p className="text-[10px] text-soft-dim uppercase tracking-wide mb-1">Win Rate</p>
+                            <p className="text-lg font-bold" style={{ color: 'hsl(142 71% 45%)' }}>{trader.stats.winRate}%</p>
                           </div>
                           <div>
-                            <p className="text-soft-dim mb-0.5">Win Rate</p>
-                            <p className="font-medium" style={{ color: 'hsl(142 71% 45%)' }}>{trader.stats.winRate}%</p>
+                            <p className="text-[10px] text-soft-dim uppercase tracking-wide mb-1">Avg ROI</p>
+                            <p className="text-lg font-bold" style={{ color: trader.stats.avgROI >= 0 ? 'hsl(142 71% 45%)' : 'hsl(355 71% 51%)' }}>
+                              {trader.stats.avgROI > 0 ? '+' : ''}{trader.stats.avgROI}%
+                            </p>
                           </div>
                           <div>
-                            <p className="text-soft-dim mb-0.5">Members</p>
-                            <p className="font-medium text-white">{trader.members}</p>
+                            <p className="text-[10px] text-soft-dim uppercase tracking-wide mb-1">30d Return</p>
+                            <p className="text-lg font-bold" style={{ color: trader.stats.thirtyDayReturn >= 0 ? 'hsl(142 71% 45%)' : 'hsl(355 71% 51%)' }}>
+                              {trader.stats.thirtyDayReturn > 0 ? '+' : ''}{trader.stats.thirtyDayReturn}%
+                            </p>
                           </div>
                         </div>
+
+                        {/* Risk & Channel Info */}
+                        <div className="grid grid-cols-3 gap-3 pt-3 border-t border-white/[0.08]">
+                          <div>
+                            <p className="text-[10px] text-soft-dim uppercase tracking-wide mb-1">Max Drawdown</p>
+                            <p className="text-sm font-medium text-red-400">-{trader.stats.maxDrawdown}%</p>
+                          </div>
+                          <div>
+                            <p className="text-[10px] text-soft-dim uppercase tracking-wide mb-1">Markets</p>
+                            <p className="text-sm font-medium text-white">{trader.stats.marketsTraded}</p>
+                          </div>
+                          <div>
+                            <p className="text-[10px] text-soft-dim uppercase tracking-wide mb-1">Consistency</p>
+                            <p className="text-sm font-medium text-white">{trader.stats.consistency}%</p>
+                          </div>
+                        </div>
+
+                        {/* Primary Markets */}
+                        <div className="pt-3 border-t border-white/[0.08]">
+                          <p className="text-[10px] text-soft-dim uppercase tracking-wide mb-2">Primary Markets</p>
+                          <div className="flex flex-wrap gap-1.5">
+                            {trader.stats.primaryMarkets.slice(0, 4).map((market, i) => (
+                              <span key={i} className="px-2 py-0.5 text-[10px] rounded-full bg-white/5 border border-white/10 text-white">
+                                {market}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Click hint */}
+                        <p className="text-[10px] text-soft-dim text-center pt-2 border-t border-white/[0.06]">
+                          Click to view full profile
+                        </p>
                       </div>
                     </HoverCardContent>
                   </HoverCard>

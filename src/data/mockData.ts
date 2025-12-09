@@ -8,6 +8,12 @@ export interface Trader {
     lifetimePnl: number;
     winRate: number;
     marketsTraded: number;
+    edgeScore: number;
+    avgROI: number;
+    thirtyDayReturn: number;
+    maxDrawdown: number;
+    consistency: number;
+    primaryMarkets: string[];
   };
 }
 
@@ -49,63 +55,63 @@ export const traders: Trader[] = [
     name: 'Dom PNL',
     handle: 'dom_alpha',
     tags: ['Politics', 'Macro'],
-    stats: { lifetimePnl: 142.5, winRate: 64, marketsTraded: 234 }
+    stats: { lifetimePnl: 142.5, winRate: 64, marketsTraded: 234, edgeScore: 87, avgROI: 18.4, thirtyDayReturn: 32.1, maxDrawdown: 12, consistency: 78, primaryMarkets: ['US Politics', 'Macro Events', 'Fed Policy'] }
   },
   {
     id: '2',
     name: 'Macro Signals',
     handle: 'macro_whale',
     tags: ['Macro', 'Crypto'],
-    stats: { lifetimePnl: 89.2, winRate: 58, marketsTraded: 187 }
+    stats: { lifetimePnl: 89.2, winRate: 58, marketsTraded: 187, edgeScore: 72, avgROI: 12.3, thirtyDayReturn: 18.5, maxDrawdown: 18, consistency: 65, primaryMarkets: ['Crypto', 'Interest Rates', 'Commodities'] }
   },
   {
     id: '3',
     name: 'Sports Edge',
     handle: 'sports_alpha',
     tags: ['Sports', 'NBA'],
-    stats: { lifetimePnl: 156.8, winRate: 71, marketsTraded: 312 }
+    stats: { lifetimePnl: 156.8, winRate: 71, marketsTraded: 312, edgeScore: 91, avgROI: 22.1, thirtyDayReturn: 41.2, maxDrawdown: 8, consistency: 85, primaryMarkets: ['NBA', 'NFL', 'Soccer', 'Tennis'] }
   },
   {
     id: '4',
     name: 'Election Pro',
     handle: 'election_calls',
     tags: ['Politics', 'Elections'],
-    stats: { lifetimePnl: 203.4, winRate: 67, marketsTraded: 156 }
+    stats: { lifetimePnl: 203.4, winRate: 67, marketsTraded: 156, edgeScore: 94, avgROI: 28.7, thirtyDayReturn: 52.3, maxDrawdown: 15, consistency: 82, primaryMarkets: ['US Elections', 'Global Politics', 'Policy'] }
   },
   {
     id: '5',
     name: 'Crypto Oracle',
     handle: 'crypto_oracle',
     tags: ['Crypto', 'DeFi'],
-    stats: { lifetimePnl: 178.9, winRate: 62, marketsTraded: 423 }
+    stats: { lifetimePnl: 178.9, winRate: 62, marketsTraded: 423, edgeScore: 88, avgROI: 19.5, thirtyDayReturn: 38.7, maxDrawdown: 22, consistency: 71, primaryMarkets: ['Bitcoin', 'Ethereum', 'DeFi', 'Altcoins'] }
   },
   {
     id: '6',
     name: 'Finance Insider',
     handle: 'finance_insider',
     tags: ['Finance', 'Stocks'],
-    stats: { lifetimePnl: 95.3, winRate: 55, marketsTraded: 198 }
+    stats: { lifetimePnl: 95.3, winRate: 55, marketsTraded: 198, edgeScore: 68, avgROI: 9.8, thirtyDayReturn: 14.2, maxDrawdown: 25, consistency: 58, primaryMarkets: ['Stocks', 'Earnings', 'IPOs'] }
   },
   {
     id: '7',
     name: 'Tech Analyst',
     handle: 'tech_alpha',
     tags: ['Tech', 'AI'],
-    stats: { lifetimePnl: 124.7, winRate: 59, marketsTraded: 267 }
+    stats: { lifetimePnl: 124.7, winRate: 59, marketsTraded: 267, edgeScore: 76, avgROI: 14.2, thirtyDayReturn: 25.8, maxDrawdown: 19, consistency: 67, primaryMarkets: ['AI', 'Tech Earnings', 'Product Launches'] }
   },
   {
     id: '8',
     name: 'Weather Wizard',
     handle: 'weather_wiz',
     tags: ['Weather', 'Events'],
-    stats: { lifetimePnl: 67.8, winRate: 52, marketsTraded: 89 }
+    stats: { lifetimePnl: 67.8, winRate: 52, marketsTraded: 89, edgeScore: 61, avgROI: 7.4, thirtyDayReturn: 11.3, maxDrawdown: 28, consistency: 52, primaryMarkets: ['Weather Events', 'Natural Disasters'] }
   },
   {
     id: '9',
     name: 'NFT Hunter',
     handle: 'nft_hunter',
     tags: ['NFTs', 'Web3'],
-    stats: { lifetimePnl: 112.4, winRate: 61, marketsTraded: 145 }
+    stats: { lifetimePnl: 112.4, winRate: 61, marketsTraded: 145, edgeScore: 74, avgROI: 15.6, thirtyDayReturn: 28.4, maxDrawdown: 20, consistency: 69, primaryMarkets: ['NFT Launches', 'Web3', 'Gaming'] }
   },
 ];
 
