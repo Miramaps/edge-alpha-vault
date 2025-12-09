@@ -26,26 +26,26 @@ export function StyleRiskProfile({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
-      className="rounded-2xl bg-black/40 backdrop-blur-sm border border-white/[0.08] overflow-hidden"
+      className="rounded-xl bg-black/40 backdrop-blur-sm border border-white/[0.08] overflow-hidden"
     >
-      <div className="p-5 border-b border-white/[0.06]">
-        <h2 className="text-lg font-semibold text-foreground">Style and Risk Profile</h2>
+      <div className="px-4 py-3 border-b border-white/[0.06]">
+        <h2 className="text-sm font-semibold text-foreground">Style & Risk</h2>
       </div>
 
-      <div className="p-5">
-        <div className="grid md:grid-cols-2 gap-8">
+      <div className="p-4">
+        <div className="grid md:grid-cols-2 gap-6">
           {/* Left Column */}
-          <div className="space-y-5">
+          <div className="space-y-4">
             {/* Primary Markets */}
             <div>
-              <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">
-                Primary Markets
+              <h3 className="text-[10px] text-muted-foreground uppercase tracking-wide mb-2">
+                Markets
               </h3>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {primaryMarkets.map((market) => (
                   <span
                     key={market}
-                    className="px-3 py-1.5 text-sm rounded-md bg-accent/10 text-accent border border-accent/20"
+                    className="px-2 py-1 text-xs rounded bg-accent/10 text-accent border border-accent/20"
                   >
                     {market}
                   </span>
@@ -55,15 +55,15 @@ export function StyleRiskProfile({
 
             {/* Time Horizon */}
             <div>
-              <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">
+              <h3 className="text-[10px] text-muted-foreground uppercase tracking-wide mb-2">
                 Time Horizon
               </h3>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {timeHorizons.map((horizon) => (
                   <span
                     key={horizon}
                     className={cn(
-                      "px-3 py-1.5 text-sm rounded-md border transition-colors",
+                      "px-2 py-1 text-xs rounded border",
                       horizon === timeHorizon
                         ? "bg-accent text-white border-accent"
                         : "bg-black/30 text-muted-foreground border-white/[0.06]"
@@ -77,28 +77,28 @@ export function StyleRiskProfile({
 
             {/* Strategy Notes */}
             <div>
-              <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">
-                Strategy Notes
+              <h3 className="text-[10px] text-muted-foreground uppercase tracking-wide mb-2">
+                Strategy
               </h3>
-              <p className="text-sm text-foreground/80 leading-relaxed">
+              <p className="text-xs text-foreground/80 leading-relaxed line-clamp-3">
                 {strategyNotes}
               </p>
             </div>
           </div>
 
           {/* Right Column */}
-          <div className="space-y-5">
+          <div className="space-y-4">
             {/* Risk Appetite */}
             <div>
-              <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">
+              <h3 className="text-[10px] text-muted-foreground uppercase tracking-wide mb-2">
                 Risk Appetite
               </h3>
-              <div className="flex gap-2">
+              <div className="flex gap-1.5">
                 {riskLevels.map((level) => (
                   <span
                     key={level}
                     className={cn(
-                      "px-3 py-1.5 text-sm rounded-md border flex-1 text-center transition-colors",
+                      "px-2 py-1 text-xs rounded border flex-1 text-center",
                       level === riskAppetite
                         ? "bg-accent text-white border-accent"
                         : "bg-black/30 text-muted-foreground border-white/[0.06]"
@@ -110,24 +110,15 @@ export function StyleRiskProfile({
               </div>
             </div>
 
-            {/* Consistency */}
-            <div>
-              <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">
-                Consistency
-              </h3>
-              <div className="p-4 rounded-xl bg-black/30 border border-white/[0.06]">
-                <span className="text-2xl font-bold text-foreground">{consistencyPercent}%</span>
-                <span className="text-sm text-muted-foreground ml-2">green days last 90 days</span>
+            {/* Stats Row */}
+            <div className="grid grid-cols-2 gap-2">
+              <div className="p-3 rounded-lg bg-black/30 border border-white/[0.06]">
+                <p className="text-[10px] text-muted-foreground uppercase mb-1">Consistency</p>
+                <span className="text-lg font-bold text-foreground">{consistencyPercent}%</span>
               </div>
-            </div>
-
-            {/* Max Drawdown */}
-            <div>
-              <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">
-                Max Drawdown (Last 90 Days)
-              </h3>
-              <div className="p-4 rounded-xl bg-black/30 border border-white/[0.06]">
-                <span className="text-2xl font-bold text-red-400">{maxDrawdown}%</span>
+              <div className="p-3 rounded-lg bg-black/30 border border-white/[0.06]">
+                <p className="text-[10px] text-muted-foreground uppercase mb-1">Max Drawdown</p>
+                <span className="text-lg font-bold text-red-400">{maxDrawdown}%</span>
               </div>
             </div>
           </div>
