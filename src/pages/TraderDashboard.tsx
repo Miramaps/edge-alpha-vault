@@ -69,8 +69,8 @@ export default function TraderDashboard() {
       </div>
 
       <div className="relative w-full px-6 md:px-10 lg:px-16 py-8 md:py-10">
-        {/* Owner mode toggle (for demo) */}
-        <div className="flex justify-end mb-3">
+        {/* Owner mode toggle (for demo) - hidden on mobile */}
+        <div className="hidden md:flex justify-end mb-3">
           <Button
             variant="ghost"
             size="sm"
