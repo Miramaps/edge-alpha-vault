@@ -73,19 +73,19 @@ export function ChannelsShowcase() {
   }, [searchQuery, filter, sort]);
 
   return (
-    <section id="channels" className="py-16 md:py-24">
-      <div className="container mx-auto px-4">
+    <section id="channels" className="py-4">
+      <div>
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-10"
+          className="mb-4"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
+          <h2 className="text-lg md:text-xl font-bold text-foreground mb-1">
             Live Alpha Channels
           </h2>
-          <p className="text-muted-foreground max-w-xl">
+          <p className="text-muted-foreground text-sm">
             Buy access NFTs to join elite prediction traders' Discord rooms.
           </p>
         </motion.div>
@@ -96,7 +96,7 @@ export function ChannelsShowcase() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="rounded-2xl bg-black/40 backdrop-blur-sm border border-white/[0.08] p-4 mb-8"
+          className="rounded-xl bg-black/40 backdrop-blur-sm border border-white/[0.08] p-3 mb-4"
         >
           <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center">
             {/* Search */}
@@ -162,7 +162,7 @@ export function ChannelsShowcase() {
 
         {/* Channels Grid/List */}
         {viewMode === "grid" ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredAndSortedChannels.map((channel, index) => (
               <ChannelCard key={channel.id} channel={channel} index={index} />
             ))}

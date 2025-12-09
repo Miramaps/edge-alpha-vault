@@ -27,8 +27,8 @@ export default function Channels() {
         />
       </div>
 
-      <div className="relative w-full px-6 md:px-10 lg:px-16 pt-24 pb-12">
-        <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-6">All Channels</h1>
+      <div className="relative w-full px-6 md:px-10 lg:px-16 pt-20 pb-8">
+        <h1 className="text-xl md:text-2xl font-bold text-foreground mb-4">All Channels</h1>
         <ChannelsShowcase />
       </div>
     </Layout>
