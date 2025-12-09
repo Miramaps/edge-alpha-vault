@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Wallet } from "lucide-react";
+import { useWalletAddress } from "@/contexts/WalletAddressContext";
 
 // Wallet icons mapping
 const walletIcons: Record<string, string> = {
@@ -18,6 +19,7 @@ interface WalletConnectModalProps {
 
 export function WalletConnectModal({ trigger, autoOpen = false }: WalletConnectModalProps) {
   const { wallet, wallets, select, connect, connected, publicKey } = useWallet();
+  const { setAddress } = useWalletAddress();
   const [isOpen, setIsOpen] = useState(false);
   const [isConnecting, setIsConnecting] = useState(false);
 
@@ -51,6 +53,13 @@ export function WalletConnectModal({ trigger, autoOpen = false }: WalletConnectM
       setIsConnecting(false);
     }
   };
+
+  // When wallet connects, set address in context (this will trigger 2FA check if enabled)
+  useEffect(() => {
+    if (connected && publicKey) {
+      setAddress(publicKey.toString());
+    }
+  }, [connected, publicKey, setAddress]);
 
   const handleClose = (open: boolean) => {
     if (!open && !connected) {

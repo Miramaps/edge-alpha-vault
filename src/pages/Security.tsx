@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authenticator } from "otplib";
 import { toast } from "sonner";
+import { verifyTOTP } from "@/utils/totp";
 // QR code library is loaded lazily to avoid SSR/import reassignment issues
 
 export default function Security() {
@@ -47,14 +48,54 @@ export default function Security() {
       }
       const QRCode = qrCodeRef.current;
 
-      // Generate a secret for this user
-      const newSecret = authenticator.generateSecret();
-      setSecret(newSecret);
+      // Generate a secret for this user using browser-compatible Web Crypto API
+      // otplib's generateSecret() uses Node.js crypto, so we generate it manually
+      const array = new Uint8Array(20); // 20 bytes = 160 bits (standard for TOTP)
+      crypto.getRandomValues(array);
+      
+      // Convert to base32 string (proper RFC 4648 base32 encoding)
+      const base32Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+      let base32Secret = '';
+      let buffer = 0;
+      let bitsLeft = 0;
+      
+      for (let i = 0; i < array.length; i++) {
+        buffer = (buffer << 8) | array[i];
+        bitsLeft += 8;
+        
+        while (bitsLeft >= 5) {
+          const index = (buffer >> (bitsLeft - 5)) & 0x1f;
+          base32Secret += base32Chars[index];
+          bitsLeft -= 5;
+        }
+      }
+      
+      // Handle remaining bits (if any)
+      if (bitsLeft > 0) {
+        const index = (buffer << (5 - bitsLeft)) & 0x1f;
+        base32Secret += base32Chars[index];
+      }
+      
+      // Store secret in uppercase (base32 standard)
+      const normalizedSecret = base32Secret.toUpperCase();
+      setSecret(normalizedSecret);
+      
+      // Debug: verify secret format
+      console.log("Generated 2FA secret:", {
+        length: normalizedSecret.length,
+        preview: normalizedSecret.substring(0, 16) + "...",
+        isValidBase32: /^[A-Z2-7]+$/.test(normalizedSecret)
+      });
 
-      // Create the OTP Auth URL
+      // Create the OTP Auth URL manually to avoid otplib's crypto usage
+      // Standard OTP URL format: otpauth://totp/{label}?secret={secret}&issuer={issuer}
       const serviceName = "EDGE Platform";
       const accountName = address.slice(0, 8);
-      const otpAuthUrl = authenticator.keyuri(accountName, serviceName, newSecret);
+      // Label format: can be just account or issuer:account
+      // Using issuer:account format for better compatibility
+      const label = `${serviceName}:${accountName}`;
+      // Build the OTP URL - use normalized secret (uppercase)
+      const otpAuthUrl = `otpauth://totp/${encodeURIComponent(label)}?secret=${normalizedSecret}&issuer=${encodeURIComponent(serviceName)}`;
 
       // Generate QR code
       const qrCode = await QRCode.toDataURL(otpAuthUrl, {
@@ -80,7 +121,20 @@ export default function Security() {
 
     setIsVerifying(true);
     try {
-      const isValid = authenticator.check(verificationCode, secret);
+      // Ensure secret is uppercase (base32 should be uppercase)
+      const normalizedSecret = secret.toUpperCase().replace(/\s/g, '');
+      
+      // Verify the code using browser-compatible TOTP verification
+      const isValid = await verifyTOTP(verificationCode, normalizedSecret, 1);
+      
+      // Debug logging (remove in production)
+      if (!isValid) {
+        console.log("2FA Verification Debug:", {
+          code: verificationCode,
+          secretLength: normalizedSecret.length,
+          secretPreview: normalizedSecret.substring(0, 8) + "...",
+        });
+      }
 
       if (isValid) {
         // Store 2FA status (in a real app, this would be sent to your backend)
@@ -93,11 +147,11 @@ export default function Security() {
         setVerificationCode("");
         toast.success("2FA enabled successfully!");
       } else {
-        toast.error("Invalid verification code");
+        toast.error("Invalid verification code. Make sure you're entering the current 6-digit code from your authenticator app.");
       }
     } catch (error) {
       toast.error("Verification failed");
-      console.error(error);
+      console.error("2FA verification error:", error);
     } finally {
       setIsVerifying(false);
     }

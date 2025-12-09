@@ -50,7 +50,7 @@ export function WalletAddressModal({ trigger, autoOpen = false }: WalletAddressM
     }
 
     setAddress(trimmedAddress);
-    toast.success("Wallet connected!");
+    // Note: 2FA verification will be handled by WalletAddressContext if enabled
     setIsOpen(false);
     setAddressInput("");
   };
