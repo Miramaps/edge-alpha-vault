@@ -7,18 +7,18 @@ export function HeroSection() {
 
       {/* Main content - centered vertically */}
       <div className="relative flex-1 flex items-center px-6 md:px-12 lg:px-16 py-24">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="w-full max-w-6xl mx-auto text-center">
 
           <motion.h1
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4 md:mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4 md:mb-6 tracking-tighter text-center"
+            style={{ fontFamily: 'Poppins, sans-serif', textAlign: 'center' }}
           >
-            Get Private Access To The
+            <span className="block whitespace-nowrap mx-auto text-center">Get&nbsp;Private&nbsp;Access&nbsp;To&nbsp;The</span>
             <span 
-              className="block mt-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
-              style={{ color: 'hsl(355 71% 51%)' }}
+              className="block mt-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white text-center"
             >
               Traders Beating The Markets.
             </span>

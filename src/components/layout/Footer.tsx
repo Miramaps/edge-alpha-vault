@@ -46,11 +46,8 @@ export function Footer() {
           <div className="w-full max-w-xs h-px bg-border/30" />
 
           {/* Logo and copyright */}
-          <div className="flex flex-col items-center gap-3">
-            <div className="flex items-center gap-2.5">
-              <img src={edgeLogo} alt="Edge" className="w-12 h-12 opacity-90" />
-              <span className="text-muted-foreground text-sm">Edge</span>
-            </div>
+          <div className="flex flex-col items-center gap-2">
+            <img src={edgeLogo} alt="Edge" className="w-20 h-20 opacity-90" />
             <p className="text-muted-foreground text-xs">
               2024 Edge Protocol. All rights reserved.
             </p>
