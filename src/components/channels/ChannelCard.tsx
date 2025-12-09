@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import type { Channel } from "@/data/mockData";
+import { TwitterIcon } from "@/components/icons/SocialIcons";
 
 interface ChannelCardProps {
   channel: Channel;
@@ -31,14 +32,25 @@ export function ChannelCard({ channel, index }: ChannelCardProps) {
           >
             {channel.trader.name.charAt(0)}
           </div>
-          {/* Name & Handle */}
+          {/* Name & Handle with X link */}
           <div>
             <h3 className="text-base font-medium text-white leading-tight">
               {channel.trader.name}
             </h3>
-            <p className="text-[13px] text-soft-muted">
-              @{channel.trader.handle}
-            </p>
+            <div className="flex items-center gap-2">
+              <p className="text-[13px] text-soft-muted">
+                @{channel.trader.handle}
+              </p>
+              <a 
+                href={`https://x.com/${channel.trader.handle}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-soft-dim hover:text-white transition-colors"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <TwitterIcon size={14} />
+              </a>
+            </div>
           </div>
         </div>
         {/* Status Pill */}
