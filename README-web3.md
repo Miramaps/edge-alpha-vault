@@ -1,75 +1,66 @@
-## Web3 Requirements (Solana)
+## Web3 Program Requirements (Solana)
 
-This document lists the on-chain programs and components needed for the platform to function end to end on Solana (no project-specific branding).
+Practical list of on-chain programs, accounts, and flows the EDGE platform needs to operate reliably.
 
-### Core Programs
-- **Access NFT (Token-2022 / Metaplex)**  
-  - Mint/burn transfer-restricted NFTs representing channel access.  
-  - Configurable max supply, mint price, allowlist, and owner-controlled minting windows.  
-  - Role-based controls for pausing, metadata updates (URI), royalties (creator shares), and withdrawal of proceeds.  
-  - Optional transfer hooks to enforce cooldowns or blocklisted addresses.
+### Core On-Chain Pieces
+- **Access NFT program (Token-2022/Metaplex)**  
+  - Access tokens for channels; mint/burn; optional transfer restrictions/cooldowns.  
+  - Config: supply cap, mint price, allowlist, mint windows, metadata URI, creator shares/royalties.  
+  - Controls: pause minting/transfers; update metadata/royalties; withdraw proceeds.
 
-- **Prediction Market Program**  
-  - Create markets with resolution source, outcomes, start/end time, and liquidity parameters.  
-  - Supports trading (AMM curve or orderbook), collateral deposits/withdrawals, fee accrual, and slippage controls.  
-  - Outcome resolution via designated oracle; supports disputes/appeals and resolution finalization.  
-  - Payout/claim instruction to settle winning positions and release collateral for losers.  
-  - Emits events (via logs) for market lifecycle: created, liquidity added/removed, trades, resolution, payouts.
+- **Prediction market program**  
+  - Create markets (source, outcomes, start/end, liquidity params).  
+  - Trade via AMM or orderbook; handle collateral deposits/withdrawals; collect fees; enforce slippage bounds.  
+  - Resolve outcomes via designated oracle; support disputes/appeals; finalize and unlock claims.  
+  - Payout instruction to settle winning positions; emit logs for create/liquidity/trade/resolve/payout.
 
-- **Oracle / Resolution Module**  
-  - Designated resolvers or external oracle feed to report outcomes.  
-  - Dispute window with bonds/stakes; slash malicious resolvers and reward correct challengers.  
-  - Finalization process that locks further disputes and unblocks payouts.
+- **Oracle / resolution module**  
+  - Resolver submits outcome; dispute window with bonded challenges; slash bad actors; reward correct challengers.  
+  - Finalization step closes disputes and enables claims.
 
-- **Treasury / Fee Splitter**  
-  - Receives protocol fees from trading and mints.  
-  - Configurable splits to stakeholders (e.g., protocol, channel owner, referrers).  
-  - Supports periodic withdrawals and emits distribution events.
+- **Treasury / fee splitter**  
+  - Receive protocol + channel fees from trades/mints.  
+  - Configurable splits; periodic withdrawals; emit distribution logs.
 
-- **Leaderboard / Stats Indexing (Off-chain + Verifiable Data)**  
-  - Indexer (e.g., custom service or Helium/Trident/Switchboard feeds) to derive volumes, PnL, win rates, and market stats from program logs.  
-  - Optionally provide Merkle roots or signed snapshots for client-side verification of computed stats.
+- **Indexing / stats**  
+  - Off-chain indexer consuming program logs to surface volume, PnL, win rate, holders/supply.  
+  - Optional signed snapshots or Merkle roots for client verification.
 
-### Access Control and Permissions
-- **Roles:** admin, market creator, resolver/oracle, fee collector, channel owner.  
-- **Pausable/Safe Mode:** ability to pause minting/trading/resolution pathways independently.  
-- **Upgradability:** governed upgrade (e.g., program upgrade authority held by multisig with timelock/guard).
+### Access, Roles, Upgrades
+- Roles: admin, market creator, resolver/oracle, fee collector, channel owner.  
+  - Require signer/PDA checks; keep authorities in multisig.  
+- Pausable: independent switches for minting, trading, resolution.  
+- Upgrades: program upgrade authority behind multisig + timelock/guard.
 
-### Token and Payment Considerations
-- **Accepted Collateral:** SPL stablecoin for trading and settlement.  
-- **Mint Payments:** accept SPL stablecoin (and optionally SOL) for access NFTs; enforce per-channel pricing.  
-- **Royalties:** Metaplex creator shares/royalties on secondary sales; marketplace must honor them.  
-- **Escrow:** optional escrow for disputed markets; release upon finalization.
+### Tokens and Payments
+- Collateral: SPL stablecoin for trading/settlement.  
+- Access mints: accept SPL stablecoin (optionally SOL); per-channel pricing.  
+- Royalties: Metaplex creator shares on secondary sales; marketplaces must honor.  
+- Escrow: optional escrow for disputed markets until finalization.
 
-### Security and Integrity
-- **Reentrancy and PDA Auth:** enforce signer/owner checks and PDA seeds; avoid arbitrary CPI.  
-- **Slippage / Price Bounds** on trades and liquidity adds/removes.  
-- **Oracle Integrity:** dispute bonds sized to economic risk; resolution timeouts; clear liveness rules.  
-- **Rate Limits / Guardrails:** per-wallet mint limits, transfer cooldowns for access NFTs if desired.  
-- **Audit and Monitoring:** external audits, runtime alerts on anomalous volumes or resolutions.
+### Security
+- PDA auth on all state; strict signer checks; avoid arbitrary CPI.  
+- Slippage bounds on trades/liquidity; price sanity checks if AMM.  
+- Oracle integrity: dispute bond sizing, resolution timeouts, liveness rules.  
+- Limits: per-wallet mint caps, transfer cooldowns if desired.  
+- Audits/monitoring: external audits; alerts on abnormal volume/resolution patterns.
 
-### Frontend Integration Points
-- **Program IDs and IDLs** exposed to the client for: access NFT mint/burn/transfer, market trade/resolve/claim, fee/treasury reads.  
-- **Event Streams:** listen to program logs for MarketCreated, Trade, LiquidityAdded/Removed, Resolved, PayoutClaimed, AccessMinted/Burned/Transferred.  
-- **Indexing API:** endpoint that surfaces aggregates for leaderboards (volume24h, price change, win rate, PnL) and channel stats (supply, holders).
+### Frontend / Client Integration
+- Publish program IDs + IDLs for access NFT, market, oracle, treasury.  
+- Expose event/log streams for MarketCreated, LiquidityAdded/Removed, Trade, Resolved, PayoutClaimed, AccessMinted/Burned/Transferred.  
+  - Indexer API should surface aggregates (volume24h, price change, win rate, PnL, supply/holders).
 
-### Operational Flows
-- **Channel Launch:** create/register channel with supply, mint price, URI, royalty, and access gating config.  
-- **Trading:** users approve collateral, trade outcomes, adjust positions; fees routed to treasury.  
-- **Resolution:** oracle submits outcome → dispute window → finalize → users claim payouts.  
-- **Access Management:** mint/burn/transfer access NFTs; client/back-end uses ownership to gate content.  
-- **Withdrawals:** authorized roles withdraw accumulated protocol/channel fees and royalties.
-
-### Optional Enhancements
-- **Referral Program:** track referrer addresses on mint/trade; fee rebates or points via storage or off-chain attestation.  
-- **Points / Loyalty:** on-chain or off-chain points with signed attestations and Merkle claims.  
-- **Batching:** CPI/multicall patterns to bundle approve + trade/mint to reduce UX friction.  
-- **Cross-Chain Support:** if multi-chain, include bridge or canonical registry for channels and markets with message verification.
+### Operational Flows to Validate
+- Channel launch: set supply, price, URI, royalty, gating config; enable mint.  
+- Trading: approve collateral, trade outcomes, adjust positions; fees route to treasury.  
+- Resolution: oracle submit → dispute window → finalize → claims.  
+- Access: mint/burn/transfer access NFTs; client gates content by ownership.  
+- Withdrawals: authorized roles withdraw protocol/channel fees and royalties.
 
 ### Deployment Checklist
-- Configure environment-specific accounts (collateral mint, access NFT mint/program, market/oracle program IDs, treasury accounts).  
-- Set initial roles and transfer upgrade authority to multisig/timelock.  
-- Seed indexer; publish program IDs/IDLs to the frontend.  
-- Run test markets end-to-end: create → trade → resolve → dispute (happy/unhappy paths) → finalize → claim → fee withdrawal.  
-- Validate access gating using NFT ownership in the client/auth layer.
+- Configure environment accounts: collateral mint, access mint/program, market/oracle program IDs, treasury PDAs.  
+- Set roles and transfer upgrade authority to multisig/timelock.  
+- Seed indexer; publish program IDs/IDLs.  
+- Run full-path tests: create → trade → resolve → dispute (happy/unhappy) → finalize → claim → withdraw.  
+- Verify access gating via NFT ownership in the client/auth layer.
 
