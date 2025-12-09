@@ -63,10 +63,20 @@ export default function TraderDashboard() {
 
   return (
     <Layout>
-      {/* Background - fixed to cover entire viewport */}
+      {/* Red gradient background - fixed to cover entire viewport */}
       <div className="fixed inset-0 -z-10 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-hero" />
         <div className="absolute inset-0 bg-gradient-radial" />
+        
+        {/* Subtle crimson glows */}
+        <div 
+          className="absolute -top-20 right-0 w-[700px] h-[500px] rounded-full blur-[200px] opacity-70"
+          style={{ background: 'hsl(0 65% 45% / 0.25)' }}
+        />
+        <div 
+          className="absolute -top-10 -left-20 w-[400px] h-[350px] rounded-full blur-[150px] opacity-50"
+          style={{ background: 'hsl(5 60% 42% / 0.2)' }}
+        />
         
         {/* Grainy noise texture overlay */}
         <div 
