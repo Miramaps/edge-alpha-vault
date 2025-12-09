@@ -326,17 +326,17 @@ export default function BecomeTrader() {
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
-                  "Submitting..."
+                  "Creating..."
                 ) : (
                   <>
-                    Submit Application
+                    Start Channel
                     <Send className="w-4 h-4 ml-2" />
                   </>
                 )}
               </Button>
               
               <p className="text-center text-muted-foreground/60 text-xs mt-3">
-                Applications reviewed within 48 hours
+                Your channel will be live instantly
               </p>
             </form>
           </motion.div>
