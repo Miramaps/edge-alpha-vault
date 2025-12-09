@@ -49,11 +49,7 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
           </div>
 
           <div 
-            className="flex items-center gap-1 p-1 rounded-lg w-fit"
-            style={{ 
-              background: 'hsl(17 23% 18%)',
-              border: '1px solid hsl(16 20% 24%)'
-            }}
+            className="flex items-center gap-1 p-1 rounded-lg w-fit bg-black/30 border border-white/[0.06]"
           >
             {timeframes.map((tf) => (
               <button
@@ -82,13 +78,12 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.1 }}
-        className="pro-card overflow-hidden"
+        className="rounded-2xl bg-black/40 backdrop-blur-sm border border-white/[0.08] overflow-hidden"
       >
         <Table>
           <TableHeader>
             <TableRow 
-              className="hover:bg-transparent"
-              style={{ borderColor: 'hsl(16 20% 24%)' }}
+              className="hover:bg-transparent border-white/[0.06]"
             >
               <TableHead className="w-12 text-[11px] font-normal uppercase tracking-wider" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>#</TableHead>
               <TableHead className="text-[11px] font-normal uppercase tracking-wider" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>Trader</TableHead>
@@ -105,8 +100,7 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
             {data.map((trader, index) => (
               <TableRow 
                 key={trader.id} 
-                className="transition-colors group hover:bg-white/[0.02]"
-                style={{ borderColor: 'hsl(16 20% 24% / 0.5)' }}
+                className="transition-colors group hover:bg-white/[0.02] border-white/[0.04]"
               >
                 <TableCell className="py-4">
                   <span className="text-sm font-medium text-soft-dim">{index + 1}</span>
@@ -114,11 +108,7 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
                 <TableCell className="py-4">
                   <Link to={`/t/${trader.handle}`} className="flex items-center gap-3 group-hover:opacity-80 transition-opacity">
                     <div 
-                      className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0"
-                      style={{ 
-                        background: 'hsl(16 20% 24%)', 
-                        color: 'hsl(30 4% 93%)' 
-                      }}
+                      className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0 bg-black/30 text-muted-foreground"
                     >
                       {trader.name.charAt(0)}
                     </div>
