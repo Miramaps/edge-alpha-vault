@@ -36,124 +36,106 @@ export function ChannelAnalyticsAccess({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3 }}
-      className="rounded-2xl bg-black/40 backdrop-blur-sm border border-white/[0.08] overflow-hidden"
+      className="rounded-xl bg-black/40 backdrop-blur-sm border border-white/[0.08] overflow-hidden"
     >
-      <div className="p-5 border-b border-white/[0.06]">
-        <h2 className="text-lg font-semibold text-foreground">Channel Analytics and Access</h2>
+      <div className="px-4 py-3 border-b border-white/[0.06]">
+        <h2 className="text-sm font-semibold text-foreground">Channel & Access</h2>
       </div>
 
-      <div className="p-5">
-        <div className="grid md:grid-cols-2 gap-6">
+      <div className="p-4">
+        <div className="grid md:grid-cols-2 gap-4">
           {/* Left - Channel Analytics */}
-          <div className="space-y-3">
-            <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-4">
-              Channel Analytics
+          <div className="space-y-2">
+            <h3 className="text-[10px] text-muted-foreground uppercase tracking-wide mb-2">
+              Analytics
             </h3>
 
-            {/* Members */}
-            <div className="flex items-center justify-between p-3 rounded-xl bg-black/30 border border-white/[0.06]">
-              <div className="flex items-center gap-3">
-                <Users className="w-4 h-4 text-accent" />
-                <span className="text-sm text-muted-foreground">Members</span>
+            <div className="flex items-center justify-between p-2.5 rounded-lg bg-black/30 border border-white/[0.06]">
+              <div className="flex items-center gap-2">
+                <Users className="w-3.5 h-3.5 text-accent" />
+                <span className="text-xs text-muted-foreground">Members</span>
               </div>
-              <span className="text-sm font-medium text-foreground">
-                {members} / {maxMembers} seats filled
+              <span className="text-xs font-medium text-foreground">
+                {members}/{maxMembers}
               </span>
             </div>
 
-            {/* Member Growth */}
-            <div className="flex items-center justify-between p-3 rounded-xl bg-black/30 border border-white/[0.06]">
-              <div className="flex items-center gap-3">
-                <TrendingUp className="w-4 h-4 text-accent" />
-                <span className="text-sm text-muted-foreground">Member Growth (30d)</span>
+            <div className="flex items-center justify-between p-2.5 rounded-lg bg-black/30 border border-white/[0.06]">
+              <div className="flex items-center gap-2">
+                <TrendingUp className="w-3.5 h-3.5 text-accent" />
+                <span className="text-xs text-muted-foreground">Growth (30d)</span>
               </div>
-              <span className="text-sm font-medium text-emerald-400">
-                +{memberGrowth}%
-              </span>
+              <span className="text-xs font-medium text-emerald-400">+{memberGrowth}%</span>
             </div>
 
-            {/* Retention */}
-            <div className="flex items-center justify-between p-3 rounded-xl bg-black/30 border border-white/[0.06]">
-              <div className="flex items-center gap-3">
-                <Clock className="w-4 h-4 text-accent" />
-                <span className="text-sm text-muted-foreground">Retention</span>
+            <div className="flex items-center justify-between p-2.5 rounded-lg bg-black/30 border border-white/[0.06]">
+              <div className="flex items-center gap-2">
+                <Clock className="w-3.5 h-3.5 text-accent" />
+                <span className="text-xs text-muted-foreground">Retention</span>
               </div>
-              <span className="text-sm font-medium text-foreground">
-                {retentionPercent}% stay &gt; 30 days
-              </span>
+              <span className="text-xs font-medium text-foreground">{retentionPercent}%</span>
             </div>
 
-            {/* Engagement */}
-            <div className="flex items-center justify-between p-3 rounded-xl bg-black/30 border border-white/[0.06]">
-              <div className="flex items-center gap-3">
-                <MessageSquare className="w-4 h-4 text-accent" />
-                <span className="text-sm text-muted-foreground">Engagement</span>
+            <div className="flex items-center justify-between p-2.5 rounded-lg bg-black/30 border border-white/[0.06]">
+              <div className="flex items-center gap-2">
+                <MessageSquare className="w-3.5 h-3.5 text-accent" />
+                <span className="text-xs text-muted-foreground">Posts/day</span>
               </div>
-              <span className="text-sm font-medium text-foreground">
-                {postsPerDay} posts/day in Discord
-              </span>
+              <span className="text-xs font-medium text-foreground">{postsPerDay}</span>
             </div>
 
-            {/* Signal Frequency */}
-            <div className="flex items-center justify-between p-3 rounded-xl bg-black/30 border border-white/[0.06]">
-              <div className="flex items-center gap-3">
-                <Zap className="w-4 h-4 text-accent" />
-                <span className="text-sm text-muted-foreground">Signal Frequency</span>
+            <div className="flex items-center justify-between p-2.5 rounded-lg bg-black/30 border border-white/[0.06]">
+              <div className="flex items-center gap-2">
+                <Zap className="w-3.5 h-3.5 text-accent" />
+                <span className="text-xs text-muted-foreground">Signals/week</span>
               </div>
-              <span className="text-sm font-medium text-foreground">
-                {signalsPerWeek} ideas/week
-              </span>
+              <span className="text-xs font-medium text-foreground">{signalsPerWeek}</span>
             </div>
           </div>
 
           {/* Right - Access Card */}
-          <div className="p-5 rounded-xl bg-black/30 border border-white/[0.06]">
-            <h3 className="text-base font-semibold text-foreground mb-3">
-              Access via Channel NFT
+          <div className="p-4 rounded-lg bg-black/30 border border-white/[0.06]">
+            <h3 className="text-sm font-semibold text-foreground mb-2">
+              NFT Access
             </h3>
-            <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
-              Hold 1 Channel NFT to stay in this Discord alpha. Selling the NFT removes access.
+            <p className="text-xs text-muted-foreground mb-4">
+              Hold 1 NFT for Discord access. Sell to revoke.
             </p>
 
             {/* NFT Stats */}
-            <div className="space-y-3 mb-5">
-              <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Max Supply</span>
+            <div className="space-y-2 mb-4 text-xs">
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Supply</span>
                 <span className="text-foreground font-medium">{maxMembers}</span>
               </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Current Floor</span>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Floor</span>
                 <span className="text-foreground font-medium">{floorPrice} SOL</span>
               </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">24h Volume</span>
-                <span className="text-foreground font-medium">{(volume24h / 1000).toFixed(1)}k SOL</span>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">24h Vol</span>
+                <span className="text-foreground font-medium">{(volume24h / 1000).toFixed(1)}k</span>
               </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Seats Available</span>
-                <span className="text-foreground font-medium">{seatsAvailable} remaining</span>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Available</span>
+                <span className="text-foreground font-medium">{seatsAvailable}</span>
               </div>
             </div>
 
-            {/* Progress Bar */}
-            <div className="mb-5">
-              <Progress value={fillPercent} className="h-1.5" />
-            </div>
+            <Progress value={fillPercent} className="h-1 mb-4" />
 
-            {/* Buy Button */}
             <Button
               variant="hero"
               onClick={onBuyClick}
               disabled={disabled}
-              className="w-full h-11"
+              className="w-full h-9 text-sm"
             >
-              Buy Access NFT
+              Buy Access
             </Button>
 
-            {/* Marketplace Link */}
-            <button className="w-full mt-3 flex items-center justify-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
-              <ExternalLink className="w-3.5 h-3.5" />
-              View on Marketplace
+            <button className="w-full mt-2 flex items-center justify-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
+              <ExternalLink className="w-3 h-3" />
+              Marketplace
             </button>
           </div>
         </div>

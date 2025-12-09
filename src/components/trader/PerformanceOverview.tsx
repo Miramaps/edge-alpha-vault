@@ -28,13 +28,13 @@ interface StatCardProps {
 
 function StatCard({ label, value, subtext, icon: Icon, positive }: StatCardProps) {
   return (
-    <div className="p-4 rounded-xl bg-black/30 border border-white/[0.06]">
-      <div className="flex items-center gap-2 mb-2">
-        <Icon className="w-4 h-4 text-accent" />
-        <span className="text-xs text-muted-foreground uppercase tracking-wide">{label}</span>
+    <div className="p-3 rounded-lg bg-black/30 border border-white/[0.06]">
+      <div className="flex items-center gap-1.5 mb-1">
+        <Icon className="w-3 h-3 text-accent" />
+        <span className="text-[10px] text-muted-foreground uppercase tracking-wide">{label}</span>
       </div>
       <p className={cn(
-        "text-2xl font-bold",
+        "text-lg font-bold",
         positive === true && "text-emerald-400",
         positive === false && "text-red-400",
         positive === undefined && "text-foreground"
@@ -42,7 +42,7 @@ function StatCard({ label, value, subtext, icon: Icon, positive }: StatCardProps
         {value}
       </p>
       {subtext && (
-        <p className="text-xs text-muted-foreground mt-1">{subtext}</p>
+        <p className="text-[10px] text-muted-foreground">{subtext}</p>
       )}
     </div>
   );
@@ -68,17 +68,17 @@ export function PerformanceOverview({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1 }}
-      className="rounded-2xl bg-black/40 backdrop-blur-sm border border-white/[0.08] overflow-hidden"
+      className="rounded-xl bg-black/40 backdrop-blur-sm border border-white/[0.08] overflow-hidden"
     >
-      <div className="p-5 border-b border-white/[0.06]">
-        <h2 className="text-lg font-semibold text-foreground">Performance Overview</h2>
+      <div className="px-4 py-3 border-b border-white/[0.06]">
+        <h2 className="text-sm font-semibold text-foreground">Performance</h2>
       </div>
 
-      <div className="p-5">
+      <div className="p-4">
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
+        <div className="grid grid-cols-5 gap-2 mb-4">
           <StatCard
-            label="Edge Score"
+            label="Edge"
             value={edgeScore.toString()}
             icon={TrendingUp}
           />
@@ -89,13 +89,13 @@ export function PerformanceOverview({
             positive={winRate >= 55}
           />
           <StatCard
-            label="Avg ROI / Trade"
+            label="Avg ROI"
             value={`+${avgRoi}%`}
             icon={Percent}
             positive={true}
           />
           <StatCard
-            label="30-Day Return"
+            label="30d Return"
             value={`${thirtyDayReturn > 0 ? '+' : ''}${thirtyDayReturn}%`}
             icon={Calendar}
             positive={thirtyDayReturn > 0}
@@ -110,30 +110,31 @@ export function PerformanceOverview({
 
         {/* Equity Curve Chart */}
         <div>
-          <h3 className="text-sm font-medium text-muted-foreground mb-4">Equity Curve (Last 90 Days)</h3>
-          <div className="h-48 w-full">
+          <h3 className="text-xs text-muted-foreground mb-2">Equity Curve (90d)</h3>
+          <div className="h-32 w-full">
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={equityData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
+              <LineChart data={equityData} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
                 <XAxis 
                   dataKey="day" 
                   axisLine={false}
                   tickLine={false}
-                  tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 11 }}
+                  tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 9 }}
                   tickFormatter={(value) => `${value}d`}
                 />
                 <YAxis 
                   domain={[80, 140]}
                   axisLine={false}
                   tickLine={false}
-                  tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 11 }}
-                  width={35}
+                  tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 9 }}
+                  width={28}
                 />
                 <Tooltip
                   contentStyle={{
                     backgroundColor: 'hsl(var(--card))',
                     border: '1px solid hsl(var(--accent) / 0.3)',
-                    borderRadius: '8px',
+                    borderRadius: '6px',
                     color: 'hsl(var(--foreground))',
+                    fontSize: '12px'
                   }}
                   labelFormatter={(value) => `Day ${value}`}
                   formatter={(value: number) => [value.toFixed(1), 'Index']}
@@ -142,9 +143,9 @@ export function PerformanceOverview({
                   type="monotone"
                   dataKey="value"
                   stroke="hsl(var(--accent))"
-                  strokeWidth={2}
+                  strokeWidth={1.5}
                   dot={false}
-                  activeDot={{ r: 4, fill: 'hsl(var(--accent))' }}
+                  activeDot={{ r: 3, fill: 'hsl(var(--accent))' }}
                 />
               </LineChart>
             </ResponsiveContainer>
