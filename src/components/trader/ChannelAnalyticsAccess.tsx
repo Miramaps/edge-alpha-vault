@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+
 import { Users, TrendingUp, Clock, MessageSquare, Zap, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -32,10 +32,7 @@ export function ChannelAnalyticsAccess({
   const fillPercent = (members / maxMembers) * 100;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.3 }}
+    <div
       className="rounded-xl bg-black/40 backdrop-blur-sm border border-white/[0.08] overflow-hidden"
     >
       <div className="px-4 py-3 border-b border-white/[0.06]">
@@ -140,6 +137,6 @@ export function ChannelAnalyticsAccess({
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

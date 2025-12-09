@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import type { Channel } from "@/data/mockData";
 import { TwitterIcon } from "@/components/icons/SocialIcons";
 
@@ -13,10 +12,7 @@ export function ChannelCard({ channel, index }: ChannelCardProps) {
   const isOpen = channel.status === "open" || channel.status === "almost-full";
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.05 }}
+    <div
       className="rounded-2xl bg-black/40 backdrop-blur-sm border border-white/[0.08] p-5 md:p-6 flex flex-col hover:border-white/[0.12] transition-all duration-200"
     >
       {/* Top Bar - Identity + Status */}
@@ -112,6 +108,6 @@ export function ChannelCard({ channel, index }: ChannelCardProps) {
       >
         View Channel
       </Link>
-    </motion.div>
+    </div>
   );
 }
