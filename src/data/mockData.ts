@@ -100,6 +100,13 @@ export const traders: Trader[] = [
     tags: ['Weather', 'Events'],
     stats: { lifetimePnl: 67.8, winRate: 52, marketsTraded: 89 }
   },
+  {
+    id: '9',
+    name: 'NFT Hunter',
+    handle: 'nft_hunter',
+    tags: ['NFTs', 'Web3'],
+    stats: { lifetimePnl: 112.4, winRate: 61, marketsTraded: 145 }
+  },
 ];
 
 export const channels: Channel[] = traders.map((trader, index) => ({
@@ -108,15 +115,15 @@ export const channels: Channel[] = traders.map((trader, index) => ({
   name: `${trader.name} Alpha`,
   description: `Exclusive prediction market insights from ${trader.name}. Join the alpha channel for real-time calls and analysis.`,
   discordUrl: 'https://discord.gg/edge',
-  maxSupply: [100, 150, 200, 75, 250, 100, 125, 50][index],
-  minted: [87, 142, 156, 75, 198, 67, 98, 23][index],
-  floorPrice: [12.4, 8.7, 15.2, 22.8, 6.3, 9.1, 11.5, 18.9][index],
-  volume24h: [3200, 1800, 4500, 890, 5600, 1200, 2100, 450][index],
-  priceChange24h: [5.2, -2.1, 8.7, 0, 12.3, -4.5, 3.2, 15.8][index],
-  status: [87, 142, 156, 75, 198, 67, 98, 23][index] >= [100, 150, 200, 75, 250, 100, 125, 50][index] * 0.95 
+  maxSupply: [100, 150, 200, 75, 250, 100, 125, 50, 180][index],
+  minted: [87, 142, 156, 75, 198, 67, 98, 23, 134][index],
+  floorPrice: [12.4, 8.7, 15.2, 22.8, 6.3, 9.1, 11.5, 18.9, 7.8][index],
+  volume24h: [3200, 1800, 4500, 890, 5600, 1200, 2100, 450, 2800][index],
+  priceChange24h: [5.2, -2.1, 8.7, 0, 12.3, -4.5, 3.2, 15.8, 6.9][index],
+  status: [87, 142, 156, 75, 198, 67, 98, 23, 134][index] >= [100, 150, 200, 75, 250, 100, 125, 50, 180][index] * 0.95 
     ? 'almost-full' 
-    : [87, 142, 156, 75, 198, 67, 98, 23][index] >= [100, 150, 200, 75, 250, 100, 125, 50][index] 
-      ? 'closed' 
+    : [87, 142, 156, 75, 198, 67, 98, 23, 134][index] >= [100, 150, 200, 75, 250, 100, 125, 50, 180][index] 
+      ? 'closed'
       : 'open',
   createdAt: new Date(Date.now() - Math.random() * 90 * 24 * 60 * 60 * 1000).toISOString(),
 }));
