@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { useWalletAddress } from "@/contexts/WalletAddressContext";
 import { Navigate } from "react-router-dom";
@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authenticator } from "otplib";
 import { toast } from "sonner";
-import QRCode from "qrcode";
+// QR code library is loaded lazily to avoid SSR/import reassignment issues
 
 export default function Security() {
   const { address } = useWalletAddress();
@@ -19,6 +19,7 @@ export default function Security() {
   const [verificationCode, setVerificationCode] = useState("");
   const [isVerifying, setIsVerifying] = useState(false);
   const [copied, setCopied] = useState(false);
+  const qrCodeRef = useRef<any>(null);
 
   useEffect(() => {
     // Check if 2FA is already enabled (in a real app, this would come from your backend)
@@ -40,10 +41,11 @@ export default function Security() {
       }
 
       // Dynamically import QRCode if not already loaded
-      if (!QRCode) {
-        const qrcodeModule = await import('qrcode');
-        QRCode = qrcodeModule.default || qrcodeModule;
+      if (!qrCodeRef.current) {
+        const qrcodeModule = await import("qrcode");
+        qrCodeRef.current = qrcodeModule.default || qrcodeModule;
       }
+      const QRCode = qrCodeRef.current;
 
       // Generate a secret for this user
       const newSecret = authenticator.generateSecret();
