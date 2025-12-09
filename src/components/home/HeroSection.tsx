@@ -10,9 +10,9 @@ export function HeroSection() {
         <div className="max-w-3xl mx-auto text-center">
 
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.3 }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4 md:mb-6"
           >
             Welcome to Edge
@@ -25,9 +25,9 @@ export function HeroSection() {
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.3 }}
             className="text-base md:text-lg lg:text-xl text-soft-muted mb-8 md:mb-10 max-w-2xl mx-auto px-2"
           >
             Edge hosts private alpha rooms run by the best prediction market traders.
@@ -36,9 +36,9 @@ export function HeroSection() {
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ duration: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <Link to="/channels" className="btn-accent px-8 py-3 text-base">
@@ -60,9 +60,9 @@ export function HeroSection() {
 
       {/* Trust badges strip - pinned to bottom of viewport */}
       <motion.div
-        initial={{ opacity: 0 }}
+        initial={false}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.5 }}
+        transition={{ duration: 0.3 }}
         className="relative border-t border-white/[0.06] bg-black/20 backdrop-blur-sm"
       >
         <div className="px-6 md:px-12 lg:px-16 py-4">
