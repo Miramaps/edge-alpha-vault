@@ -68,11 +68,11 @@ export function ChannelCard({ channel, index }: ChannelCardProps) {
       <div className="grid grid-cols-2 gap-x-6 gap-y-4 mb-5">
         <div>
           <p className="stat-label">Floor</p>
-          <p className="stat-value">{channel.floorPrice} EDGE</p>
+          <p className="stat-value">{channel.floorPrice} SOL</p>
         </div>
         <div>
           <p className="stat-label">Vol 24H</p>
-          <p className="stat-value">{(channel.volume24h / 1000).toFixed(1)}k EDGE</p>
+          <p className="stat-value">{(channel.volume24h / 1000).toFixed(1)}k SOL</p>
         </div>
         <div>
           <p className="stat-label">Members</p>
