@@ -28,7 +28,7 @@ interface StatCardProps {
 
 function StatCard({ label, value, subtext, icon: Icon, positive }: StatCardProps) {
   return (
-    <div className="p-4 rounded-lg bg-zinc-900/60 border border-accent/20">
+    <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.05]">
       <div className="flex items-center gap-2 mb-2">
         <Icon className="w-4 h-4 text-accent" />
         <span className="text-xs text-muted-foreground uppercase tracking-wide">{label}</span>
@@ -68,9 +68,9 @@ export function PerformanceOverview({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1 }}
-      className="rounded-xl bg-gradient-to-br from-zinc-900/90 to-black/80 border border-accent/20 overflow-hidden"
+      className="rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] overflow-hidden"
     >
-      <div className="p-5 border-b border-accent/10">
+      <div className="p-5 border-b border-white/[0.05]">
         <h2 className="text-lg font-semibold text-foreground">Performance Overview</h2>
       </div>
 

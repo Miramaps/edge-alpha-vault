@@ -26,9 +26,9 @@ export function StyleRiskProfile({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
-      className="rounded-xl bg-gradient-to-br from-zinc-900/90 to-black/80 border border-accent/20 overflow-hidden"
+      className="rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] overflow-hidden"
     >
-      <div className="p-5 border-b border-accent/10">
+      <div className="p-5 border-b border-white/[0.05]">
         <h2 className="text-lg font-semibold text-foreground">Style and Risk Profile</h2>
       </div>
 
@@ -66,7 +66,7 @@ export function StyleRiskProfile({
                       "px-3 py-1.5 text-sm rounded-md border transition-colors",
                       horizon === timeHorizon
                         ? "bg-accent text-white border-accent"
-                        : "bg-zinc-900/40 text-muted-foreground border-border/30"
+                        : "bg-white/[0.02] text-muted-foreground border-white/[0.05]"
                     )}
                   >
                     {horizon}
@@ -101,7 +101,7 @@ export function StyleRiskProfile({
                       "px-3 py-1.5 text-sm rounded-md border flex-1 text-center transition-colors",
                       level === riskAppetite
                         ? "bg-accent text-white border-accent"
-                        : "bg-zinc-900/40 text-muted-foreground border-border/30"
+                        : "bg-white/[0.02] text-muted-foreground border-white/[0.05]"
                     )}
                   >
                     {level}
@@ -115,7 +115,7 @@ export function StyleRiskProfile({
               <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">
                 Consistency
               </h3>
-              <div className="p-4 rounded-lg bg-zinc-900/60 border border-accent/20">
+              <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.05]">
                 <span className="text-2xl font-bold text-foreground">{consistencyPercent}%</span>
                 <span className="text-sm text-muted-foreground ml-2">green days last 90 days</span>
               </div>
@@ -126,7 +126,7 @@ export function StyleRiskProfile({
               <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">
                 Max Drawdown (Last 90 Days)
               </h3>
-              <div className="p-4 rounded-lg bg-zinc-900/60 border border-accent/20">
+              <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.05]">
                 <span className="text-2xl font-bold text-red-400">{maxDrawdown}%</span>
               </div>
             </div>
