@@ -55,10 +55,6 @@ export default function BecomeTrader() {
             transition={{ duration: 0.6 }}
             className="lg:sticky lg:top-24"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-medium mb-6">
-              <Sparkles className="w-3.5 h-3.5" />
-              Launch Your Channel
-            </div>
             
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 leading-tight">
               Become a<br />
