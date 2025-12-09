@@ -54,7 +54,7 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
           className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6"
         >
           <div>
-            <h2 className="text-2xl font-bold text-white">Top Traders</h2>
+            <h2 className="text-2xl font-bold text-white">Top Channels</h2>
             <p className="text-soft-dim text-sm mt-1">
               Ranked by performance
             </p>
