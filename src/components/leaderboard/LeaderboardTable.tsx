@@ -143,42 +143,36 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
         </div>
       )}
 
-      {/* Mobile: Card layout */}
-      {isMobile ? (
-        <div className="space-y-2">
-          {data.map((trader, index) => (
-            <MobileTraderCard 
-              key={trader.id} 
-              trader={trader} 
-              index={index}
-              channel={channelByTraderId.get(trader.id)}
-            />
-          ))}
-        </div>
-      ) : (
-        /* Desktop: Table layout */
-        <div className="rounded-xl bg-black/40 border border-white/[0.08] overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow className="hover:bg-transparent border-white/[0.06]">
-                <TableHead className="w-12 text-[11px] font-normal uppercase tracking-wider" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>#</TableHead>
-                <TableHead className="text-[11px] font-normal uppercase tracking-wider" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>Trader</TableHead>
-                <TableHead className="text-[11px] font-normal uppercase tracking-wider text-right" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>Floor Price</TableHead>
-                <TableHead className="text-[11px] font-normal uppercase tracking-wider text-right" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>1d Change</TableHead>
-                <TableHead className="text-[11px] font-normal uppercase tracking-wider text-right" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>Win Rate</TableHead>
-                <TableHead className="hidden lg:table-cell text-[11px] font-normal uppercase tracking-wider text-right" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>1d Vol</TableHead>
-                <TableHead className="text-[11px] font-normal uppercase tracking-wider text-right" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>Members</TableHead>
-                <TableHead className="hidden lg:table-cell text-[11px] font-normal uppercase tracking-wider text-right" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>Markets</TableHead>
-                <TableHead className="text-[11px] font-normal uppercase tracking-wider text-right" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>Last 7d</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {data.map((trader, index) => {
-                const channel = channelByTraderId.get(trader.id);
-                const status = channel?.status;
-                const supplyLabel = channel ? `${channel.minted}/${channel.maxSupply}` : "—";
-                const priceLabel = channel ? `${channel.floorPrice} EDGE` : `${trader.floorPrice} EDGE`;
-                const volLabel = channel ? `${(channel.volume24h / 1000).toFixed(1)}k EDGE` : `${(trader.volume24h / 1000).toFixed(1)}k EDGE`;
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.1 }}
+        className="rounded-xl bg-black/40 backdrop-blur-sm border border-white/[0.08] overflow-x-auto"
+      >
+        <Table className="min-w-[600px]">
+          <TableHeader>
+            <TableRow 
+              className="hover:bg-transparent border-white/[0.06]"
+            >
+              <TableHead className="w-12 text-[11px] font-normal uppercase tracking-wider" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>#</TableHead>
+              <TableHead className="text-[11px] font-normal uppercase tracking-wider" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>Trader</TableHead>
+              <TableHead className="text-[11px] font-normal uppercase tracking-wider text-right" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>Price</TableHead>
+              <TableHead className="hidden sm:table-cell text-[11px] font-normal uppercase tracking-wider text-right" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>1d Change</TableHead>
+              <TableHead className="hidden md:table-cell text-[11px] font-normal uppercase tracking-wider text-right" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>Win Rate</TableHead>
+              <TableHead className="hidden lg:table-cell text-[11px] font-normal uppercase tracking-wider text-right" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>1d Vol</TableHead>
+              <TableHead className="hidden md:table-cell text-[11px] font-normal uppercase tracking-wider text-right" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>Members</TableHead>
+              <TableHead className="hidden lg:table-cell text-[11px] font-normal uppercase tracking-wider text-right" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>Markets</TableHead>
+              <TableHead className="text-[11px] font-normal uppercase tracking-wider text-right" style={{ color: 'hsl(30 4% 93% / 0.56)' }}>Last 7d</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {data.map((trader, index) => {
+              const channel = channelByTraderId.get(trader.id);
+              const status = channel?.status;
+              const supplyLabel = channel ? `${channel.minted}/${channel.maxSupply}` : "—";
+              const priceLabel = channel ? `${channel.floorPrice} EDGE` : `${trader.floorPrice} EDGE`;
+              const volLabel = channel ? `${(channel.volume24h / 1000).toFixed(1)}k EDGE` : `${(trader.volume24h / 1000).toFixed(1)}k EDGE`;
 
                 const rowContent = (
                   <TableRow 
@@ -289,29 +283,61 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
                           </div>
                         </div>
 
-                        {/* Performance Stats */}
-                        <div className="grid grid-cols-4 gap-3 pt-3 border-t border-white/[0.08]">
-                          <div>
-                            <p className="text-[10px] text-soft-dim uppercase tracking-wide mb-1">Edge Score</p>
-                            <p className="text-lg font-bold text-accent">{trader.stats.edgeScore}</p>
-                          </div>
-                          <div>
-                            <p className="text-[10px] text-soft-dim uppercase tracking-wide mb-1">Win Rate</p>
-                            <p className="text-lg font-bold" style={{ color: 'hsl(142 71% 45%)' }}>{trader.stats.winRate}%</p>
-                          </div>
-                          <div>
-                            <p className="text-[10px] text-soft-dim uppercase tracking-wide mb-1">Avg ROI</p>
-                            <p className="text-lg font-bold" style={{ color: trader.stats.avgROI >= 0 ? 'hsl(142 71% 45%)' : 'hsl(355 71% 51%)' }}>
-                              {trader.stats.avgROI > 0 ? '+' : ''}{trader.stats.avgROI}%
-                            </p>
-                          </div>
-                          <div>
-                            <p className="text-[10px] text-soft-dim uppercase tracking-wide mb-1">30d Return</p>
-                            <p className="text-lg font-bold" style={{ color: trader.stats.thirtyDayReturn >= 0 ? 'hsl(142 71% 45%)' : 'hsl(355 71% 51%)' }}>
-                              {trader.stats.thirtyDayReturn > 0 ? '+' : ''}{trader.stats.thirtyDayReturn}%
-                            </p>
-                          </div>
+                    {/* Tags */}
+                    {trader.tags && trader.tags.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5">
+                        {trader.tags.map((tag) => (
+                          <span 
+                            key={tag}
+                            className="px-2 py-0.5 text-[10px] rounded bg-white/5 text-accent border border-white/10"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Snapshot rows */}
+                    <div className="grid grid-cols-2 gap-2.5 pt-2 border-t border-white/[0.05]">
+                      <div>
+                        <p className="text-[11px] text-soft-dim mb-0.5">Price</p>
+                        <p className="text-sm font-medium text-white">{priceLabel}</p>
+                      </div>
+                      <div>
+                        <p className="text-[11px] text-soft-dim mb-0.5">24h Vol</p>
+                        <p className="text-sm font-medium text-white">{volLabel}</p>
+                      </div>
+                      <div>
+                        <p className="text-[11px] text-soft-dim mb-0.5">Capacity</p>
+                        <p className="text-sm font-medium text-white">{supplyLabel}</p>
+                      </div>
+                      <div>
+                        <p className="text-[11px] text-soft-dim mb-0.5">Markets Traded</p>
+                        <p className="text-sm font-medium text-white">
+                          {trader.stats.marketsTraded.toLocaleString()}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-[11px] text-soft-dim mb-0.5">Lifetime PNL</p>
+                        <p className="text-sm font-medium text-white">
+                          {trader.stats.lifetimePnl > 0 ? "+" : ""}{trader.stats.lifetimePnl}%
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-[11px] text-soft-dim mb-0.5">Win Rate</p>
+                        <p className="text-sm font-medium" style={{ color: 'hsl(142 71% 45%)' }}>
+                          {trader.stats.winRate}%
+                        </p>
+                      </div>
+                      {channel && (
+                        <div>
+                          <p className="text-[11px] text-soft-dim mb-0.5">Discord</p>
+                          <p className="text-sm font-medium text-white truncate">
+                            {channel.discordUrl.replace(/^https?:\/\//, "")}
+                          </p>
                         </div>
+                      )}
+                    </div>
 
                         {/* Risk & Channel Info */}
                         <div className="grid grid-cols-3 gap-3 pt-3 border-t border-white/[0.08]">

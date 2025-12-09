@@ -16,8 +16,7 @@ export default function BecomeTrader() {
     channelName: "",
     twitterHandle: "",
     discordHandle: "",
-    nftSupply: "",
-    floorPrice: "",
+    maxMembers: "",
     markets: "",
   });
 
@@ -97,7 +96,7 @@ export default function BecomeTrader() {
             </h1>
             
             <p className="text-muted-foreground text-sm md:text-base mb-6 md:mb-8 max-w-md">
-              Share your alpha, build a community, and earn SOL through NFT-gated access to your exclusive channel.
+              Share your alpha, build a community, and earn EDGE tokens through token-gated access to your exclusive channel.
             </p>
 
             {/* Benefits */}
@@ -108,7 +107,7 @@ export default function BecomeTrader() {
                 </div>
                 <div>
                   <p className="text-foreground text-sm font-medium">Set Your Price</p>
-                  <p className="text-muted-foreground text-xs">You decide the floor price</p>
+                  <p className="text-muted-foreground text-xs">You decide the subscription price</p>
                 </div>
               </div>
               
@@ -118,7 +117,7 @@ export default function BecomeTrader() {
                 </div>
                 <div>
                   <p className="text-foreground text-sm font-medium">Control Access</p>
-                  <p className="text-muted-foreground text-xs">Limit with NFT supply</p>
+                  <p className="text-muted-foreground text-xs">Set max members limit</p>
                 </div>
               </div>
               
@@ -140,105 +139,61 @@ export default function BecomeTrader() {
               onSubmit={handleSubmit} 
               className="p-5 md:p-6 rounded-2xl bg-black/40 border border-white/[0.08]"
             >
-              {/* NFT Profile Picture */}
+              {/* Profile Picture */}
               <div className="mb-5">
-                <Label className="text-foreground text-sm mb-2 block">NFT Profile Picture</Label>
-                
-                {/* Mobile: Simple upload button */}
-                {isMobile ? (
-                  <div className="flex items-center gap-3">
-                    {profileImage ? (
-                      <>
-                        <img 
-                          src={profileImage} 
-                          alt="Profile preview" 
-                          className="w-14 h-14 rounded-full object-cover border border-white/[0.1]"
-                        />
-                        <div className="flex-1">
-                          <p className="text-foreground text-sm font-medium">Image uploaded</p>
-                          <p className="text-muted-foreground text-xs">Tap to change</p>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={removeImage}
-                          className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center"
-                        >
-                          <X className="w-4 h-4 text-accent" />
-                        </button>
-                      </>
-                    ) : (
-                      <label className="flex items-center gap-3 w-full p-3 rounded-xl bg-black/30 border border-white/[0.08] cursor-pointer active:bg-white/[0.05]">
-                        <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
-                          <Upload className="w-5 h-5 text-accent" />
-                        </div>
-                        <div>
-                          <p className="text-foreground text-sm font-medium">Tap to upload</p>
-                          <p className="text-muted-foreground text-xs">Choose from gallery</p>
-                        </div>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={handleFileSelect}
-                          className="hidden"
-                        />
-                      </label>
-                    )}
-                  </div>
-                ) : (
-                  /* Desktop: Drag and drop */
-                  <div 
-                    className={`relative flex items-center gap-4 p-4 rounded-xl border-2 border-dashed transition-colors cursor-pointer ${
-                      isDragging 
-                        ? 'border-accent bg-accent/10' 
-                        : 'border-white/[0.08] bg-black/30 hover:border-white/[0.15]'
-                    }`}
-                    onDragOver={handleDragOver}
-                    onDragLeave={handleDragLeave}
-                    onDrop={handleDrop}
-                    onClick={() => !profileImage && document.getElementById('profile-upload')?.click()}
-                  >
-                    {profileImage ? (
-                      <>
-                        <img 
-                          src={profileImage} 
-                          alt="Profile preview" 
-                          className="w-14 h-14 rounded-full object-cover border border-white/[0.1]"
-                        />
-                        <div className="flex-1">
-                          <p className="text-foreground text-sm font-medium">Image uploaded</p>
-                          <p className="text-muted-foreground text-xs">Click to change</p>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            removeImage();
-                          }}
-                          className="w-7 h-7 rounded-full bg-accent/20 flex items-center justify-center hover:bg-accent/30 transition-colors"
-                        >
-                          <X className="w-3.5 h-3.5 text-accent" />
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <div className="w-14 h-14 rounded-full bg-white/[0.05] flex items-center justify-center">
-                          <Image className="w-6 h-6 text-muted-foreground" />
-                        </div>
-                        <div>
-                          <p className="text-foreground text-sm font-medium">Drag & drop image</p>
-                          <p className="text-muted-foreground text-xs">or click to browse</p>
-                        </div>
-                      </>
-                    )}
-                    <input
-                      id="profile-upload"
-                      type="file"
-                      accept="image/*"
-                      onChange={handleFileSelect}
-                      className="hidden"
-                    />
-                  </div>
-                )}
+                <Label className="text-foreground text-sm mb-2 block">Profile Picture</Label>
+                <div 
+                  className={`relative flex items-center gap-4 p-4 rounded-xl border-2 border-dashed transition-all duration-200 cursor-pointer ${
+                    isDragging 
+                      ? 'border-accent bg-accent/10' 
+                      : 'border-white/[0.08] bg-black/30 hover:border-white/[0.15]'
+                  }`}
+                  onDragOver={handleDragOver}
+                  onDragLeave={handleDragLeave}
+                  onDrop={handleDrop}
+                  onClick={() => !profileImage && document.getElementById('profile-upload')?.click()}
+                >
+                  {profileImage ? (
+                    <>
+                      <img 
+                        src={profileImage} 
+                        alt="Profile preview" 
+                        className="w-14 h-14 rounded-full object-cover border border-white/[0.1]"
+                      />
+                      <div className="flex-1">
+                        <p className="text-foreground text-sm font-medium">Image uploaded</p>
+                        <p className="text-muted-foreground text-xs">Click to change</p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          removeImage();
+                        }}
+                        className="w-7 h-7 rounded-full bg-accent/20 flex items-center justify-center hover:bg-accent/30 transition-colors"
+                      >
+                        <X className="w-3.5 h-3.5 text-accent" />
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <div className="w-14 h-14 rounded-full bg-white/[0.05] flex items-center justify-center">
+                        <Image className="w-6 h-6 text-muted-foreground" />
+                      </div>
+                      <div>
+                        <p className="text-foreground text-sm font-medium">Drag & drop image</p>
+                        <p className="text-muted-foreground text-xs">or click to browse</p>
+                      </div>
+                    </>
+                  )}
+                  <input
+                    id="profile-upload"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileSelect}
+                    className="hidden"
+                  />
+                </div>
               </div>
 
               {/* Divider */}
@@ -259,34 +214,20 @@ export default function BecomeTrader() {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <Label htmlFor="nftSupply" className="text-foreground text-sm">Max Members</Label>
-                    <Input
-                      id="nftSupply"
-                      name="nftSupply"
-                      type="number"
-                      placeholder="100"
-                      value={formData.nftSupply}
-                      onChange={handleChange}
-                      required
-                      className="mt-1.5 h-10 bg-black/30 border-white/[0.06] focus:border-accent/50 placeholder:text-muted-foreground/50"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="floorPrice" className="text-foreground text-sm">Floor Price (SOL)</Label>
-                    <Input
-                      id="floorPrice"
-                      name="floorPrice"
-                      type="number"
-                      step="0.01"
-                      placeholder="0.5"
-                      value={formData.floorPrice}
-                      onChange={handleChange}
-                      required
-                      className="mt-1.5 h-10 bg-black/30 border-white/[0.06] focus:border-accent/50 placeholder:text-muted-foreground/50"
-                    />
-                  </div>
+                <div>
+                  <Label htmlFor="maxMembers" className="text-foreground text-sm">Max Members (max 1000)</Label>
+                  <Input
+                    id="maxMembers"
+                    name="maxMembers"
+                    type="number"
+                    min="1"
+                    max="1000"
+                    placeholder="100"
+                    value={formData.maxMembers}
+                    onChange={handleChange}
+                    required
+                    className="mt-1.5 h-10 bg-black/30 border-white/[0.06] focus:border-accent/50 placeholder:text-muted-foreground/50"
+                  />
                 </div>
               </div>
 

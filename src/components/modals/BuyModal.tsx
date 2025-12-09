@@ -82,7 +82,7 @@ export function BuyModal({ channel, isOpen, onClose }: BuyModalProps) {
             /* Purchase Form */
             <>
               <h3 className="text-xl font-bold text-foreground mb-1">
-                Buy Access NFT
+                Subscribe to Channel
               </h3>
               <p className="text-muted-foreground text-sm mb-6">
                 {channel.name}
@@ -100,7 +100,7 @@ export function BuyModal({ channel, isOpen, onClose }: BuyModalProps) {
                   </div>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Floor Price</span>
+                  <span className="text-muted-foreground">Subscription Price</span>
                   <span className="text-foreground font-medium">{channel.floorPrice} EDGE</span>
                 </div>
               </div>
@@ -136,7 +136,7 @@ export function BuyModal({ channel, isOpen, onClose }: BuyModalProps) {
               {/* Summary */}
               <div className="glass-card bg-secondary/30 p-4 mb-6">
                 <div className="flex justify-between text-sm mb-2">
-                  <span className="text-muted-foreground">Price per NFT</span>
+                  <span className="text-muted-foreground">Price per subscription</span>
                   <span className="text-foreground">{channel.floorPrice} EDGE</span>
                 </div>
                 <div className="flex justify-between text-sm mb-2">

@@ -63,12 +63,12 @@ export function ChannelCard({ channel, index }: ChannelCardProps) {
       {/* Middle - Metrics Grid */}
       <div className="grid grid-cols-2 gap-x-6 gap-y-4 mb-5">
         <div>
-          <p className="stat-label">Floor</p>
-          <p className="stat-value">{channel.floorPrice} SOL</p>
+          <p className="stat-label">Price</p>
+          <p className="stat-value">{channel.floorPrice} EDGE</p>
         </div>
         <div>
           <p className="stat-label">Vol 24H</p>
-          <p className="stat-value">{(channel.volume24h / 1000).toFixed(1)}k SOL</p>
+          <p className="stat-value">{(channel.volume24h / 1000).toFixed(1)}k EDGE</p>
         </div>
         <div>
           <p className="stat-label">Members</p>
@@ -99,7 +99,7 @@ export function ChannelCard({ channel, index }: ChannelCardProps) {
 
       {/* Bottom - Helper Text + CTA */}
       <p className="text-[12px] text-soft-muted mb-4">
-        Discord alpha room access via channel NFT.
+        Discord alpha room access via EDGE token subscription.
       </p>
 
       <Link 

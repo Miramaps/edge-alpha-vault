@@ -3,8 +3,8 @@ import { TwitterIcon, DiscordIcon, DocsIcon } from "@/components/icons/SocialIco
 import edgeLogo from "@/assets/edge-logo.png";
 
 const socialLinks = [
-  { href: "https://x.com/UseEdge", icon: TwitterIcon, label: "Twitter / X" },
-  { href: "/docs", icon: DocsIcon, label: "Documentation", isInternal: true },
+  { href: "https://x.com/UseEdge", icon: TwitterIcon, label: "Twitter / X", iconOnly: true },
+  { href: "/docs", icon: DocsIcon, label: "Documentation", isInternal: true, iconOnly: true },
 ];
 
 export function Footer() {
@@ -24,7 +24,7 @@ export function Footer() {
                     className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm"
                   >
                     <link.icon size={18} />
-                    <span>{link.label}</span>
+                    {!link.iconOnly && <span>{link.label}</span>}
                   </Link>
                 ) : (
                   <a
@@ -35,7 +35,7 @@ export function Footer() {
                     className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm"
                   >
                     <link.icon size={18} />
-                    <span>{link.label}</span>
+                    {!link.iconOnly && <span>{link.label}</span>}
                   </a>
                 )
               ))}
@@ -48,7 +48,7 @@ export function Footer() {
           {/* Logo and copyright */}
           <div className="flex flex-col items-center gap-3">
             <div className="flex items-center gap-2.5">
-              <img src={edgeLogo} alt="Edge" className="w-6 h-6 opacity-70" />
+              <img src={edgeLogo} alt="Edge" className="w-12 h-12 opacity-90" />
               <span className="text-muted-foreground text-sm">Edge</span>
             </div>
             <p className="text-muted-foreground text-xs">

@@ -126,7 +126,7 @@ export function ChannelsShowcase() {
             Live Alpha Channels
           </h2>
           <p className="text-muted-foreground text-sm">
-            Buy access NFTs to join elite prediction traders' Discord rooms.
+            Subscribe with EDGE tokens to join elite prediction traders' Discord rooms.
           </p>
         </div>
 
@@ -167,7 +167,7 @@ export function ChannelsShowcase() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="volume">24h Volume</SelectItem>
-                  <SelectItem value="floor">Floor Price</SelectItem>
+                  <SelectItem value="floor">Subscription Price</SelectItem>
                   <SelectItem value="members">Members</SelectItem>
                   <SelectItem value="pnl">PnL</SelectItem>
                 </SelectContent>

@@ -93,21 +93,21 @@ export function ChannelAnalyticsAccess({
           {/* Right - Access Card */}
           <div className="p-4 rounded-lg bg-black/30 border border-white/[0.06]">
             <h3 className="text-sm font-semibold text-foreground mb-2">
-              NFT Access
+              Token Subscription
             </h3>
             <p className="text-xs text-muted-foreground mb-4">
-              Hold 1 NFT for Discord access. Sell to revoke.
+              Pay with EDGE tokens for Discord access. Cancel anytime to revoke.
             </p>
 
-            {/* NFT Stats */}
+            {/* Subscription Stats */}
             <div className="space-y-2 mb-4 text-xs">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Supply</span>
                 <span className="text-foreground font-medium">{maxMembers}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Floor</span>
-                <span className="text-foreground font-medium">{floorPrice} SOL</span>
+                <span className="text-muted-foreground">Price</span>
+                <span className="text-foreground font-medium">{floorPrice} EDGE</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">24h Vol</span>
@@ -130,10 +130,6 @@ export function ChannelAnalyticsAccess({
               Buy Access
             </Button>
 
-            <button className="w-full mt-2 flex items-center justify-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
-              <ExternalLink className="w-3 h-3" />
-              Marketplace
-            </button>
           </div>
         </div>
       </div>

@@ -31,8 +31,8 @@ export function HeroSection() {
             className="text-base md:text-lg lg:text-xl text-soft-muted mb-8 md:mb-10 max-w-2xl mx-auto px-2"
           >
             Edge hosts private alpha rooms run by the best prediction market traders.
-            Your access is a scarce NFT — its price moves with demand.
-            Trade your membership anytime; selling removes your access.
+            Subscribe with EDGE tokens to access exclusive channels.
+            Your subscription price moves with demand. Cancel anytime to revoke access.
           </motion.p>
 
           <motion.div
