@@ -10,7 +10,7 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/30 bg-card/30">
+    <footer className="border-t border-white/[0.06] bg-black/20 backdrop-blur-sm">
       <div className="container mx-auto px-4 py-12">
         <div className="flex flex-col items-center gap-8">
           {/* Stay connected section */}
