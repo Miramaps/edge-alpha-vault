@@ -4,7 +4,6 @@ import edgeLogo from "@/assets/edge-logo.png";
 
 const socialLinks = [
   { href: "https://x.com/UseEdge", icon: TwitterIcon, label: "Twitter / X" },
-  { href: "https://discord.gg/lovable-dev", icon: DiscordIcon, label: "Discord" },
   { href: "/docs", icon: DocsIcon, label: "Documentation", isInternal: true },
 ];
 
