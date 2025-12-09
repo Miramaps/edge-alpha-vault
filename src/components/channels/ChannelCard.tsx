@@ -13,7 +13,7 @@ export function ChannelCard({ channel, index }: ChannelCardProps) {
 
   return (
     <div
-      className="rounded-2xl bg-black/40 backdrop-blur-sm border border-white/[0.08] p-5 md:p-6 flex flex-col hover:border-white/[0.12] transition-all duration-200"
+      className="rounded-2xl bg-black/40 border border-white/[0.08] p-5 md:p-6 flex flex-col hover:border-white/[0.12] transition-colors duration-200"
     >
       {/* Top Bar - Identity + Status */}
       <div className="flex items-start justify-between mb-4">

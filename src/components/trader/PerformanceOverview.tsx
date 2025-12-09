@@ -1,22 +1,9 @@
-
+import { lazy, Suspense } from "react";
 import { TrendingUp, Target, Percent, Calendar, Activity } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
 
-// Generate mock equity curve data
-const generateEquityCurve = () => {
-  const data = [];
-  let value = 100;
-  for (let i = 0; i <= 90; i += 3) {
-    const change = (Math.random() - 0.4) * 4;
-    value = Math.max(80, Math.min(140, value + change));
-    data.push({ day: i, value: Math.round(value * 10) / 10 });
-  }
-  data[data.length - 1].value = Math.max(data[data.length - 1].value, 118);
-  return data;
-};
-
-const equityData = generateEquityCurve();
+// Lazy load Recharts to prevent blocking page render
+const LazyChart = lazy(() => import("./EquityChart"));
 
 interface StatCardProps {
   label: string;
@@ -64,9 +51,7 @@ export function PerformanceOverview({
   volatility,
 }: PerformanceOverviewProps) {
   return (
-    <div
-      className="rounded-xl bg-black/40 backdrop-blur-sm border border-white/[0.08] overflow-hidden"
-    >
+    <div className="rounded-xl bg-black/40 border border-white/[0.08] overflow-hidden">
       <div className="px-4 py-3 border-b border-white/[0.06]">
         <h2 className="text-sm font-semibold text-foreground">Performance</h2>
       </div>
@@ -105,47 +90,13 @@ export function PerformanceOverview({
           />
         </div>
 
-        {/* Equity Curve Chart */}
+        {/* Equity Curve Chart - Lazy Loaded */}
         <div>
           <h3 className="text-xs text-muted-foreground mb-2">Equity Curve (90d)</h3>
           <div className="h-32 w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={equityData} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
-                <XAxis 
-                  dataKey="day" 
-                  axisLine={false}
-                  tickLine={false}
-                  tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 9 }}
-                  tickFormatter={(value) => `${value}d`}
-                />
-                <YAxis 
-                  domain={[80, 140]}
-                  axisLine={false}
-                  tickLine={false}
-                  tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 9 }}
-                  width={28}
-                />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: 'hsl(var(--card))',
-                    border: '1px solid hsl(var(--accent) / 0.3)',
-                    borderRadius: '6px',
-                    color: 'hsl(var(--foreground))',
-                    fontSize: '12px'
-                  }}
-                  labelFormatter={(value) => `Day ${value}`}
-                  formatter={(value: number) => [value.toFixed(1), 'Index']}
-                />
-                <Line
-                  type="monotone"
-                  dataKey="value"
-                  stroke="hsl(var(--accent))"
-                  strokeWidth={1.5}
-                  dot={false}
-                  activeDot={{ r: 3, fill: 'hsl(var(--accent))' }}
-                />
-              </LineChart>
-            </ResponsiveContainer>
+            <Suspense fallback={<div className="h-32 w-full bg-black/20 rounded animate-pulse" />}>
+              <LazyChart />
+            </Suspense>
           </div>
         </div>
       </div>

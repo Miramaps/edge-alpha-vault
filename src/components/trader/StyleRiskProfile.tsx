@@ -23,7 +23,7 @@ export function StyleRiskProfile({
 
   return (
     <div
-      className="rounded-xl bg-black/40 backdrop-blur-sm border border-white/[0.08] overflow-hidden"
+      className="rounded-xl bg-black/40 border border-white/[0.08] overflow-hidden"
     >
       <div className="px-4 py-3 border-b border-white/[0.06]">
         <h2 className="text-sm font-semibold text-foreground">Style & Risk</h2>
