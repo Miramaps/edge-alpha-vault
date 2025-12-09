@@ -17,12 +17,50 @@ import { channels } from "@/data/mockData";
 type ViewMode = "grid" | "list";
 type FilterType = "all" | "new" | "trending" | "high-volume";
 type SortType = "volume" | "floor" | "members" | "pnl";
+const MARKET_CATEGORIES = [
+  "all",
+  "sports",
+  "politics",
+  "crypto",
+  "macro",
+  "finance",
+  "tech",
+  "weather",
+  "nfts",
+  "elections",
+  "ai",
+  "defi",
+  "stocks",
+  "nba",
+  "web3",
+  "events",
+] as const;
+type MarketCategory = typeof MARKET_CATEGORIES[number];
+const MARKET_CATEGORY_LABELS: Record<MarketCategory, string> = {
+  all: "All Categories",
+  sports: "Sports",
+  politics: "Politics",
+  crypto: "Crypto",
+  macro: "Macro",
+  finance: "Finance",
+  tech: "Tech",
+  weather: "Weather",
+  nfts: "NFTs",
+  elections: "Elections",
+  ai: "AI",
+  defi: "DeFi",
+  stocks: "Stocks",
+  nba: "NBA",
+  web3: "Web3",
+  events: "Events",
+};
 
 export function ChannelsShowcase() {
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
   const [searchQuery, setSearchQuery] = useState("");
   const [filter, setFilter] = useState<FilterType>("all");
   const [sort, setSort] = useState<SortType>("volume");
+  const [category, setCategory] = useState<MarketCategory>("all");
 
   const filteredAndSortedChannels = useMemo(() => {
     let result = [...channels];
@@ -53,6 +91,14 @@ export function ChannelsShowcase() {
         break;
     }
 
+    // Filter by market category (e.g., sports, politics)
+    if (category !== "all") {
+      const selected = category.toLowerCase();
+      result = result.filter((c) =>
+        c.trader.tags.some((tag) => tag.toLowerCase() === selected)
+      );
+    }
+
     // Sort
     switch (sort) {
       case "volume":
@@ -70,7 +116,7 @@ export function ChannelsShowcase() {
     }
 
     return result;
-  }, [searchQuery, filter, sort]);
+  }, [searchQuery, filter, sort, category]);
 
   return (
     <section id="channels" className="py-4">
@@ -134,6 +180,20 @@ export function ChannelsShowcase() {
                   <SelectItem value="floor">Floor Price</SelectItem>
                   <SelectItem value="members">Members</SelectItem>
                   <SelectItem value="pnl">PnL</SelectItem>
+                </SelectContent>
+              </Select>
+
+              {/* Category */}
+              <Select value={category} onValueChange={(v) => setCategory(v as MarketCategory)}>
+                <SelectTrigger className="w-[170px] bg-black/30 border-white/[0.06]">
+                  <SelectValue placeholder="Category" />
+                </SelectTrigger>
+                <SelectContent>
+                  {MARKET_CATEGORIES.map((cat) => (
+                    <SelectItem key={cat} value={cat}>
+                      {MARKET_CATEGORY_LABELS[cat]}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
 
