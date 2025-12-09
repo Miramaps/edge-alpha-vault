@@ -13,11 +13,11 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 md:mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4 md:mb-6"
           >
             Welcome to Edge
             <span 
-              className="block mt-2 text-xl sm:text-2xl md:text-3xl lg:text-4xl"
+              className="block mt-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
               style={{ color: 'hsl(355 71% 51%)' }}
             >
               Get private access to the traders beating the markets.
@@ -41,7 +41,7 @@ export function HeroSection() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Link to="/#channels" className="btn-accent px-8 py-3 text-base">
+            <Link to="/channels" className="btn-accent px-8 py-3 text-base">
               Explore Channels
             </Link>
             <Link 

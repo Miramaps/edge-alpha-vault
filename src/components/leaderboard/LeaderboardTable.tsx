@@ -195,7 +195,7 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
                   align="center"
                   sideOffset={0}
                   alignOffset={0}
-                  className="pointer-events-auto fixed left-1/2 top-6 -translate-x-1/2 w-[640px] max-w-[95vw] rounded-xl bg-black/60 backdrop-blur-lg border border-white/[0.08] p-3.5 shadow-2xl"
+                  className="pointer-events-auto fixed left-1/2 top-6 -translate-x-1/2 w-[640px] max-w-[95vw] rounded-xl bg-black/60 backdrop-blur-lg border border-white/[0.08] p-3.5 shadow-2xl transition-all duration-300 ease-out will-change-transform will-change-opacity data-[state=closed]:opacity-0 data-[state=open]:opacity-100 data-[state=closed]:translate-y-6 data-[state=open]:translate-y-0 data-[state=closed]:scale-95 data-[state=open]:scale-100"
                 >
                   <div className="space-y-3.5">
                     {/* Header */}
