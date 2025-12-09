@@ -66,6 +66,15 @@ export default function TraderDashboard() {
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-hero pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-radial pointer-events-none" />
+      
+      {/* Grainy noise texture overlay */}
+      <div 
+        className="absolute inset-0 opacity-[0.12] pointer-events-none mix-blend-overlay"
+        style={{ 
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.7' numOctaves='1' seed='15' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E")`,
+          backgroundSize: '200px 200px'
+        }}
+      />
 
       <div className="container relative mx-auto px-4 py-12 md:py-16 max-w-5xl">
         {/* Owner mode toggle (for demo) */}
@@ -85,7 +94,7 @@ export default function TraderDashboard() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="rounded-xl bg-gradient-to-br from-zinc-900/90 to-black/80 border border-accent/20 p-6 md:p-8 mb-6"
+          className="rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] p-6 md:p-8 mb-6"
         >
           <div className="flex flex-col lg:flex-row lg:items-start gap-6">
             {/* Trader Info */}
@@ -140,7 +149,7 @@ export default function TraderDashboard() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="rounded-xl bg-gradient-to-br from-zinc-900/90 to-black/80 border border-accent/20 p-6 mb-6"
+            className="rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] p-6 mb-6"
           >
             <div className="flex items-center gap-2 mb-6">
               <Settings className="w-5 h-5 text-accent" />
