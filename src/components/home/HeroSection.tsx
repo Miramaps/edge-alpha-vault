@@ -17,7 +17,7 @@ export function HeroSection() {
           >
             Welcome to Edge
             <span 
-              className="block mt-2"
+              className="block mt-2 text-xl sm:text-2xl md:text-3xl lg:text-4xl"
               style={{ color: 'hsl(355 71% 51%)' }}
             >
               Get private access to the traders beating the markets.
