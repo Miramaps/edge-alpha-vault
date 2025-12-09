@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import edgeLogo from "@/assets/edge-logo.png";
 
 export function HeroSection() {
   return (
@@ -16,7 +15,7 @@ export function HeroSection() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 md:mb-6"
           >
-            Welcome to <img src={edgeLogo} alt="E" className="inline-block w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-44 lg:h-44 -mt-4 md:-mt-6 -mr-4 sm:-mr-6 md:-mr-8 lg:-mr-10" />dge
+            Welcome to Edge
             <span 
               className="block mt-2 text-xl sm:text-2xl md:text-3xl lg:text-4xl"
               style={{ color: 'hsl(355 71% 51%)' }}
