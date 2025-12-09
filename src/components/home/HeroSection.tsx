@@ -4,28 +4,6 @@ import { Link } from "react-router-dom";
 export function HeroSection() {
   return (
     <section className="relative min-h-screen flex flex-col overflow-hidden -mt-16 pt-16">
-      {/* Subtle gradient background */}
-      <div className="absolute inset-0 bg-gradient-hero" />
-      <div className="absolute inset-0 bg-gradient-radial" />
-      
-      {/* Grainy noise texture overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.12] pointer-events-none mix-blend-overlay"
-        style={{ 
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.7' numOctaves='1' seed='15' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E")`,
-          backgroundSize: '200px 200px'
-        }}
-      />
-      
-      {/* Subtle refined glow effects */}
-      <div 
-        className="absolute -top-20 right-0 w-[700px] h-[500px] rounded-full blur-[200px] opacity-70"
-        style={{ background: 'hsl(0 65% 45% / 0.25)' }}
-      />
-      <div 
-        className="absolute -top-10 -left-20 w-[400px] h-[350px] rounded-full blur-[150px] opacity-50"
-        style={{ background: 'hsl(5 60% 42% / 0.2)' }}
-      />
 
       {/* Main content - centered vertically */}
       <div className="relative flex-1 flex items-center px-6 md:px-12 lg:px-16 py-24">
@@ -85,11 +63,7 @@ export function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.5 }}
-        className="relative border-t"
-        style={{ 
-          borderColor: 'hsl(16 20% 24% / 0.5)',
-          background: 'hsl(17 23% 18% / 0.3)'
-        }}
+        className="relative border-t border-white/[0.06] bg-black/20 backdrop-blur-sm"
       >
         <div className="px-6 md:px-12 lg:px-16 py-4">
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12 text-sm text-soft-dim">
