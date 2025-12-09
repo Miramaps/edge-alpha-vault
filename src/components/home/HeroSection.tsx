@@ -16,7 +16,7 @@ export function HeroSection() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 md:mb-6"
           >
-            Welcome to <img src={edgeLogo} alt="E" className="inline-block w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 -mt-3 md:-mt-4 -mr-3 sm:-mr-4 md:-mr-5 lg:-mr-6" />dge
+            Welcome to <img src={edgeLogo} alt="E" className="inline-block w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-44 lg:h-44 -mt-4 md:-mt-6 -mr-4 sm:-mr-6 md:-mr-8 lg:-mr-10" />dge
             <span 
               className="block mt-2 text-xl sm:text-2xl md:text-3xl lg:text-4xl"
               style={{ color: 'hsl(355 71% 51%)' }}
