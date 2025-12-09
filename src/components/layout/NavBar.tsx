@@ -52,10 +52,10 @@ export function NavBar() {
       <AnimatePresence>
         {isVisible && (
           <motion.nav
-            initial={{ opacity: 0, y: -20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
             className="fixed top-0 left-0 right-0 z-50"
           >
             <div className="w-full px-4 md:px-12 lg:px-16 h-14 md:h-16 flex items-center justify-between">
