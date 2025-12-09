@@ -8,14 +8,18 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-gradient-hero" />
       <div className="absolute inset-0 bg-gradient-radial" />
       
-      {/* Subtle glow effects */}
+      {/* Intense crimson glow effects */}
       <div 
-        className="absolute top-0 right-0 w-[600px] h-[400px] rounded-full blur-[150px] animate-glow-pulse"
-        style={{ background: 'hsl(355 71% 51% / 0.12)' }}
+        className="absolute top-0 right-0 w-[900px] h-[700px] rounded-full blur-[180px] animate-glow-pulse"
+        style={{ background: 'radial-gradient(circle, hsl(0 85% 55% / 0.5) 0%, hsl(355 70% 40% / 0.3) 50%, transparent 70%)' }}
       />
       <div 
-        className="absolute top-0 left-0 w-[300px] h-[300px] rounded-full blur-[120px] animate-glow-pulse"
-        style={{ background: 'hsl(7 85% 62% / 0.08)' }}
+        className="absolute -top-20 left-0 w-[500px] h-[500px] rounded-full blur-[150px] animate-glow-pulse"
+        style={{ background: 'radial-gradient(circle, hsl(5 90% 50% / 0.4) 0%, transparent 60%)' }}
+      />
+      <div 
+        className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full blur-[120px] opacity-60"
+        style={{ background: 'radial-gradient(circle, hsl(0 80% 45% / 0.35) 0%, transparent 60%)' }}
       />
 
       {/* Main content - centered vertically */}
