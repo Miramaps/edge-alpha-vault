@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import {
   Table,
@@ -49,10 +48,7 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
   return (
     <div>
       {showHeader && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+        <div
           className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6"
         >
           <div>
@@ -84,15 +80,11 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
               </button>
             ))}
           </div>
-        </motion.div>
+        </div>
       )}
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.1 }}
-        className="rounded-xl bg-black/40 backdrop-blur-sm border border-white/[0.08] overflow-x-auto"
+      <div
+        className="rounded-xl bg-black/40 border border-white/[0.08] overflow-x-auto"
       >
         <Table className="min-w-[600px]">
           <TableHeader>
@@ -333,7 +325,7 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
             })}
           </TableBody>
         </Table>
-      </motion.div>
+      </div>
     </div>
   );
 }

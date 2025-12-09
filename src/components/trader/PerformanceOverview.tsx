@@ -15,13 +15,13 @@ interface StatCardProps {
 
 function StatCard({ label, value, subtext, icon: Icon, positive }: StatCardProps) {
   return (
-    <div className="p-3 rounded-lg bg-black/30 border border-white/[0.06]">
-      <div className="flex items-center gap-1.5 mb-1">
-        <Icon className="w-3 h-3 text-accent" />
-        <span className="text-[10px] text-muted-foreground uppercase tracking-wide">{label}</span>
+    <div className="p-2 md:p-3 rounded-lg bg-black/30 border border-white/[0.06] min-w-0 overflow-hidden">
+      <div className="flex items-center gap-1 mb-1">
+        <Icon className="w-3 h-3 text-accent flex-shrink-0" />
+        <span className="text-[9px] md:text-[10px] text-muted-foreground uppercase tracking-wide truncate">{label}</span>
       </div>
       <p className={cn(
-        "text-lg font-bold",
+        "text-sm md:text-lg font-bold truncate",
         positive === true && "text-emerald-400",
         positive === false && "text-red-400",
         positive === undefined && "text-foreground"
@@ -29,7 +29,7 @@ function StatCard({ label, value, subtext, icon: Icon, positive }: StatCardProps
         {value}
       </p>
       {subtext && (
-        <p className="text-[10px] text-muted-foreground">{subtext}</p>
+        <p className="text-[9px] md:text-[10px] text-muted-foreground truncate">{subtext}</p>
       )}
     </div>
   );
@@ -56,9 +56,9 @@ export function PerformanceOverview({
         <h2 className="text-sm font-semibold text-foreground">Performance</h2>
       </div>
 
-      <div className="p-4">
-        {/* Stats Grid */}
-        <div className="grid grid-cols-5 gap-2 mb-4">
+      <div className="p-3 md:p-4">
+        {/* Stats Grid - 2 cols mobile, 5 cols desktop */}
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-2 mb-4">
           <StatCard
             label="Edge"
             value={edgeScore.toString()}
