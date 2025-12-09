@@ -13,7 +13,7 @@ const navLinks = [
 ];
 
 const socialLinks = [
-  { href: "https://twitter.com", icon: TwitterIcon, label: "Twitter" },
+  { href: "https://x.com/UseEdge", icon: TwitterIcon, label: "Twitter" },
   { href: "https://discord.com", icon: DiscordIcon, label: "Discord" },
   { href: "https://github.com", icon: GitHubIcon, label: "GitHub" },
 ];
