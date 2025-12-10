@@ -62,28 +62,29 @@ export function NavBar() {
             transition={{ duration: 0.28, ease: "easeOut" }}
             className="fixed top-0 left-0 right-0 z-50"
           >
-            <div className="w-full px-4 md:px-12 lg:px-16 h-14 md:h-16 flex items-center justify-between">
+            <div className="w-full px-4 md:px-12 lg:px-16 h-14 md:h-16 flex items-center justify-between relative">
               {/* Left side - Logo and nav */}
               <div className="flex items-center gap-4 md:gap-8">
-                <Link to="/" className="flex items-center gap-2 group">
-                  <img src={edgeLogo} alt="Edge" className="w-14 h-14 md:w-20 md:h-20 transition-transform duration-200 group-hover:scale-105" />
-                  <span className="text-foreground font-semibold text-base md:text-lg tracking-tight">Edge</span>
+                <Link to="/" className="flex items-center gap-0 group">
+                  <img src={edgeLogo} alt="Edge" className="w-16 h-16 md:w-24 md:h-24 transition-transform duration-200 group-hover:scale-105" />
+                  <span className="text-foreground font-semibold text-base md:text-lg tracking-tight -ml-5">Edge</span>
                 </Link>
+              </div>
 
-                <div className="hidden md:flex items-center gap-6">
-                  {navLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      to={link.href}
-                      className={cn(
-                        "nav-link",
-                        location.pathname === link.href && "nav-link-active"
-                      )}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </div>
+              {/* Centered nav links */}
+              <div className="hidden md:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    className={cn(
+                      "nav-link",
+                      location.pathname === link.href && "nav-link-active"
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
               </div>
 
               {/* Right side - Token, Connect, Socials */}
@@ -92,21 +93,6 @@ export function NavBar() {
                   <span className="text-muted-foreground text-xs">Token:</span>
                   <span className="text-foreground text-sm font-medium">EDGE</span>
                   <span className="text-accent text-xs">$0.84</span>
-                </div>
-
-                <div className="hidden lg:flex items-center gap-1">
-                  {socialLinks.map((social) => (
-                    <a
-                      key={social.label}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-                      aria-label={social.label}
-                    >
-                      <social.icon size={18} />
-                    </a>
-                  ))}
                 </div>
 
                 {address ? (
@@ -136,6 +122,32 @@ export function NavBar() {
               </div>
             </div>
           </motion.nav>
+        )}
+      </AnimatePresence>
+
+      {/* Floating socials on right edge for desktop */}
+      <AnimatePresence>
+        {isVisible && (
+          <motion.div
+            initial={{ opacity: 0, x: 12 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 12 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="hidden lg:flex fixed right-4 top-1/2 -translate-y-1/2 z-40 flex-col items-center gap-3"
+          >
+            {socialLinks.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground transition-colors"
+                aria-label={social.label}
+              >
+                <social.icon size={18} />
+              </a>
+            ))}
+          </motion.div>
         )}
       </AnimatePresence>
 
