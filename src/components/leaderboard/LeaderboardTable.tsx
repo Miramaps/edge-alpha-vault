@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 import { MiniTrendChart } from "./MiniTrendChart";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { formatVolumeUSD } from "@/utils/currency";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { useWalletAddress } from "@/contexts/WalletAddressContext";
 import { isWalletVerified } from "@/utils/verification";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle } from "lucide-react";
@@ -103,7 +103,7 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
   const [timeframe, setTimeframe] = useState<TimeFrame>("1d");
   const navigate = useNavigate();
   const isMobile = useIsMobile();
-  const { publicKey } = useWallet();
+  const { address } = useWalletAddress();
 
   const timeframes: { value: TimeFrame; label: string }[] = [
     { value: "all", label: "All" },
@@ -221,7 +221,7 @@ export function LeaderboardTable({ limit, showHeader = true }: LeaderboardTableP
                               </Badge>
                             )}
                             {/* Show verification badge if this is the current user and they're verified */}
-                            {publicKey && trader.id === publicKey.toString() && isWalletVerified(publicKey.toString()) && index !== 0 && (
+                            {address && trader.id === address && isWalletVerified(address) && index !== 0 && (
                               <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30 px-1.5 py-0 h-4">
                                 <CheckCircle className="w-3 h-3 mr-0.5" />
                                 Verified

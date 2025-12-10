@@ -18,6 +18,7 @@ export default function BecomeTrader() {
     discordHandle: "",
     maxMembers: "",
     markets: "",
+    polymarketWallet: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -90,48 +91,48 @@ export default function BecomeTrader() {
         <div className="absolute inset-0 bg-black/40" />
       </div>
 
-      <div className="container relative mx-auto px-4 py-6 md:py-12 min-h-[calc(100vh-4rem)] flex items-center">
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center w-full max-w-6xl mx-auto pt-12 md:pt-0">
+      <div className="container relative mx-auto px-4 py-4 md:py-6 min-h-[calc(100vh-4rem)] flex items-center">
+        <div className="grid lg:grid-cols-2 gap-4 lg:gap-8 items-center w-full max-w-6xl mx-auto pt-8 md:pt-0">
           
           {/* Left Side - Info */}
           <div>
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-2 md:mb-3 leading-tight">
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-foreground mb-1.5 md:mb-2 leading-tight">
               Join <span className="text-accent">Edge</span>
             </h1>
             
-            <p className="text-muted-foreground text-sm md:text-base mb-6 md:mb-8 max-w-md">
+            <p className="text-muted-foreground text-xs md:text-sm mb-4 md:mb-5 max-w-md">
               Share your alpha, build a community, and earn EDGE tokens through token-gated access to your exclusive channel.
             </p>
 
             {/* Benefits */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-3 p-3 rounded-lg bg-black/30 border border-white/[0.06]">
-                <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
-                  <Coins className="w-4 h-4 text-accent" />
+            <div className="space-y-2">
+              <div className="flex items-center gap-2.5 p-2 rounded-lg bg-black/30 border border-white/[0.06]">
+                <div className="w-7 h-7 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                  <Coins className="w-3.5 h-3.5 text-accent" />
                 </div>
                 <div>
-                  <p className="text-foreground text-sm font-medium">Your Price</p>
-                  <p className="text-muted-foreground text-xs">Dynamic pricing based on deflationary token</p>
+                  <p className="text-foreground text-xs font-medium">Your Price</p>
+                  <p className="text-muted-foreground text-[10px]">Dynamic pricing based on deflationary token</p>
                 </div>
               </div>
               
-              <div className="flex items-center gap-3 p-3 rounded-lg bg-black/30 border border-white/[0.06]">
-                <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
-                  <Users className="w-4 h-4 text-accent" />
+              <div className="flex items-center gap-2.5 p-2 rounded-lg bg-black/30 border border-white/[0.06]">
+                <div className="w-7 h-7 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                  <Users className="w-3.5 h-3.5 text-accent" />
                 </div>
                 <div>
-                  <p className="text-foreground text-sm font-medium">Control Access</p>
-                  <p className="text-muted-foreground text-xs">Set max members limit</p>
+                  <p className="text-foreground text-xs font-medium">Control Access</p>
+                  <p className="text-muted-foreground text-[10px]">Set max members limit</p>
                 </div>
               </div>
               
-              <div className="flex items-center gap-3 p-3 rounded-lg bg-black/30 border border-white/[0.06]">
-                <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
-                  <MessageCircle className="w-4 h-4 text-accent" />
+              <div className="flex items-center gap-2.5 p-2 rounded-lg bg-black/30 border border-white/[0.06]">
+                <div className="w-7 h-7 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                  <MessageCircle className="w-3.5 h-3.5 text-accent" />
                 </div>
                 <div>
-                  <p className="text-foreground text-sm font-medium">Discord Integration</p>
-                  <p className="text-muted-foreground text-xs">Auto-gated access</p>
+                  <p className="text-foreground text-xs font-medium">Discord Integration</p>
+                  <p className="text-muted-foreground text-[10px]">Auto-gated access</p>
                 </div>
               </div>
             </div>
@@ -141,13 +142,13 @@ export default function BecomeTrader() {
           <div>
             <form 
               onSubmit={handleSubmit} 
-              className="p-5 md:p-6 rounded-2xl bg-black/40 border border-white/[0.08]"
+              className="p-4 md:p-5 rounded-2xl bg-black/40 border border-white/[0.08]"
             >
               {/* Profile Picture */}
-              <div className="mb-5">
+              <div className="mb-4">
                 <Label className="text-foreground text-sm mb-2 block">Profile Picture</Label>
                 <div 
-                  className={`relative flex items-center gap-4 p-4 rounded-xl border-2 border-dashed transition-all duration-200 cursor-pointer ${
+                  className={`relative flex items-center gap-3 p-3 rounded-xl border-2 border-dashed transition-all duration-200 cursor-pointer ${
                     isDragging 
                       ? 'border-accent bg-accent/10' 
                       : 'border-white/[0.08] bg-black/30 hover:border-white/[0.15]'
@@ -162,11 +163,11 @@ export default function BecomeTrader() {
                       <img 
                         src={profileImage} 
                         alt="Profile preview" 
-                        className="w-14 h-14 rounded-full object-cover border border-white/[0.1]"
+                        className="w-12 h-12 rounded-full object-cover border border-white/[0.1]"
                       />
                       <div className="flex-1">
-                        <p className="text-foreground text-sm font-medium">Image uploaded</p>
-                        <p className="text-muted-foreground text-xs">Click to change</p>
+                        <p className="text-foreground text-xs font-medium">Image uploaded</p>
+                        <p className="text-muted-foreground text-[10px]">Click to change</p>
                       </div>
                       <button
                         type="button"
@@ -174,19 +175,19 @@ export default function BecomeTrader() {
                           e.stopPropagation();
                           removeImage();
                         }}
-                        className="w-7 h-7 rounded-full bg-accent/20 flex items-center justify-center hover:bg-accent/30 transition-colors"
+                        className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center hover:bg-accent/30 transition-colors"
                       >
-                        <X className="w-3.5 h-3.5 text-accent" />
+                        <X className="w-3 h-3 text-accent" />
                       </button>
                     </>
                   ) : (
                     <>
-                      <div className="w-14 h-14 rounded-full bg-white/[0.05] flex items-center justify-center">
-                        <Image className="w-6 h-6 text-muted-foreground" />
+                      <div className="w-12 h-12 rounded-full bg-white/[0.05] flex items-center justify-center">
+                        <Image className="w-5 h-5 text-muted-foreground" />
                       </div>
                       <div>
-                        <p className="text-foreground text-sm font-medium">Drag & drop image</p>
-                        <p className="text-muted-foreground text-xs">or click to browse</p>
+                        <p className="text-foreground text-xs font-medium">Drag & drop image</p>
+                        <p className="text-muted-foreground text-[10px]">or click to browse</p>
                       </div>
                     </>
                   )}
@@ -201,12 +202,12 @@ export default function BecomeTrader() {
               </div>
 
               {/* Divider */}
-              <div className="h-px bg-white/[0.06] mb-5" />
+              <div className="h-px bg-white/[0.06] mb-4" />
 
               {/* Channel Details */}
-              <div className="space-y-4 mb-5">
+              <div className="space-y-3 mb-4">
                 <div>
-                  <Label htmlFor="channelName" className="text-foreground text-sm">Channel Name</Label>
+                  <Label htmlFor="channelName" className="text-foreground text-xs">Channel Name</Label>
                   <Input
                     id="channelName"
                     name="channelName"
@@ -214,12 +215,12 @@ export default function BecomeTrader() {
                     value={formData.channelName}
                     onChange={handleChange}
                     required
-                    className="mt-1.5 h-10 bg-black/30 border-white/[0.06] focus:border-accent/50 placeholder:text-muted-foreground/50"
+                    className="mt-1 h-9 text-sm bg-black/30 border-white/[0.06] focus:border-accent/50 placeholder:text-muted-foreground/50"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="maxMembers" className="text-foreground text-sm">Max Members (max 1000)</Label>
+                  <Label htmlFor="maxMembers" className="text-foreground text-xs">Max Members (max 1000)</Label>
                   <Input
                     id="maxMembers"
                     name="maxMembers"
@@ -230,19 +231,19 @@ export default function BecomeTrader() {
                     value={formData.maxMembers}
                     onChange={handleChange}
                     required
-                    className="mt-1.5 h-10 bg-black/30 border-white/[0.06] focus:border-accent/50 placeholder:text-muted-foreground/50"
+                    className="mt-1 h-9 text-sm bg-black/30 border-white/[0.06] focus:border-accent/50 placeholder:text-muted-foreground/50"
                   />
                 </div>
               </div>
 
               {/* Divider */}
-              <div className="h-px bg-white/[0.06] mb-5" />
+              <div className="h-px bg-white/[0.06] mb-4" />
 
               {/* Social Links */}
-              <div className="space-y-4 mb-5">
-                <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-3 mb-4">
+                <div className="grid grid-cols-2 gap-2.5">
                   <div>
-                    <Label htmlFor="twitterHandle" className="text-foreground text-sm">X (Twitter)</Label>
+                    <Label htmlFor="twitterHandle" className="text-foreground text-xs">X (Twitter)</Label>
                     <Input
                       id="twitterHandle"
                       name="twitterHandle"
@@ -250,24 +251,24 @@ export default function BecomeTrader() {
                       value={formData.twitterHandle}
                       onChange={handleChange}
                       required
-                      className="mt-1.5 h-10 bg-black/30 border-white/[0.06] focus:border-accent/50 placeholder:text-muted-foreground/50"
+                      className="mt-1 h-9 text-sm bg-black/30 border-white/[0.06] focus:border-accent/50 placeholder:text-muted-foreground/50"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="discordHandle" className="text-foreground text-sm">Discord</Label>
+                    <Label htmlFor="discordHandle" className="text-foreground text-xs">Discord</Label>
                     <Input
                       id="discordHandle"
                       name="discordHandle"
                       placeholder="username"
                       value={formData.discordHandle}
                       onChange={handleChange}
-                      className="mt-1.5 h-10 bg-black/30 border-white/[0.06] focus:border-accent/50 placeholder:text-muted-foreground/50"
+                      className="mt-1 h-9 text-sm bg-black/30 border-white/[0.06] focus:border-accent/50 placeholder:text-muted-foreground/50"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <Label htmlFor="markets" className="text-foreground text-sm">Markets You Trade</Label>
+                  <Label htmlFor="markets" className="text-foreground text-xs">Markets You Trade</Label>
                   <Input
                     id="markets"
                     name="markets"
@@ -275,8 +276,33 @@ export default function BecomeTrader() {
                     value={formData.markets}
                     onChange={handleChange}
                     required
-                    className="mt-1.5 h-10 bg-black/30 border-white/[0.06] focus:border-accent/50 placeholder:text-muted-foreground/50"
+                    className="mt-1 h-9 text-sm bg-black/30 border-white/[0.06] focus:border-accent/50 placeholder:text-muted-foreground/50"
                   />
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div className="h-px bg-white/[0.06] mb-4" />
+
+              {/* Polymarket Wallet */}
+              <div className="mb-4">
+                <div>
+                  <Label htmlFor="polymarketWallet" className="text-foreground text-xs">
+                    Polymarket Trading Wallet Address
+                  </Label>
+                  <Input
+                    id="polymarketWallet"
+                    name="polymarketWallet"
+                    type="text"
+                    placeholder="Your Solana wallet address used for Polymarket trading"
+                    value={formData.polymarketWallet}
+                    onChange={handleChange}
+                    required
+                    className="mt-1 h-9 text-sm bg-black/30 border-white/[0.06] focus:border-accent/50 placeholder:text-muted-foreground/50"
+                  />
+                  <p className="text-muted-foreground text-[10px] mt-1">
+                    This is the wallet address you use to trade on Polymarket. We'll use this for verification and data tracking.
+                  </p>
                 </div>
               </div>
 
@@ -285,7 +311,7 @@ export default function BecomeTrader() {
                 type="submit" 
                 variant="hero" 
                 size="lg" 
-                className="w-full h-11 text-sm font-medium"
+                className="w-full h-10 text-xs font-medium"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
@@ -293,12 +319,12 @@ export default function BecomeTrader() {
                 ) : (
                   <>
                     Submit Application
-                    <Send className="w-4 h-4 ml-2" />
+                    <Send className="w-3.5 h-3.5 ml-2" />
                   </>
                 )}
               </Button>
               
-              <p className="text-center text-muted-foreground/60 text-xs mt-3">
+              <p className="text-center text-muted-foreground/60 text-[10px] mt-2">
                 We'll review your application and get back to you soon
               </p>
             </form>
