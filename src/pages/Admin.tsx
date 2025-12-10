@@ -327,7 +327,7 @@ export default function Admin() {
             </CardHeader>
             <CardContent>
               <div className="w-full overflow-auto">
-                <Table className="min-w-[1100px]">
+                <Table className="min-w-[1100px]">e
                   <TableHeader>
                     <TableRow className="border-white/5">
                       <TableHead>Trader</TableHead>

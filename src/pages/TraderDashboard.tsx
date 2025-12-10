@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { ExternalLink, Eye, Settings } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { BuyModal } from "@/components/modals/BuyModal";
+import { SubscriptionModal } from "@/components/modals/SubscriptionModal";
 import { PerformanceOverview } from "@/components/trader/PerformanceOverview";
 import { StyleRiskProfile } from "@/components/trader/StyleRiskProfile";
 import { ChannelAnalyticsAccess } from "@/components/trader/ChannelAnalyticsAccess";
@@ -191,7 +191,7 @@ export default function TraderDashboard() {
         </div>
       </div>
 
-      <BuyModal
+      <SubscriptionModal
         channel={channel}
         isOpen={isBuyModalOpen}
         onClose={() => setIsBuyModalOpen(false)}

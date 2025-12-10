@@ -13,6 +13,7 @@ import JoinEdge from "./pages/JoinEdge";
 import Dashboard from "./pages/Dashboard";
 import Security from "./pages/Security";
 import Admin from "./pages/Admin";
+import Docs from "./pages/Docs";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,6 +34,7 @@ const App = () => (
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/security" element={<Security />} />
               <Route path="/admin" element={<Admin />} />
+              <Route path="/docs" element={<Docs />} />
               <Route path="/t/:handle" element={<TraderDashboard />} />
               <Route path="/channels/:id" element={<TraderDashboard />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
