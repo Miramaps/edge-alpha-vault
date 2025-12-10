@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogOut } from "lucide-react";
 import { TwitterIcon, DiscordIcon, GitHubIcon } from "@/components/icons/SocialIcons";
 import { Button } from "@/components/ui/button";
 import { WalletDropdown } from "@/components/wallet/WalletDropdown";
@@ -24,10 +24,18 @@ const socialLinks = [
 
 export function NavBar() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { address } = useWalletAddress();
+  const isAdminRoute = location.pathname.startsWith("/admin");
+  const isHomePage = location.pathname === "/";
+
+  const handleLogout = () => {
+    localStorage.removeItem("edge_admin_authed");
+    navigate("/");
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -89,26 +97,42 @@ export function NavBar() {
 
               {/* Right side - Token, Connect, Socials */}
               <div className="flex items-center gap-2 md:gap-4">
-                <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-md">
-                  <span className="text-muted-foreground text-xs">Token:</span>
-                  <span className="text-foreground text-sm font-medium">EDGE</span>
-                  <span className="text-accent text-xs">$0.84</span>
-                </div>
+                {!isAdminRoute && (
+                  <>
+                    <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-md">
+                      <span className="text-muted-foreground text-xs">Token:</span>
+                      <span className="text-foreground text-sm font-medium">EDGE</span>
+                      <span className="text-accent text-xs">$0.84</span>
+                    </div>
 
-                {address ? (
-                  <WalletDropdown publicKey={address} />
-                ) : (
-                  <WalletAddressModal
-                    trigger={
-                      <Button
-                        variant="hero"
-                        size="sm"
-                        className="text-xs md:text-sm px-3 md:px-4"
-                      >
-                        Connect Wallet
-                      </Button>
-                    }
-                  />
+                    {address ? (
+                      <WalletDropdown publicKey={address} />
+                    ) : (
+                      <WalletAddressModal
+                        trigger={
+                          <Button
+                            variant="hero"
+                            size="sm"
+                            className="text-xs md:text-sm px-3 md:px-4"
+                          >
+                            Connect Wallet
+                          </Button>
+                        }
+                      />
+                    )}
+                  </>
+                )}
+
+                {isAdminRoute && (
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={handleLogout}
+                    className="h-9 px-4 text-xs font-medium border-white/20 text-foreground hover:bg-white/10 hover:border-white/30"
+                  >
+                    <LogOut className="w-3.5 h-3.5 mr-1.5" />
+                    Log Out
+                  </Button>
                 )}
 
                 {/* Mobile menu button */}
@@ -127,7 +151,7 @@ export function NavBar() {
 
       {/* Floating socials on right edge for desktop */}
       <AnimatePresence>
-        {isVisible && (
+        {isVisible && isHomePage && (
           <motion.div
             initial={{ opacity: 0, x: 12 }}
             animate={{ opacity: 1, x: 0 }}
@@ -176,22 +200,38 @@ export function NavBar() {
                 </Link>
               ))}
               
-              <div className="h-px bg-white/[0.06] my-2" />
-              
-              <div className="flex items-center gap-4 px-4 py-2">
-                {socialLinks.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-                    aria-label={social.label}
+              {isAdminRoute && (
+                <>
+                  <div className="h-px bg-white/[0.06] my-2" />
+                  <button
+                    onClick={handleLogout}
+                    className="px-4 py-3 rounded-lg text-sm font-medium transition-colors border border-white/20 text-foreground hover:bg-white/10 hover:border-white/30 flex items-center gap-2"
                   >
-                    <social.icon size={20} />
-                  </a>
-                ))}
-              </div>
+                    <LogOut className="w-4 h-4" />
+                    Log Out
+                  </button>
+                </>
+              )}
+              
+              {isHomePage && (
+                <>
+                  <div className="h-px bg-white/[0.06] my-2" />
+                  <div className="flex items-center gap-4 px-4 py-2">
+                    {socialLinks.map((social) => (
+                      <a
+                        key={social.label}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+                        aria-label={social.label}
+                      >
+                        <social.icon size={20} />
+                      </a>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
           </motion.div>
         )}

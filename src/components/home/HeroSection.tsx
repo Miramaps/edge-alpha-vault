@@ -61,7 +61,7 @@ export function HeroSection() {
               Explore Channels
             </Link>
             <Link 
-              to="/become-trader" 
+              to="/join-edge" 
               className="inline-flex items-center justify-center px-8 py-3 text-base font-medium rounded-full border transition-all duration-200 hover:bg-white/5"
               style={{ 
                 borderColor: 'hsl(16 20% 33%)',

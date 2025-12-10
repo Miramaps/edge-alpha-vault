@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { Users, Coins, MessageCircle, Send, X, Image, Upload } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-export default function BecomeTrader() {
+export default function JoinEdge() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
