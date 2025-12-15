@@ -19,6 +19,8 @@ dist-ssr
 .DS_Store
 *.suo
 *.ntvs*
-*.njsproj
+dist
+.env.local
+server/service.json
 *.sln
 *.sw?

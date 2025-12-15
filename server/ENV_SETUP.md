@@ -14,7 +14,29 @@ npm run generate-keys
 
 3. Copy the generated keys to your `.env` file
 
+
 4. Fill in the remaining variables:
+
+### Firebase Admin SDK (Server)
+To use Firebase from the server (for storing Join Edge form data and images), you need a Firebase service account. Download the service account JSON from your Firebase project settings and copy the following fields into your `.env`:
+
+```env
+FIREBASE_PRIVATE_KEY_ID=your_private_key_id
+FIREBASE_PRIVATE_KEY=your_private_key (wrap in double quotes, replace newlines with \n)
+FIREBASE_CLIENT_EMAIL=your_client_email
+FIREBASE_CLIENT_ID=your_client_id
+FIREBASE_CLIENT_CERT_URL=your_client_cert_url
+```
+
+**Never commit your actual .env file or service account JSON to git.**
+
+You can also store the entire service account JSON in an environment variable as base64. This is useful for platforms that don't allow uploading files.
+
+```env
+FIREBASE_SERVICE_ACCOUNT_BASE64=base64_encoded_service_json
+# or provide a file path to the JSON on disk (local dev):
+FIREBASE_SERVICE_ACCOUNT_PATH=./server/service.json
+```
 
 ### Database (Railway PostgreSQL)
 ```env

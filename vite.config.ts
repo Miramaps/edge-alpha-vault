@@ -1,6 +1,6 @@
-import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import { defineConfig } from "vite";
 
 // Plugin to inject Buffer polyfill at the very beginning
 function bufferPolyfillPlugin() {
@@ -33,6 +33,28 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    proxy: {
+      // Forward API calls to local backend during development
+      '/join-edge': {
+        target: process.env.API_SERVER || 'http://localhost:3001',
+        changeOrigin: true,
+      },
+      // Only proxy the API endpoint used by the admin UI to avoid
+      // colliding with the client-side `/admin` route which must
+      // be served by the Vite dev server.
+      '/admin/update-status': {
+        target: process.env.API_SERVER || 'http://localhost:3001',
+        changeOrigin: true,
+      },
+      '/verify': {
+        target: process.env.API_SERVER || 'http://localhost:3001',
+        changeOrigin: true,
+      },
+      '/webhooks': {
+        target: process.env.API_SERVER || 'http://localhost:3001',
+        changeOrigin: true,
+      }
+    },
   },
   plugins: [bufferPolyfillPlugin(), react()].filter(Boolean),
   resolve: {

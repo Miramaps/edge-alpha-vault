@@ -20,7 +20,11 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-rate-limit": "^7.4.1",
+    "firebase-admin": "^13.6.0",
     "helmet": "^8.0.0",
+    "multer": "^2.0.2",
+    "cloudinary": "^1.36.0",
+    "sharp": "^0.32.1",
     "node-pg-migrate": "^6.2.2",
     "pg": "^8.13.1",
     "tweetnacl": "^1.0.3",
@@ -32,7 +36,6 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.5",
-    "@types/node-pg-migrate": "^6.0.4",
     "@types/pg": "^8.11.10",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2"
@@ -41,4 +44,3 @@
     "node": ">=18.0.0"
   }
 }
-

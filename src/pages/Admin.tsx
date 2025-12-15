@@ -1,8 +1,15 @@
-import { useEffect, useMemo, useState } from "react";
 import { Layout } from "@/components/layout/Layout";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -13,33 +20,28 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Application, ApplicationStatus } from "@/data/mockApplications";
+import { app as firebaseApp } from '@/lib/firebase';
+import { formatDistanceToNow } from "date-fns";
+import { ref as dbRef, getDatabase, onValue } from 'firebase/database';
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { mockApplications, Application, ApplicationStatus } from "@/data/mockApplications";
-import {
-  CheckCircle2,
-  Clock3,
-  Filter,
-  Mail,
-  Search,
-  Users,
-  XCircle,
   Activity,
   BarChart3,
-  Eye,
-  ExternalLink,
+  CheckCircle2,
+  Clock3,
   Copy,
-  Wallet,
+  ExternalLink,
+  Eye,
+  Filter,
   Hash,
+  Mail,
   MessageCircle,
+  Search,
+  Users,
+  Wallet,
+  XCircle,
 } from "lucide-react";
-import { formatDistanceToNow } from "date-fns";
+import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
 type ActivityEvent = {
@@ -58,7 +60,7 @@ export default function Admin() {
   );
   const [password, setPassword] = useState("");
   const [onlineUsers, setOnlineUsers] = useState(() => 180 + Math.floor(Math.random() * 40));
-  const [applications, setApplications] = useState<Application[]>(mockApplications);
+  const [applications, setApplications] = useState<Application[]>([]);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<ApplicationStatus | "all">("pending");
   const [selectedApp, setSelectedApp] = useState<Application | null>(null);
@@ -77,6 +79,33 @@ export default function Admin() {
     },
   ]);
 
+  // Subscribe to server-driven admin activity feed (Realtime Database)
+  useEffect(() => {
+    try {
+      const db = getDatabase(firebaseApp);
+      const actRef = dbRef(db, 'adminActivity');
+      const unsubscribe = onValue(actRef, (snapshot) => {
+        const data = snapshot.val() || {};
+        const evts: ActivityEvent[] = Object.entries(data).map(([key, value]) => {
+          const obj: any = value as any;
+          const tone = obj.status === 'Approved' ? 'approve' : obj.status === 'Rejected' ? 'reject' : 'info';
+          return {
+            id: key,
+            message: `${obj.channelName || obj.appId || 'Application'} was ${String(obj.status).toLowerCase()}`,
+            ts: obj.ts || new Date().toISOString(),
+            tone: tone as ActivityEvent['tone'],
+          };
+        });
+        evts.sort((a, b) => (a.ts > b.ts ? -1 : 1));
+        setActivity(evts);
+      });
+
+      return () => unsubscribe();
+    } catch (err) {
+      console.error('Failed to subscribe to adminActivity:', err);
+    }
+  }, []);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setOnlineUsers((prev) => {
@@ -86,6 +115,39 @@ export default function Admin() {
       });
     }, 4000);
     return () => clearInterval(interval);
+  }, []);
+
+  // Listen to Firebase Realtime Database for joinEdgeApplications
+  useEffect(() => {
+    try {
+      const db = getDatabase(firebaseApp);
+      const ref = dbRef(db, 'joinEdgeApplications');
+      const unsubscribe = onValue(ref, (snapshot) => {
+        const data = snapshot.val() || {};
+        const apps: Application[] = Object.entries(data).map(([key, value]) => {
+          const obj: any = value as any;
+          return {
+            id: key,
+            channelName: obj.channelName || '',
+            twitterHandle: obj.twitterHandle || '',
+            discordHandle: obj.discordHandle || '',
+            maxMembers: Number(obj.maxMembers) || 0,
+            markets: obj.markets || '',
+            polymarketWallet: obj.polymarketWallet || '',
+            submittedAt: obj.createdAt || obj.createdAt || new Date().toISOString(),
+            status: (obj.Status || obj.status || 'pending').toLowerCase() as ApplicationStatus,
+            profileImage: obj.profileImageUrl || obj.profileImage || undefined,
+          };
+        });
+        // sort newest first
+        apps.sort((a, b) => (a.submittedAt > b.submittedAt ? -1 : 1));
+        setApplications(apps);
+      });
+
+      return () => unsubscribe();
+    } catch (err) {
+      console.error('Failed to subscribe to joinEdgeApplications:', err);
+    }
   }, []);
 
   const metrics = useMemo(() => {
@@ -126,17 +188,53 @@ export default function Admin() {
   };
 
   const updateStatus = (id: string, status: ApplicationStatus) => {
-    setApplications((prev) =>
-      prev.map((app) => (app.id === id ? { ...app, status } : app))
-    );
+    const prevStatus = applications.find((a) => a.id === id)?.status || 'pending';
+
+    // Optimistic UI update
+    setApplications((prev) => prev.map((app) => (app.id === id ? { ...app, status } : app)));
+
+    // Send update to server to persist via Firebase Admin
+    (async () => {
+      try {
+        const statusValue = status === 'approved' ? 'Approved' : status === 'rejected' ? 'Rejected' : 'Pending';
+        const res = await fetch('/admin/update-status', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id, status: statusValue }),
+        });
+
+        if (!res.ok) {
+          // try to parse error JSON if present, otherwise fall back to status text
+          let errMsg = `Server returned ${res.status}`;
+          try {
+            const payload = await res.json();
+            if (payload && payload.error) errMsg = payload.error;
+            else errMsg = JSON.stringify(payload);
+          } catch (parseErr) {
+            try {
+              const txt = await res.text();
+              if (txt) errMsg = txt;
+            } catch (_e) { }
+          }
+          throw new Error(errMsg);
+        }
+
+        // Successful response — no JSON expected
+        toast.success('Status updated');
+      } catch (err) {
+        console.error('Failed to update status via server:', err);
+        toast.error('Failed to persist status change');
+        // revert optimistic update
+        setApplications((prev) => prev.map((app) => (app.id === id ? { ...app, status: prevStatus } : app)));
+      }
+    })();
+
     setActivity((prev) => [
       {
         id: `evt-${Date.now()}`,
-        message: `${applications.find((a) => a.id === id)?.channelName || "Application"} was ${
-          status === "approved" ? "approved" : "rejected"
-        }`,
+        message: `${applications.find((a) => a.id === id)?.channelName || 'Application'} was ${status === 'approved' ? 'approved' : 'rejected'}`,
         ts: new Date().toISOString(),
-        tone: status === "approved" ? "approve" : "reject",
+        tone: status === 'approved' ? 'approve' : 'reject',
       },
       ...prev,
     ]);
@@ -381,8 +479,8 @@ export default function Admin() {
                               app.status === "approved"
                                 ? "default"
                                 : app.status === "pending"
-                                ? "secondary"
-                                : "destructive"
+                                  ? "secondary"
+                                  : "destructive"
                             }
                             className="capitalize px-2 py-0.5 text-[11px]"
                           >
@@ -453,8 +551,8 @@ export default function Admin() {
                     evt.tone === "approve"
                       ? { label: "Approved", icon: CheckCircle2, chip: "bg-emerald-500/15 text-emerald-200" }
                       : evt.tone === "reject"
-                      ? { label: "Rejected", icon: XCircle, chip: "bg-red-500/15 text-red-200" }
-                      : { label: "Update", icon: Activity, chip: "bg-amber-400/15 text-amber-200" };
+                        ? { label: "Rejected", icon: XCircle, chip: "bg-red-500/15 text-red-200" }
+                        : { label: "Update", icon: Activity, chip: "bg-amber-400/15 text-amber-200" };
                   const Icon = toneMeta.icon;
                   return (
                     <div
@@ -541,8 +639,8 @@ export default function Admin() {
                         selectedApp.status === "approved"
                           ? "default"
                           : selectedApp.status === "pending"
-                          ? "secondary"
-                          : "destructive"
+                            ? "secondary"
+                            : "destructive"
                       }
                       className="capitalize text-sm px-3 py-1"
                     >
