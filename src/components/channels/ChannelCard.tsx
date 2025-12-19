@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
-import type { Channel } from "@/data/mockData";
 import { TwitterIcon } from "@/components/icons/SocialIcons";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import type { Channel } from "@/data/mockData";
 import { formatVolumeUSD } from "@/utils/currency";
+import { Link } from "react-router-dom";
 
 interface ChannelCardProps {
   channel: Channel;
@@ -20,11 +21,15 @@ export function ChannelCard({ channel, index }: ChannelCardProps) {
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
           {/* Avatar */}
-          <div 
-            className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium bg-black/30 text-muted-foreground"
-          >
-            {channel.trader.name.charAt(0)}
-          </div>
+          <Avatar className="w-12 h-12">
+            {channel.trader.avatar ? (
+              <AvatarImage src={channel.trader.avatar} alt={channel.trader.name} />
+            ) : (
+              <AvatarFallback className="bg-black/30 text-muted-foreground text-sm font-medium">
+                {channel.trader.name.charAt(0)}
+              </AvatarFallback>
+            )}
+          </Avatar>
           {/* Name & Handle with X link */}
           <div>
             <h3 className="text-base font-medium text-white leading-tight">
@@ -34,7 +39,7 @@ export function ChannelCard({ channel, index }: ChannelCardProps) {
               <p className="text-[13px] text-soft-muted">
                 @{channel.trader.handle}
               </p>
-              <a 
+              <a
                 href={`https://x.com/${channel.trader.handle}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -88,8 +93,8 @@ export function ChannelCard({ channel, index }: ChannelCardProps) {
       {/* Capacity Progress Bar */}
       <div className="mb-2">
         <div className="progress-track">
-          <div 
-            className="progress-fill" 
+          <div
+            className="progress-fill"
             style={{ width: `${capacityPercentage}%` }}
           />
         </div>
@@ -103,7 +108,7 @@ export function ChannelCard({ channel, index }: ChannelCardProps) {
         Discord alpha room access via EDGE token subscription.
       </p>
 
-      <Link 
+      <Link
         to={`/t/${channel.trader.handle}`}
         className="btn-accent w-full text-center text-sm mt-auto"
       >

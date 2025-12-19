@@ -1,8 +1,8 @@
-import { Client, GatewayIntentBits, Guild, Role, TextChannel, GuildMember } from 'discord.js';
+import { Client, GatewayIntentBits, Guild, TextChannel } from 'discord.js';
 import { query } from '../database/connection';
-import { encrypt, decrypt, hashWalletAddress } from '../utils/encryption';
-import { queryWithRetry, validateSubscriptionData } from '../utils/solana';
+import { decrypt } from '../utils/encryption';
 import { logger } from '../utils/logger';
+import { queryWithRetry, validateSubscriptionData } from '../utils/solana';
 
 let client: Client | null = null;
 let guild: Guild | null = null;
@@ -15,7 +15,7 @@ export async function initializeDiscordBot(): Promise<Client> {
   if (!token) {
     throw new Error('DISCORD_BOT_TOKEN environment variable is required');
   }
-  
+
   client = new Client({
     intents: [
       GatewayIntentBits.Guilds,
@@ -23,17 +23,17 @@ export async function initializeDiscordBot(): Promise<Client> {
       GatewayIntentBits.GuildMessages,
     ],
   });
-  
+
   await client.login(token);
-  
+
   const guildId = process.env.DISCORD_GUILD_ID;
   if (!guildId) {
     throw new Error('DISCORD_GUILD_ID environment variable is required');
   }
-  
+
   guild = await client.guilds.fetch(guildId);
   logger.info('Discord bot initialized and connected');
-  
+
   return client;
 }
 
@@ -48,7 +48,7 @@ export async function createTraderChannel(
   if (!guild) {
     throw new Error('Discord guild not initialized');
   }
-  
+
   try {
     // Create role
     const role = await guild.roles.create({
@@ -56,11 +56,14 @@ export async function createTraderChannel(
       mentionable: false,
       reason: `Auto-created for trader channel: ${channelName}`,
     });
-    
-    // Create channel
+
+    // Create channel (place under configured category if provided)
+    const categoryId = process.env.DISCORD_CATEGORY_ID || '1451364821764149389';
+
     const channel = await guild.channels.create({
-      name: channelName.toLowerCase().replace(/\s+/g, '-'),
+      name: channelName,
       type: 0, // Text channel
+      parent: categoryId,
       permissionOverwrites: [
         {
           id: guild.id, // @everyone
@@ -73,21 +76,26 @@ export async function createTraderChannel(
       ],
       reason: `Auto-created for trader: ${channelName}`,
     }) as TextChannel;
-    
-    // Store in database
-    await query(
-      `INSERT INTO channels (channel_id, trader_wallet, discord_role_id, discord_channel_id, channel_name)
-       VALUES ($1, $2, $3, $4, $5)
-       ON CONFLICT (channel_id) DO UPDATE
-       SET discord_role_id = $3, discord_channel_id = $4, updated_at = NOW()`,
-      [channelId, traderWallet, role.id, channel.id, channelName]
-    );
-    
-    logger.info(`Created Discord channel and role for ${channelName}`, {
-      roleId: role.id,
-      channelId: channel.id,
-    });
-    
+
+    // Attempt to store mapping in Postgres, but don't fail Discord creation if DB is unavailable
+    try {
+      await query(
+        `INSERT INTO channels (channel_id, trader_wallet, discord_role_id, discord_channel_id, channel_name)
+         VALUES ($1, $2, $3, $4, $5)
+         ON CONFLICT (channel_id) DO UPDATE
+         SET discord_role_id = $3, discord_channel_id = $4, updated_at = NOW()`,
+        [channelId, traderWallet, role.id, channel.id, channelName]
+      );
+
+      logger.info(`Created Discord channel and role for ${channelName}`, {
+        roleId: role.id,
+        channelId: channel.id,
+      });
+    } catch (dbErr) {
+      // Log warning and continue — DB might not be running in dev environments
+      logger.warn('Postgres write failed while creating Discord channel; continuing without DB persistence', dbErr);
+    }
+
     return { roleId: role.id, channelId: channel.id };
   } catch (error) {
     logger.error('Error creating Discord channel/role:', error);
@@ -102,7 +110,7 @@ export async function assignRole(discordUserId: string, roleId: string): Promise
   if (!guild) {
     throw new Error('Discord guild not initialized');
   }
-  
+
   try {
     const member = await guild.members.fetch(discordUserId);
     if (!member.roles.cache.has(roleId)) {
@@ -124,7 +132,7 @@ export async function removeRole(discordUserId: string, roleId: string): Promise
   if (!guild) {
     throw new Error('Discord guild not initialized');
   }
-  
+
   try {
     const member = await guild.members.fetch(discordUserId);
     if (member.roles.cache.has(roleId)) {
@@ -148,36 +156,36 @@ export async function syncAllRoles(): Promise<void> {
     const verified = await query(
       'SELECT discord_user_id, wallet_address_encrypted FROM wallet_verifications'
     );
-    
+
     // Get all channels with their role mappings
     const channels = await query(
       'SELECT channel_id, discord_role_id FROM channels'
     );
-    
+
     const channelMap = new Map(
       channels.rows.map((row) => [row.channel_id, row.discord_role_id])
     );
-    
+
     for (const verification of verified.rows) {
       // Decrypt wallet address
       const walletAddress = decrypt(verification.wallet_address_encrypted);
-      
+
       // Query subscriptions with retry
       const subscriptions = await queryWithRetry(async () => {
         const { getWalletSubscriptions } = await import('../utils/solana');
         return getWalletSubscriptions(walletAddress);
       });
-      
+
       if (!subscriptions) {
         logger.warn(`Failed to query subscriptions for wallet ${walletAddress}`);
         continue;
       }
-      
+
       // Get active channel IDs
       const activeChannels = subscriptions
         .filter((s) => s.status === 'active')
         .map((s) => s.channelId);
-      
+
       // Assign roles for active subscriptions
       for (const channelId of activeChannels) {
         const roleId = channelMap.get(channelId);
@@ -189,7 +197,7 @@ export async function syncAllRoles(): Promise<void> {
           }
         }
       }
-      
+
       // Remove roles for inactive subscriptions
       for (const [channelId, roleId] of channelMap.entries()) {
         if (!activeChannels.includes(channelId)) {
@@ -197,7 +205,7 @@ export async function syncAllRoles(): Promise<void> {
         }
       }
     }
-    
+
     logger.info('Role sync completed');
   } catch (error) {
     logger.error('Error syncing roles:', error);

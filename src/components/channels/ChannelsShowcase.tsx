@@ -1,5 +1,3 @@
-import { useState, useMemo } from "react";
-import { Search, Grid3X3, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -9,9 +7,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import type { Channel as ChannelType } from '@/data/mockData';
+import { app as firebaseApp } from '@/lib/firebase';
+import { ref as dbRef, getDatabase, onValue } from 'firebase/database';
+import { Grid3X3, List, Search } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import { ChannelCard } from "./ChannelCard";
 import { ChannelListItem } from "./ChannelListItem";
-import { channels } from "@/data/mockData";
 
 type ViewMode = "grid" | "list";
 type FilterType = "all" | "new" | "trending" | "high-volume";
@@ -60,6 +62,81 @@ export function ChannelsShowcase() {
   const [filter, setFilter] = useState<FilterType>("all");
   const [sort, setSort] = useState<SortType>("volume");
   const [category, setCategory] = useState<MarketCategory>("all");
+
+  const [channels, setChannels] = useState<ChannelType[]>([]);
+  const [loadingChannels, setLoadingChannels] = useState(true);
+
+  // Subscribe to `channels` in Realtime Database and map to UI Channel shape
+  useEffect(() => {
+    try {
+      const db = getDatabase(firebaseApp);
+      const ref = dbRef(db, 'channels');
+      const unsub = onValue(ref, (snapshot) => {
+        const data = snapshot.val() || {};
+        console.debug('RTDB channels snapshot:', data);
+        const list: ChannelType[] = Object.entries(data).map(([key, value]) => {
+          const obj: any = value as any;
+          const traderName = obj.channelName || obj.id || 'Unknown';
+          const traderHandle = (obj.twitterHandle || obj.twitter || obj.id || '').replace('@', '') || String(obj.id);
+          const minted = Number(obj.currentMemberCount || obj.minted || 0);
+          const maxSupply = Number(obj.totalAllowedCount || obj.maxSupply || 0);
+          const floorPrice = Number(obj.price || obj.floorPrice || 0);
+          const volume24h = Number(obj.volume24hr || obj.volume24h || 0);
+          const winRate = Number(obj.winRate || (obj.trader?.stats?.winRate) || 0);
+
+          return {
+            id: String(obj.id || key),
+            trader: {
+              id: String(obj.id || key),
+              name: traderName,
+              handle: traderHandle,
+              avatar: obj.profileImageUrl || obj.profileImage || undefined,
+              tags: (obj.tags || (obj.markets ? String(obj.markets).split(/[,\s]+/) : [])) as string[],
+              verified: false,
+              stats: {
+                lifetimePnl: 0,
+                winRate: winRate,
+                marketsTraded: 0,
+                edgeScore: 0,
+                avgROI: Number(obj.avgRoi || obj.avgROI || 0),
+                thirtyDayReturn: Number(obj.return30d || 0),
+                maxDrawdown: Number(obj.maxDrawdown || 0),
+                consistency: Number(obj.consistency || 0),
+                primaryMarkets: (obj.markets ? String(obj.markets).split(/[,\s]+/) : []),
+              },
+            },
+            name: traderName + ' Alpha',
+            description: obj.description || '',
+            discordUrl: obj.discordUrl || obj.discordHandle || '',
+            maxSupply: maxSupply,
+            minted: minted,
+            floorPrice: floorPrice,
+            volume24h: volume24h,
+            priceChange24h: 0,
+            status:
+              maxSupply > 0
+                ? minted >= maxSupply
+                  ? 'closed'
+                  : minted >= Math.floor(maxSupply * 0.95)
+                    ? 'almost-full'
+                    : 'open'
+                : 'open',
+            createdAt: obj.createdAt || new Date().toISOString(),
+          } as ChannelType;
+        });
+
+        // sort newest first
+        list.sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
+        setChannels(list);
+        setLoadingChannels(false);
+      });
+
+      return () => unsub();
+    } catch (err) {
+      console.error('Failed to subscribe to channels:', err);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const filteredAndSortedChannels = useMemo(() => {
     let result = [...channels];
@@ -225,11 +302,11 @@ export function ChannelsShowcase() {
           </div>
         )}
 
-        {filteredAndSortedChannels.length === 0 && (
-          <div className="text-center py-16 text-muted-foreground">
-            No channels found matching your criteria.
-          </div>
-        )}
+        {loadingChannels ? (
+          <div className="text-center py-16 text-muted-foreground">Loading channels…</div>
+        ) : filteredAndSortedChannels.length === 0 ? (
+          <div className="text-center py-16 text-muted-foreground">No channels found matching your criteria.</div>
+        ) : null}
       </div>
     </section>
   );

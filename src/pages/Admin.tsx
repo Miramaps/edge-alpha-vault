@@ -197,7 +197,22 @@ export default function Admin() {
     (async () => {
       try {
         const statusValue = status === 'approved' ? 'Approved' : status === 'rejected' ? 'Rejected' : 'Pending';
-        const res = await fetch('/admin/update-status', {
+        const apiBase = (import.meta as any).env?.VITE_API_URL || '';
+        const endpoint = apiBase ? `${apiBase.replace(/\/$/, '')}/admin/update-status` : '/admin/update-status';
+
+        // Debugging: log resolved API base and endpoint so production builds can be validated
+        try {
+          // eslint-disable-next-line no-console
+          console.debug('Admin:updateStatus - VITE_API_URL=', apiBase, 'resolved endpoint=', endpoint);
+          const url = new URL(endpoint, window.location.origin);
+          if (url.host === window.location.host) {
+            // eslint-disable-next-line no-console
+            console.warn('Admin:updateStatus - endpoint host matches current host. This usually means VITE_API_URL was not set at build time or points to the frontend host. Update your production build env to set VITE_API_URL to your API URL.');
+          }
+        } catch (logErr) {
+          // ignore logging errors in older browsers
+        }
+        const res = await fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id, status: statusValue }),

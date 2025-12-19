@@ -5,7 +5,7 @@ dotenv.config();
 import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
-import { initializeDiscordBot, syncAllRoles } from './services/discord';
+import { initializeDiscordBot } from './services/discord';
 import { logger } from './utils/logger';
 
 // Defer importing routes that may initialize firebase until after env is loaded
@@ -29,6 +29,17 @@ app.use(express.json({ limit: '10mb' }));
 // Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
+// Support redirecting Discord OAuth callbacks to the frontend callback URL
+app.get('/auth/discord/callback', (req, res) => {
+  // Frontend base (Vite runtime env) — fall back to root if not set
+  const frontendBase = process.env.VITE_API_URL || '';
+  const targetBase = frontendBase ? frontendBase.replace(/\/+$/, '') : '';
+  const targetPath = targetBase ? `${targetBase}/auth/discord/callback` : '/auth/discord/callback';
+  const qs = new URLSearchParams(req.query as Record<string, string>).toString();
+  const redirectTo = qs ? `${targetPath}?${qs}` : targetPath;
+  res.redirect(redirectTo);
 });
 
 // Routes
@@ -59,26 +70,10 @@ async function start() {
       logger.warn('Discord bot not initialized — continuing without Discord integration', err);
     }
 
-    // If Discord is available, start periodic role sync
-    if (discordAvailable) {
-      const syncInterval = parseInt(process.env.ROLE_SYNC_INTERVAL_MS || '120000'); // 2 minutes default
-      setInterval(async () => {
-        try {
-          await syncAllRoles();
-        } catch (error) {
-          logger.error('Error in periodic role sync:', error);
-        }
-      }, syncInterval);
-
-      // Initial sync
-      try {
-        await syncAllRoles();
-      } catch (error) {
-        logger.error('Initial role sync failed:', error);
-      }
-    } else {
-      logger.info('Skipping role sync because Discord is not initialized');
-    }
+    // Role syncing to Discord is temporarily disabled — the bot will still initialize
+    // and can create channels on approve. Re-enable `syncAllRoles()` later when
+    // a Postgres instance is available and you want periodic role reconciliation.
+    logger.info('Role sync is disabled in this environment — only channel creation will run');
 
     // Start server regardless of Discord init result
     app.listen(PORT, () => {

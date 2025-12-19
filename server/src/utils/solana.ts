@@ -1,6 +1,6 @@
-import { Connection, PublicKey, Transaction, Message } from '@solana/web3.js';
+import { Connection, PublicKey } from '@solana/web3.js';
 import nacl from 'tweetnacl';
-import { decode } from 'tweetnacl-util';
+import { decodeBase64 } from 'tweetnacl-util';
 
 const RPC_URL = process.env.SOLANA_RPC_URL || process.env.SOLANA_RPC_URL_DEVNET || 'https://api.devnet.solana.com';
 export const connection = new Connection(RPC_URL, 'confirmed');
@@ -16,8 +16,9 @@ export async function verifyWalletSignature(
   try {
     const publicKey = new PublicKey(walletAddress);
     const messageBytes = new TextEncoder().encode(message);
-    const signatureBytes = decode(signature);
-    
+    // signature is expected as base64 string
+    const signatureBytes = decodeBase64(signature);
+
     // Verify signature using Ed25519 (Solana's signature algorithm)
     return nacl.sign.detached.verify(
       messageBytes,
@@ -41,7 +42,7 @@ export async function getWalletSubscriptions(walletAddress: string): Promise<Arr
   try {
     const walletPubkey = new PublicKey(walletAddress);
     const subscriptionProgramId = new PublicKey(process.env.SUBSCRIPTION_PROGRAM_ID!);
-    
+
     // Query subscription accounts owned by the wallet
     // This is a simplified example - adjust based on your actual program structure
     const accounts = await connection.getParsedProgramAccounts(subscriptionProgramId, {
@@ -54,7 +55,7 @@ export async function getWalletSubscriptions(walletAddress: string): Promise<Arr
         },
       ],
     });
-    
+
     // Parse subscription data based on your program structure
     // This is a placeholder - implement based on your actual account structure
     return accounts.map((account) => {
@@ -82,19 +83,19 @@ export async function validateSubscriptionData(
   try {
     const subscriptions = await getWalletSubscriptions(walletAddress);
     const subscription = subscriptions.find((s) => s.channelId === channelId);
-    
+
     if (!subscription) {
       return { valid: false, subscription: null, error: 'Subscription not found' };
     }
-    
+
     if (subscription.status !== 'active') {
       return { valid: false, subscription, error: `Subscription is ${subscription.status}` };
     }
-    
+
     if (subscription.expiresAt && subscription.expiresAt < new Date()) {
       return { valid: false, subscription, error: 'Subscription has expired' };
     }
-    
+
     return { valid: true, subscription };
   } catch (error) {
     return {
@@ -118,17 +119,17 @@ export async function queryWithRetry<T>(
       return await queryFn();
     } catch (error) {
       console.error(`Query attempt ${attempt} failed:`, error);
-      
+
       if (attempt === maxRetries) {
         console.error('All retry attempts exhausted');
         return null;
       }
-      
+
       // Exponential backoff
       await new Promise((resolve) => setTimeout(resolve, delayMs * attempt));
     }
   }
-  
+
   return null;
 }
 

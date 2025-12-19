@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import type { Channel } from "@/data/mockData";
 import { cn } from "@/lib/utils";
 import { formatVolumeUSD } from "@/utils/currency";
+import { Link } from "react-router-dom";
 
 interface ChannelListItemProps {
   channel: Channel;
@@ -27,9 +28,15 @@ export function ChannelListItem({ channel }: ChannelListItemProps) {
     <div className="rounded-xl bg-black/40 backdrop-blur-sm border border-white/[0.08] p-4 flex items-center gap-4 hover:border-white/[0.12] transition-colors">
       {/* Avatar and Name */}
       <div className="flex items-center gap-3 min-w-[180px]">
-        <div className="w-9 h-9 rounded-full bg-black/30 flex items-center justify-center text-muted-foreground font-bold text-sm flex-shrink-0">
-          {channel.trader.name.charAt(0)}
-        </div>
+        <Avatar className="w-12 h-12 flex-shrink-0">
+          {channel.trader.avatar ? (
+            <AvatarImage src={channel.trader.avatar} alt={channel.trader.name} />
+          ) : (
+            <AvatarFallback className="bg-black/30 text-muted-foreground font-bold text-sm">
+              {channel.trader.name.charAt(0)}
+            </AvatarFallback>
+          )}
+        </Avatar>
         <div className="min-w-0">
           <h3 className="font-medium text-foreground text-sm truncate">{channel.trader.name}</h3>
           <p className="text-xs text-muted-foreground truncate">@{channel.trader.handle}</p>
